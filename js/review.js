@@ -1,7 +1,7 @@
 /* LUX — aba Revisar: cartões que vencem hoje (revisão espaçada).
    Dois modos (preferência do perfil, settings.reviewMode):
-   - 'choice' (padrão): pergunta + 4 alternativas. Errou → o cartão volta hoje; acertou → a pessoa diz se foi difícil, bom ou fácil.
-   - 'recall': cartão clássico — pensar na resposta, mostrar e se autoavaliar. */
+   - 'recall' (padrão): cartão clássico — pensar na resposta, mostrar e se autoavaliar.
+   - 'choice': pergunta + 4 alternativas. Errou → o cartão volta hoje; acertou → a pessoa diz se foi difícil, bom ou fácil. */
 (function (g) {
   'use strict';
   var LUX = g.LUX, U = LUX.util, h = U.h, UI = LUX.ui, R = LUX.srs;
@@ -9,7 +9,12 @@
   var KIND = { 'fr-pt': 'Francês → português', 'pt-fr': 'Português → francês', gender: 'Gênero: le ou la?', verb: 'Verbo' };
   var QUESTION = { 'fr-pt': 'O que significa?', verb: 'O que significa este verbo?', 'pt-fr': 'Como se diz em francês?' };
 
-  function mode(p) { return (p && p.settings.reviewMode) || 'choice'; }
+  function mode(p) {
+    if (!p) return 'recall';
+    // migração única: o padrão passou a ser "Só lembrar" — vale também para quem já tinha escolhido antes
+    if (p.settings.reviewModeV !== 2) { p.settings.reviewMode = 'recall'; p.settings.reviewModeV = 2; LUX.store.save(); }
+    return p.settings.reviewMode || 'recall';
+  }
 
   LUX.router.add('/revisar', function () {
     return {
@@ -76,17 +81,18 @@
       h('summary', null, '❓ Como funciona a revisão'),
       UI.md('Cada palavra das lições vira **cartões** (francês → português, português → francês e, nos substantivos, *le* ou *la*). ' +
         'O app mostra cada cartão **no dia em que você está prestes a esquecer**: quem você acerta volta daqui a alguns dias, depois semanas, depois meses; quem você erra volta hoje mesmo.\n\n' +
-        '**Modo alternativas:** responda à pergunta escolhendo uma das 4 opções. Se errar, o cartão volta ainda nesta sessão. Se acertar, diga como foi lembrar:\n' +
-        '- **Difícil** — acertei, mas precisei pensar muito → volta mais cedo.\n' +
-        '- **Bom** — acertei normalmente → intervalo padrão.\n' +
+        '**Modo só lembrar** (padrão): pense na resposta *antes* de clicar em "Mostrar resposta" e depois seja honesto(a) sobre como foi:\n' +
+        '- **Errei** — não lembrei → volta ainda nesta sessão.\n' +
+        '- **Difícil** — lembrei, mas precisei pensar muito → volta mais cedo.\n' +
+        '- **Bom** — lembrei normalmente → intervalo padrão.\n' +
         '- **Fácil** — sabia na hora → volta bem mais tarde.\n\n' +
-        '**Modo só lembrar:** pense na resposta *antes* de clicar em "Mostrar resposta" e depois seja honesto: **Errei** (não lembrei), **Difícil**, **Bom** ou **Fácil**. É mais exigente, e por isso fixa melhor.\n\n' +
+        '**Modo alternativas** (opcional): responda escolhendo uma das 4 opções. Se errar, o cartão volta ainda nesta sessão; se acertar, diga se foi difícil, bom ou fácil.\n\n' +
         'Embaixo de cada botão aparece quando o cartão volta (ex.: "em 4 dias"). Uns 10 minutos por dia bastam.')
     ]);
   }
   function modeSwitch(p, onChange) {
     var wrap = h('div', { class: 'seg', role: 'group', 'aria-label': 'Modo de revisão' });
-    [['choice', 'Alternativas'], ['recall', 'Só lembrar']].forEach(function (m) {
+    [['recall', 'Só lembrar'], ['choice', 'Alternativas']].forEach(function (m) {
       wrap.appendChild(h('button', { class: 'seg-btn' + (mode(p) === m[0] ? ' on' : ''), 'aria-pressed': mode(p) === m[0] ? 'true' : 'false', onclick: function () {
         if (mode(p) === m[0]) return;
         p.settings.reviewMode = m[0]; LUX.store.save();

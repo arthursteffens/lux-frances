@@ -1,6 +1,6 @@
 {
   "version": "2.0.0-fase2",
-  "build": "20261125-1906-3285f6c",
-  "date": "2026-11-25T22:06:59.082Z",
-  "notes": "Botão Voltar em todas as páginas. Lição já concluída: aviso com a melhor nota e Resumo mostrando a nota salva (refazer nunca diminui)."
+  "build": "20261125-1920-58aef39",
+  "date": "2026-11-25T22:20:50.105Z",
+  "notes": "Revisar: 'Só lembrar' é o modo padrão e a primeira opção; 'Alternativas' continua disponível."
 }
