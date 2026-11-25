@@ -50,9 +50,44 @@
       if (!r.query.keepScroll) window.scrollTo(0, 0);
       main.focus({ preventScroll: true });
       if (LUX.lessons && LUX.lessons.updatePill) LUX.lessons.updatePill();
+      R.updateBack(view.crumbs || [], r.path);
       return;
     }
     R.go('#/curso');
   };
-  window.addEventListener('hashchange', function () { R.render(); });
+
+  /* ---------- botão Voltar ----------
+     Cada página visitada dentro do app ganha um número em history.state (luxIdx).
+     Voltar usa o histórico só se houver página anterior DO APP; senão vai para a página "de cima"
+     (o item anterior da trilha de navegação) — assim o app instalado nunca fecha por acidente. */
+  function stateIdx() { var s = history.state; return s && typeof s.luxIdx === 'number' ? s.luxIdx : null; }
+  function markEntry(i) { try { history.replaceState(Object.assign({}, history.state || {}, { luxIdx: i }), '', location.href); } catch (e) { } }
+  R.histIdx = stateIdx();
+  if (R.histIdx === null) { R.histIdx = 0; markEntry(0); }
+  function syncHistory() {
+    var i = stateIdx();
+    if (i === null) { i = R.histIdx + 1; markEntry(i); } // página nova
+    R.histIdx = i;                                          // voltar/avançar do navegador: só acompanha
+  }
+  R.canGoBack = function () { return R.histIdx > 0; };
+  R.parentHref = function () {
+    var cr = (R.current && R.current.view && R.current.view.crumbs) || [];
+    for (var i = cr.length - 2; i >= 0; i--) if (cr[i] && cr[i][1]) return cr[i][1];
+    return R.current && R.current.path !== '/curso' ? '#/curso' : null;
+  };
+  R.back = function () {
+    if (R.canGoBack()) history.back();
+    else { var p = R.parentHref(); if (p) location.hash = p; }
+  };
+  R.updateBack = function (crumbs, path) {
+    var b = document.getElementById('back-btn');
+    if (!b) return;
+    var can = R.canGoBack() || !!R.parentHref();
+    b.hidden = !can;
+  };
+  document.addEventListener('DOMContentLoaded', function () {
+    var b = document.getElementById('back-btn');
+    if (b) b.addEventListener('click', function () { R.back(); });
+  });
+  window.addEventListener('hashchange', function () { syncHistory(); R.render(); });
 })(window);

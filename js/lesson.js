@@ -122,6 +122,11 @@
         h('h1', { lang: lang }, l.title), h('p', { class: 'muted' }, l.titlePt)])
     ]);
     main.appendChild(head);
+    var prevSt = p && p.progress[l.id];
+    if (prevSt) main.appendChild(h('div', { class: 'banner ' + (prevSt.status === 'done' ? 'ok' : 'info') + ' lesson-prev' }, [
+      h('b', null, prevSt.status === 'done' ? '✅ Lição concluída — melhor nota: ' + Math.round(prevSt.best * 100) + '%. ' : 'Melhor nota até agora: ' + Math.round(prevSt.best * 100) + '%. '),
+      h('span', null, 'Ao reabrir, a lição começa em branco: os ✓ das etapas e o Resumo mostram só esta nova tentativa. Sua melhor nota fica guardada — refazer nunca diminui.')
+    ]));
     var stepper = h('ol', { class: 'stepper', 'aria-label': 'Etapas da lição' });
     main.appendChild(stepper);
     var body = h('div', { class: 'lesson-body' });
@@ -163,8 +168,6 @@
           h('a', { class: 'btn', href: '#/treino/aquecimento?next=' + l.id }, 'Fazer aquecimento')
         ]));
       }
-      var st = p && p.progress[l.id];
-      if (st) pane.appendChild(h('div', { class: 'banner info' }, 'Você já fez esta lição ' + U.plural(st.attempts, 'vez', 'vezes') + '. Melhor nota: ' + Math.round(st.best * 100) + '%.'));
     })(panes[0]);
 
     /* --- vocabulário --- */
@@ -314,8 +317,17 @@
       var pct = Math.round(s.score * 100);
       var c = h('div', { class: 'card end-card' });
       c.appendChild(h('h2', null, '🏁 Resumo da lição'));
-      c.appendChild(h('div', { class: 'score-ring ' + (pct >= 70 ? 'ok' : 'low') }, [h('b', null, pct + '%'), h('span', { class: 'muted sm' }, 'nota')]));
-      c.appendChild(h('p', null, 'Você respondeu ' + s.answered + ' de ' + s.total + ' exercícios.' + (s.answered < s.total ? ' Exercícios sem resposta contam como zero.' : '')));
+      var stSaved = p && p.progress[l.id];
+      if (!s.answered && stSaved && !saved) {
+        var bp = Math.round(stSaved.best * 100);
+        c.appendChild(h('div', { class: 'score-ring ' + (bp >= 70 ? 'ok' : 'low') }, [h('b', null, bp + '%'), h('span', { class: 'muted sm' }, 'melhor nota')]));
+        c.appendChild(h('p', null, 'Esta é a sua melhor nota salva (' + U.plural(stSaved.attempts, 'tentativa', 'tentativas') + (stSaved.completedAt ? ', concluída em ' + U.fmtDate(stSaved.completedAt) : '') + '). Para tentar de novo, responda aos exercícios: o Resumo passa a mostrar a nova tentativa.'));
+        c.appendChild(h('div', { class: 'row gap wrap' }, [h('a', { class: 'btn', href: route + '?step=2&r=' + Date.now() }, '✍️ Fazer os exercícios de novo')]));
+        endPane.appendChild(c);
+        return;
+      }
+      c.appendChild(h('div', { class: 'score-ring ' + (pct >= 70 ? 'ok' : 'low') }, [h('b', null, pct + '%'), h('span', { class: 'muted sm' }, stSaved ? 'nesta tentativa' : 'nota')]));
+      c.appendChild(h('p', null, 'Você respondeu ' + s.answered + ' de ' + s.total + ' exercícios.' + (s.answered < s.total ? ' Exercícios sem resposta contam como zero.' : '') + (stSaved && !saved ? ' Sua melhor nota salva é ' + Math.round(stSaved.best * 100) + '%; salvar só substitui se esta for maior.' : '')));
       var parts = h('ul', { class: 'summary-list' });
       [['r', 'Leitura', l.reading.exercises], ['a', 'Audição', l.listening.exercises], ['g', 'Prática', l.grammarPractice]].forEach(function (sec) {
         var done = sec[2].filter(function (e, i) { return results[sec[0] + i]; });
@@ -324,7 +336,8 @@
       });
       c.appendChild(parts);
       var finish = h('button', { class: 'btn primary' }, saved ? '✓ Resultado salvo' : 'Concluir lição e salvar');
-      finish.disabled = saved;
+      finish.disabled = saved || !s.answered;
+      if (!saved && !s.answered) finish.title = 'Responda pelo menos um exercício para salvar.';
       finish.addEventListener('click', function () {
         if (!p) return;
         var rec = LUX.profiles.saveLessonResult(p, l.id, s.score, null);

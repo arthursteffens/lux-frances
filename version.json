@@ -1,6 +1,6 @@
 {
   "version": "2.0.0-fase2",
-  "build": "20261125-1853-f37f769",
-  "date": "2026-11-25T21:53:15.904Z",
-  "notes": "Diálogos com uma voz para cada personagem: dois homens agora têm vozes diferentes (quando o aparelho tem vozes suficientes; senão, tons diferentes)."
+  "build": "20261125-1906-3285f6c",
+  "date": "2026-11-25T22:06:59.082Z",
+  "notes": "Botão Voltar em todas as páginas. Lição já concluída: aviso com a melhor nota e Resumo mostrando a nota salva (refazer nunca diminui)."
 }
