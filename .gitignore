@@ -1,0 +1,7 @@
+PROMPT-curso-frances.md
+ROTEIRO-github-drive-celular.md
+GUIA-google-cloud.md
+node_modules/
+*.log
+lux-backup-*.json
+.vscode/

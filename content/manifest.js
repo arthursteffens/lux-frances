@@ -1,0 +1,78 @@
+/* Manifesto do curso: níveis, unidades, lições e a lista de arquivos de conteúdo.
+   Para adicionar uma lição: crie o arquivo, acrescente o id em "lessons" da unidade e o caminho em "files". */
+LUX.manifest = {
+  version: '2.0.0-fase2',
+  levels: [
+    { id: 'A2', title: 'A2 — Comunicação do dia a dia', units: [
+      { n: 1, title: 'Rotina, família, apresentações', grammar: 'revisão do presente, verbos pronominais, negação',
+        lessons: ['a2-u01-l01', 'a2-u01-l02', 'a2-u01-l03', 'a2-u01-l04', 'a2-u01-l05'] },
+      { n: 2, title: 'Fim de semana e lazer: contar o que fez', grammar: 'passé composé com avoir/être, concordância do particípio',
+        lessons: ['a2-u02-l01', 'a2-u02-l02', 'a2-u02-l03', 'a2-u02-l04', 'a2-u02-l05'] },
+      { n: 3, title: 'Lembranças de infância, como era antes', grammar: 'imparfait; imparfait × passé composé',
+        lessons: ['a2-u03-l01', 'a2-u03-l02', 'a2-u03-l03', 'a2-u03-l04', 'a2-u03-l05'] },
+      { n: 4, title: 'Compras, mercado, restaurante', grammar: 'artigos partitivos, quantidades, pronome en',
+        lessons: ['a2-u04-l01', 'a2-u04-l02', 'a2-u04-l03', 'a2-u04-l04', 'a2-u04-l05'] },
+      { n: 5, title: 'Cidade, transporte, viagem, direções', grammar: 'imperativo, preposições de lugar, pronome y',
+        lessons: ['a2-u05-l01', 'a2-u05-l02', 'a2-u05-l03', 'a2-u05-l04', 'a2-u05-l05'] },
+      { n: 6, title: 'Planos, convites, futuro', grammar: 'futur proche, futur simple, pronomes COD/COI',
+        lessons: ['a2-u06-l01', 'a2-u06-l02', 'a2-u06-l03', 'a2-u06-l04', 'a2-u06-l05'] }
+    ] },
+    { id: 'B1', title: 'B1 — Independência', units: [
+      { n: 1, title: 'Trabalho, estudos, currículo', grammar: 'pronomes relativos qui, que, où, dont', lessons: [] },
+      { n: 2, title: 'Saúde, bem-estar, conselhos', grammar: 'conditionnel présent', lessons: [] },
+      { n: 3, title: 'Mídia e notícias', grammar: 'plus-que-parfait, discurso indireto', lessons: [] },
+      { n: 4, title: 'Meio ambiente e cidade', grammar: 'subjonctif présent', lessons: [] },
+      { n: 5, title: 'Francofonia: Québec, Bélgica, Suíça, África', grammar: 'comparativo/superlativo, gérondif', lessons: [] },
+      { n: 6, title: 'Relações, sentimentos, opiniões', grammar: 'subjuntivo com emoção e dúvida, pronomes duplos', lessons: [] }
+    ] },
+    { id: 'B2', title: 'B2 — Autonomia e argumentação', units: [
+      { n: 1, title: 'Sociedade e debates', grammar: 'conectores argumentativos, concessão', lessons: [] },
+      { n: 2, title: 'Tecnologia e ciência', grammar: 'voz passiva, nominalização', lessons: [] },
+      { n: 3, title: 'Economia e mundo do trabalho', grammar: 'conditionnel passé, hipóteses', lessons: [] },
+      { n: 4, title: 'Arte, literatura, cinema', grammar: 'passé simple, registros de língua', lessons: [] },
+      { n: 5, title: 'Política, cidadania, história', grammar: 'subjonctif passé, causa e consequência', lessons: [] },
+      { n: 6, title: 'Francês falado real', grammar: 'registro informal, gírias, verlan', lessons: [] }
+    ] }
+  ],
+  files: [
+    'content/verbs/irregular.js',
+    'content/verbs/verbs-a-c.js', 'content/verbs/verbs-d-l.js', 'content/verbs/verbs-m-r.js', 'content/verbs/verbs-s-z.js',
+    'content/verbs/verbs-a2-extra.js',
+    'content/lexicon/function-words.js', 'content/lexicon/lexicon-a-f.js', 'content/lexicon/lexicon-g-z.js', 'content/lexicon/names.js',
+    'content/lexicon/lexicon-a2-u02.js', 'content/lexicon/lexicon-a2-u03.js', 'content/lexicon/lexicon-a2-u04.js', 'content/lexicon/lexicon-a2-u05.js', 'content/lexicon/lexicon-a2-u06.js', 'content/lexicon/lexicon-a2-geral.js',
+    'content/grammar/articles.js', 'content/grammar/nouns-adjectives.js', 'content/grammar/pronouns.js',
+    'content/grammar/prepositions.js', 'content/grammar/tenses-a2.js', 'content/grammar/negation-questions.js', 'content/grammar/a2-extra.js',
+    'content/general/manifest.js',
+    'content/general/numeros-cardinais.js', 'content/general/numeros-ordinais.js', 'content/general/anos-seculos.js',
+    'content/general/meses.js', 'content/general/dias-semana.js', 'content/general/horas.js', 'content/general/datas.js',
+    'content/general/alfabeto.js',
+    'content/general/fracoes.js',
+    'content/general/dinheiro.js',
+    'content/general/medidas.js',
+    'content/general/estacoes.js',
+    'content/general/expressoes-tempo.js',
+    'content/general/feriados.js',
+    'content/general/saudacoes.js',
+    'content/general/cortesia.js',
+    'content/general/perguntas.js',
+    'content/general/tu-vous.js',
+    'content/general/familia.js',
+    'content/general/paises.js',
+    'content/general/profissoes.js',
+    'content/general/cores.js',
+    'content/general/clima.js',
+    'content/general/saude.js',
+    'content/general/emergencias.js',
+    'content/general/direcoes.js',
+    'content/general/restaurante.js',
+    'content/general/transporte.js',
+    'content/general/telefone-email.js',
+    'content/a2/u01/l01.js', 'content/a2/u01/l02.js', 'content/a2/u01/l03.js', 'content/a2/u01/l04.js', 'content/a2/u01/l05.js',
+    'content/a2/u02/l01.js', 'content/a2/u02/l02.js', 'content/a2/u02/l03.js', 'content/a2/u02/l04.js', 'content/a2/u02/l05.js',
+    'content/a2/u03/l01.js', 'content/a2/u03/l02.js', 'content/a2/u03/l03.js', 'content/a2/u03/l04.js', 'content/a2/u03/l05.js',
+    'content/a2/u04/l01.js', 'content/a2/u04/l02.js', 'content/a2/u04/l03.js', 'content/a2/u04/l04.js', 'content/a2/u04/l05.js',
+    'content/a2/u05/l01.js', 'content/a2/u05/l02.js', 'content/a2/u05/l03.js', 'content/a2/u05/l04.js', 'content/a2/u05/l05.js',
+    'content/a2/u06/l01.js', 'content/a2/u06/l02.js', 'content/a2/u06/l03.js', 'content/a2/u06/l04.js', 'content/a2/u06/l05.js',
+    'content/a2/test.js'
+  ]
+};
