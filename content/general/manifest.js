@@ -19,7 +19,7 @@ LUX.generalManifest = [
     { id: 'feriados', title: 'Feriados e datas comemorativas', icon: '🎉', desc: 'Le 14 juillet, Noël, la Toussaint.' }
   ] },
   { id: 'comunicacao', title: 'Comunicação básica', pages: [
-    { id: 'alfabeto', title: 'Alfabeto e soletração', icon: '🔤', desc: 'Letras, acentos e como soletrar e-mails.' },
+    { id: 'alfabeto', title: 'Alfabeto, letras e pronúncia', icon: '🔤', desc: 'Cada letra e seu som, nasais, letras mudas, liaison, acentos e soletração.' },
     { id: 'saudacoes', title: 'Saudações e despedidas', icon: '👋', desc: 'Bonjour, salut, à plus.' },
     { id: 'cortesia', title: 'Cortesia e fórmulas prontas', icon: '🙏', desc: 'S\'il vous plaît, excusez-moi.' },
     { id: 'perguntas', title: 'Perguntas essenciais', icon: '❓', desc: 'Où, quand, combien...' },

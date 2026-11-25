@@ -82,7 +82,11 @@
 
         // trilhas por nível
         main.appendChild(h('h2', { class: 'section-title' }, '📚 Lições profissionais'));
-        main.appendChild(h('p', { class: 'muted' }, 'As lições acompanham o seu nível no curso: cada uma libera quando você termina a unidade com a gramática que ela usa. Seu nível agora: ' + myLevel + '.'));
+        var gated = tr.levels.some(function (lv) { return lv.lessons.some(function (it) { return it.unit; }); });
+        main.appendChild(h('p', { class: 'muted' }, gated
+          ? 'As lições acompanham o seu nível no curso: cada uma libera quando você termina a unidade com a gramática que ela usa. Seu nível agora: ' + myLevel + '.'
+          : 'Todas as lições estão liberadas. Os textos e áudios estão em ' + (info ? info.label : '') + '; as explicações, em português.'));
+        if (!gated) myLevel = (tr.levels[0] || {}).id;
         tr.levels.forEach(function (lv) {
           var avail = lv.lessons.filter(function (it) { return LUX.data.pro.lessons[it.id]; });
           var card = h('section', { class: 'card pro-level' + (lv.id === myLevel ? ' current' : '') });

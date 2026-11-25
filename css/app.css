@@ -260,6 +260,9 @@ label.btn { position: relative; }
 .toast.bad { background: var(--bad); color: #fff; }
 @media (max-width: 639px) { .toast { bottom: 84px; } }
 
+/* nota do glossário em textos de outros idiomas: a tradução aparece ao lado */
+.fr-text .gl.open::after { content: " (" attr(data-tr) ")"; color: var(--primary); font-family: var(--font-ui, inherit); font-size: .9em; }
+
 /* aba Profissional */
 .pro-langs { margin: 4px 0 6px; }
 .chip.soon { opacity: .6; cursor: default; }
@@ -596,6 +599,13 @@ a.stat:hover { border-color: var(--primary); color: var(--text); }
 .gen-pt { color: var(--muted); font-size: .92rem; text-align: right; }
 .gen-note { grid-column: 2 / -1; }
 .letter { font-size: 1.3rem; }
+.gen-rows.wide { grid-template-columns: 1fr; gap: 0; }
+.gen-rows.wide .gen-row { grid-template-columns: auto 2.2rem 1fr; align-items: start; padding: 10px 8px; border-bottom: 1px solid var(--border); border-radius: 0; }
+.gen-rows.wide .gen-row:last-child { border-bottom: 0; }
+.gen-rows.wide .gen-pt { text-align: left; color: var(--text); line-height: 1.5; }
+.gen-rows.wide .gen-pt b, .gen-rows.wide .gen-pt strong { color: var(--text); }
+.gen-rows.wide .gen-note { grid-column: 3 / -1; color: var(--warn); }
+.gen-rows.wide .letter { font-size: 1.5rem; line-height: 1.2; }
 .rule { padding: 10px 0; border-bottom: 1px dashed var(--border); }
 .rule:last-child { border-bottom: 0; }
 .tool-out { font: 600 1.25rem var(--font-fr); margin-top: 10px; padding: 12px 14px; background: var(--surface-2); border-radius: 10px; min-height: 52px; }

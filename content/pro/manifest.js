@@ -8,7 +8,7 @@
 LUX.proManifest = {
   languages: [
     { id: 'fr', label: 'Français', flag: '🇫🇷', status: 'active', desc: 'Luxemburgo, França, Bélgica, Suíça e Québec.' },
-    { id: 'en', label: 'English', flag: '🇬🇧', status: 'soon', desc: 'Inglês profissional — em breve.' },
+    { id: 'en', label: 'English', flag: '🇬🇧', status: 'active', desc: 'Inglês de negócios para HR Business Partner (B2–C1): stakeholders, entrevistas, desenho organizacional, dados, coaching e planejamento.' },
     { id: 'it', label: 'Italiano', flag: '🇮🇹', status: 'soon', desc: 'Italiano profissional — em breve.' }
   ],
   tracks: {
@@ -36,7 +36,16 @@ LUX.proManifest = {
         { id: 'entrevista', icon: '🎤', title: 'Entrevista de emprego', desc: 'Perguntas típicas, respostas modelo e candidatura.' }
       ]
     },
-    en: { levels: [], guides: [] },
+    en: {
+      levels: [
+        { id: 'B2', title: 'B2–C1 — HR Business Partner em inglês', desc: 'As competências da vaga, em inglês: liderança, dados, organização e negócio. Todas as lições já liberadas.',
+          lessons: [
+            { id: 'pro-en-b2-l01' }, { id: 'pro-en-b2-l02' }, { id: 'pro-en-b2-l03' },
+            { id: 'pro-en-b2-l04' }, { id: 'pro-en-b2-l05' }, { id: 'pro-en-b2-l06' }
+          ] }
+      ],
+      guides: []
+    },
     it: { levels: [], guides: [] }
   }
 };

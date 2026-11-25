@@ -89,7 +89,7 @@ function checkLessonBody(id, l, isPro) {
     glossOk(id + ' leitura', l.reading.text);
     cover2(id + ' leitura', l.reading.text, names);
     const words = U.tokenize(U.stripGloss(l.reading.text)).filter(t => t.w).length;
-    const lim = { A2: [120, 240], B1: [250, 420], B2: [400, 720] }[l.level];
+    const lim = fr ? { A2: [120, 240], B1: [250, 420], B2: [400, 720] }[l.level] : null; // limites pensados para o francês
     if (lim && (words < lim[0] || words > lim[1])) warn(id, `leitura com ${words} palavras (esperado ${lim[0]}–${lim[1]})`);
     l._readingWords = words;
     (l.reading.exercises || []).forEach((ex, i) => checkExercise(`${id} leitura #${i + 1}`, ex));

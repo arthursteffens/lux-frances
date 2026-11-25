@@ -5,7 +5,7 @@
 'use strict';
 
 // <release>
-const BUILD = '20261125-1920-58aef39';
+const BUILD = '20261125-2006-e815ea7';
 const FILES = [
   './',
   'version.json',
@@ -128,6 +128,12 @@ const FILES = [
   'content/lexicon/lexicon-pro.js',
   'content/lexicon/names.js',
   'content/manifest.js',
+  'content/pro/en/b2/l01.js',
+  'content/pro/en/b2/l02.js',
+  'content/pro/en/b2/l03.js',
+  'content/pro/en/b2/l04.js',
+  'content/pro/en/b2/l05.js',
+  'content/pro/en/b2/l06.js',
   'content/pro/fr/a2/l01.js',
   'content/pro/fr/a2/l02.js',
   'content/pro/fr/a2/l03.js',

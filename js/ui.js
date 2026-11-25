@@ -129,7 +129,7 @@
       if (inSent && sents[si] && i === sents[si].end) { html += '</span>'; inSent = false; si++; }
       if (i === plain.length) break;
       if (!inSent && sents[si] && i === sents[si].start) { html += '<span class="s" data-si="' + si + '">'; inSent = true; }
-      if (!inGloss && parsed.gloss[gi] && i === parsed.gloss[gi].start) { html += '<span class="gl" data-gi="' + gi + '" tabindex="0" role="button">'; inGloss = true; }
+      if (!inGloss && parsed.gloss[gi] && i === parsed.gloss[gi].start) { html += '<span class="gl" data-gi="' + gi + '" data-tr="' + U.esc(parsed.gloss[gi].pt || '') + '" tabindex="0" role="button">'; inGloss = true; }
       while (tokens[ti] && tokens[ti].end <= i) ti++;
       var t = tokens[ti];
       if (t && t.w && t.start === i) {
@@ -287,7 +287,12 @@
     var gl = t.closest && t.closest('.gl');
     var w = t.closest && t.closest('.fr-text .w');
     if (!gl && !w) return;
-    if (t.closest('.no-popup')) return; // teste de nível: sem tradução
+    if (t.closest('.no-popup')) {
+      // texto em outro idioma (inglês, italiano): o trecho do glossário mostra a tradução ao lado
+      var ft = gl && gl.closest('.fr-text');
+      if (ft && ft.getAttribute('lang') !== 'fr') gl.classList.toggle('open');
+      return; // teste de nível: sem tradução
+    }
     var sel = window.getSelection && window.getSelection();
     if (sel && String(sel).trim().split(/\s+/).length > 1) return; // seleção de expressão: tratada no mouseup
     var c = (gl || w).closest('.fr-text');

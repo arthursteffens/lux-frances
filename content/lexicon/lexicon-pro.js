@@ -150,6 +150,13 @@ LUX.registerLexicon([
   { w: 'virement', p: 'n', g: 'm', t: 'transferência bancária', d: true },
   { w: 'cybersécurité', p: 'n', g: 'f', t: 'cibersegurança, segurança da informação' },
 
+  /* --- palavras da página de alfabeto e pronúncia --- */
+  { w: 'chat', p: 'n', g: 'm', t: 'gato; chat (conversa on-line)', fem: 'chatte' },
+  { w: 'désert', p: 'n', g: 'm', t: 'deserto', n: 'Não confundir com "dessert" (sobremesa).' },
+  { w: 'nation', p: 'n', g: 'f', t: 'nação' },
+  { w: 'poison', p: 'n', g: 'm', t: 'veneno', d: true, n: 'Não confundir com "poisson" (peixe).' },
+  { w: 'roue', p: 'n', g: 'f', t: 'roda', n: 'Não confundir com "rue" (rua).' },
+
   /* --- adjetivos e advérbios --- */
   { w: 'ancien', p: 'adj', t: 'antigo; ex-', fem: 'ancienne' },
   { w: 'annuel', p: 'adj', t: 'anual', fem: 'annuelle' },

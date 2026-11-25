@@ -174,7 +174,7 @@
     (function (pane) {
       var c = h('div', { class: 'card' });
       c.appendChild(h('div', { class: 'row between' }, [h('h2', null, '📝 Vocabulário-chave'), UI.playBtn(function () { return l.vocabulary.map(function (v) { return v.fr; }); }, { label: 'ouvir todas', small: true, pause: 600 })]));
-      c.appendChild(h('p', { class: 'muted sm' }, 'Estas palavras entram automaticamente na sua revisão quando você concluir a lição.'));
+      c.appendChild(h('p', { class: 'muted sm' }, lang === 'fr' ? 'Estas palavras entram automaticamente na sua revisão quando você concluir a lição.' : 'Ouça cada termo e o exemplo. (A revisão espaçada ainda é só de francês.)'));
       var grid = h('div', { class: 'vocab-grid' });
       l.vocabulary.forEach(function (v) {
         var isVerb = v.pos === 'v';
@@ -205,7 +205,7 @@
           onItem: function (i) { UI.highlightSentence(text, i); }, onEnd: function () { UI.highlightSentence(text, -1); }
         })])
       ]));
-      c.appendChild(h('p', { class: 'muted sm' }, 'Clique em qualquer palavra para ver a tradução. Os trechos sublinhados têm uma nota do glossário. Selecione várias palavras para salvar uma expressão.'));
+      c.appendChild(h('p', { class: 'muted sm' }, lang === 'fr' ? 'Clique em qualquer palavra para ver a tradução. Os trechos sublinhados têm uma nota do glossário. Selecione várias palavras para salvar uma expressão.' : 'Toque nos trechos sublinhados para ver a tradução.'));
       c.appendChild(h('div', { class: 'text-box' }, text));
       pane.appendChild(c);
       pane.appendChild(h('h2', { class: 'section-title' }, 'Compreensão do texto'));
@@ -283,7 +283,7 @@
         c.appendChild(h('h3', null, 'Exemplos'));
         c.appendChild(exs);
       }
-      if (gr.ptComparison) c.appendChild(h('div', { class: 'compare' }, [h('h3', null, '🇧🇷 ↔ 🇫🇷 Comparando com o português'), UI.md(gr.ptComparison)]));
+      if (gr.ptComparison) c.appendChild(h('div', { class: 'compare' }, [h('h3', null, '🇧🇷 ↔ ' + ({ fr: '🇫🇷', en: '🇬🇧', it: '🇮🇹' }[lang] || '') + ' Comparando com o português'), UI.md(gr.ptComparison)]));
       pane.appendChild(c);
     })(panes[4]);
 

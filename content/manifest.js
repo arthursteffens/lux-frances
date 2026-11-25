@@ -80,6 +80,8 @@ LUX.manifest = {
     'content/pro/fr/a2/l01.js', 'content/pro/fr/a2/l02.js', 'content/pro/fr/a2/l03.js',
     'content/pro/fr/a2/l04.js', 'content/pro/fr/a2/l05.js', 'content/pro/fr/a2/l06.js',
     'content/pro/fr/guias/trabalhar-luxemburgo.js', 'content/pro/fr/guias/outros-paises.js', 'content/pro/fr/guias/glossario-rh.js',
-    'content/pro/fr/guias/empresas-tech.js', 'content/pro/fr/guias/reunioes.js', 'content/pro/fr/guias/emails.js', 'content/pro/fr/guias/entrevista.js'
+    'content/pro/fr/guias/empresas-tech.js', 'content/pro/fr/guias/reunioes.js', 'content/pro/fr/guias/emails.js', 'content/pro/fr/guias/entrevista.js',
+    'content/pro/en/b2/l01.js', 'content/pro/en/b2/l02.js', 'content/pro/en/b2/l03.js',
+    'content/pro/en/b2/l04.js', 'content/pro/en/b2/l05.js', 'content/pro/en/b2/l06.js'
   ]
 };

@@ -104,12 +104,13 @@
         });
         card.appendChild(h('div', { class: 'row between wrap' }, [h('h2', null, s.title), playAll]));
         if (s.note) card.appendChild(h('p', { class: 'muted sm' }, s.note));
-        var ul = h('ul', { class: 'gen-rows' + (s.letters ? ' letters' : '') });
+        // wide: uma linha por item, com explicação longa (aceita **negrito**), ex.: a pronúncia de cada letra
+        var ul = h('ul', { class: 'gen-rows' + (s.letters ? ' letters' : '') + (s.wide ? ' wide' : '') });
         items.forEach(function (it) {
           var li = h('li', { class: 'gen-row' }, [
             UI.playBtn(it.tts || it.fr, { small: true, title: 'Ouvir: ' + it.fr }),
             h('span', { class: 'gen-fr', lang: 'fr' }, s.letters ? h('b', { class: 'letter' }, it.fr) : UI.frText(it.fr, { block: false, gloss: false, source: source, inline: true })),
-            h('span', { class: 'gen-pt' }, it.pt),
+            s.wide ? h('span', { class: 'gen-pt', html: U.md(it.pt).replace(/^<p>|<\/p>$/g, '') }) : h('span', { class: 'gen-pt' }, it.pt),
             it.note ? h('span', { class: 'gen-note muted sm' }, it.note) : null
           ]);
           rows.push(li);
