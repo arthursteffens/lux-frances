@@ -254,6 +254,18 @@ label.btn { position: relative; }
 .toast.bad { background: var(--bad); color: #fff; }
 @media (max-width: 639px) { .toast { bottom: 84px; } }
 
+/* aba Profissional */
+.pro-langs { margin: 4px 0 6px; }
+.chip.soon { opacity: .6; cursor: default; }
+.chip.soon:hover { border-color: var(--border); }
+.pro-level.current { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary) inset, var(--shadow); }
+.pro-level h3 { margin: 0 0 2px; }
+.pro-lessons { list-style: none; padding: 0; margin: 10px 0 0; }
+.pro-lessons li { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--border); }
+.pro-lessons li a { font-weight: 700; font-family: var(--font-fr); font-size: 1.05rem; }
+.pro-lessons li.locked > div > span:first-child { color: var(--muted); font-family: var(--font-fr); }
+.pro-ico { width: 24px; text-align: center; }
+
 /* botão flutuante "Voltar à lição" */
 .return-pill { position: fixed; right: 20px; bottom: 20px; z-index: 90; display: flex; align-items: stretch; background: var(--primary); color: var(--on-primary); border-radius: 14px; box-shadow: var(--shadow-lg); max-width: min(420px, calc(100vw - 32px)); }
 .return-pill .return-main { flex: 1; display: flex; align-items: center; gap: 10px; padding: 10px 6px 10px 16px; color: inherit; text-decoration: none; min-width: 0; }

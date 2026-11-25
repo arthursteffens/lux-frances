@@ -4,7 +4,9 @@
 (function (g) {
   'use strict';
   var LUX = g.LUX, U = LUX.util;
-  var T = LUX.tts = { supported: 'speechSynthesis' in g, voices: [], ready: false, playing: null, listeners: [] };
+  var T = LUX.tts = { supported: 'speechSynthesis' in g, voices: [], allVoices: [], ready: false, playing: null, listeners: [],
+    contentLang: 'fr' };  // idioma do conteúdo da página atual ('fr' | 'en' | 'it'); o roteador volta para 'fr' a cada página
+  var LANG_TAG = { fr: 'fr-FR', en: 'en-GB', it: 'it-IT' };
 
   var FEMALE = /(denise|eloise|élo|vivienne|julie|hortense|am[eé]lie|audrey|aur[eé]lie|marie|c[eé]line|brigitte|charline|coralie|jacqueline|jos[eé]phine|yvette|ariane|sylvie|l[eé]a|virginie|female|femme|sylvia|caroline|chantal|claire|natalie|ad[eè]le|seraphina|clara|sabine|ophélie|ophelie)/i;
   var MALE = /(henri|paul|claude|thomas|r[eé]my|remi|antoine|j[eé]r[oô]me|yves|daniel|nicolas|guillaume|mathieu|jean|louis|g[eé]rard|alain|fabrice|maxime|lucien|male|homme|cl[eé]ment|fabien|olivier|gabriel)/i;
@@ -12,6 +14,7 @@
   function loadVoices() {
     if (!T.supported) return;
     var all = speechSynthesis.getVoices() || [];
+    T.allVoices = all;
     T.voices = all.filter(function (v) { return /^fr/i.test(v.lang); });
     T.voices.sort(function (a, b) { return score(b) - score(a); });
     T.ready = true;
@@ -33,6 +36,16 @@
     setTimeout(loadVoices, 500); setTimeout(loadVoices, 2000);
   };
   T.onVoices = function (fn) { T.listeners.push(fn); };
+  /* melhor voz para outro idioma (inglês, italiano...) — usado pelas trilhas profissionais em outras línguas */
+  T.voiceForLang = function (lang) {
+    var tag = LANG_TAG[lang] || lang;
+    var pre = new RegExp('^' + lang, 'i'), exact = new RegExp('^' + tag.replace('-', '[-_]'), 'i');
+    var list = T.allVoices.filter(function (v) { return pre.test(v.lang); });
+    list.sort(function (a, b) { return langScore(b) - langScore(a); });
+    function langScore(v) { return (exact.test(v.lang) ? 10 : 0) + (/natural|online|neural|premium|enhanced/i.test(v.name) ? 20 : 0) + (/google/i.test(v.name) ? 5 : 0); }
+    return list[0] || null;
+  };
+  T.hasLang = function (lang) { return lang === 'fr' ? T.hasFrench() : !!T.voiceForLang(lang); };
   T.hasFrench = function () { return T.voices.length > 0; };
 
   T.genderOf = function (v) {
@@ -64,8 +77,9 @@
   };
 
   /* divide textos longos em frases (o Chrome corta falas longas) */
-  function chunk(text) {
-    text = U.ttsClean(text);
+  function chunk(text, lang) {
+    if (lang === 'fr') text = U.ttsClean(text); // números/horas por extenso: só em francês
+    else text = U.stripGloss(String(text));
     if (text.length < 180) return [text];
     return U.sentences(text).map(function (s) { return s.text; });
   }
@@ -84,7 +98,8 @@
     var queue = [];
     items.forEach(function (it, i) {
       var seg = typeof it === 'string' ? { text: it } : it;
-      chunk(seg.text).forEach(function (txt, j) { if (txt) queue.push({ text: txt, index: i, first: j === 0, gender: seg.gender }); });
+      var lang = seg.lang || opts.lang || T.contentLang || 'fr';
+      chunk(seg.text, lang).forEach(function (txt, j) { if (txt) queue.push({ text: txt, index: i, first: j === 0, gender: seg.gender, lang: lang }); });
     });
     var k = 0;
     T.keep = [];
@@ -94,8 +109,8 @@
       var q = queue[k++];
       if (q.first && opts.onItem) opts.onItem(q.index);
       var u = new SpeechSynthesisUtterance(q.text);
-      var vp = T.voiceFor(q.gender);
-      if (vp.voice) { u.voice = vp.voice; u.lang = vp.voice.lang; } else u.lang = 'fr-FR';
+      var vp = q.lang === 'fr' ? T.voiceFor(q.gender) : { voice: T.voiceForLang(q.lang), pitch: 1 };
+      if (vp.voice) { u.voice = vp.voice; u.lang = vp.voice.lang; } else u.lang = LANG_TAG[q.lang] || 'fr-FR';
       u.pitch = vp.pitch; u.rate = rate;
       u.onend = function () { if (!handle.stopped) setTimeout(next, k < queue.length && queue[k].first ? pause : 60); };
       u.onerror = function (e) { if (e.error !== 'interrupted' && e.error !== 'canceled') console.warn('TTS', e.error); if (!handle.stopped) setTimeout(next, 60); };

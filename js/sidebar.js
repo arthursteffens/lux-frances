@@ -17,7 +17,8 @@
     ] },
     { label: 'Meu espaço', items: [
       { id: 'caderno', icon: '📓', label: 'Caderno', href: '#/caderno', badge: function () { var p = LUX.profiles.current(); return p ? Object.keys(p.notebook).length : 0; }, badgeMuted: true },
-      { id: 'perfil', icon: '👤', label: 'Perfil e configurações', href: '#/perfil' }
+      { id: 'perfil', icon: '👤', label: 'Perfil e configurações', href: '#/perfil' },
+      { id: 'pro', icon: '💼', label: 'Profissional', href: '#/pro' }
     ] }
   ];
   SB.BOTTOM = ['curso', 'revisar', 'verbos', 'caderno'];

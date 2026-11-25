@@ -146,7 +146,7 @@
           link.fileId = f.id; link.lastSyncAt = now; link.dirty = false;
           quietSave();
           setStatus(p, 'ok');
-          if (changed && opts.refresh !== false && LUX.router && P.current() && P.current().id === p.id && !/^#\/(licao|teste)\//.test(location.hash)) {
+          if (changed && opts.refresh !== false && LUX.router && P.current() && P.current().id === p.id && !/^#\/(pro\/)?(licao|teste)\//.test(location.hash)) {
             if (LUX.sidebar) LUX.sidebar.render();
             LUX.router.render();
           }

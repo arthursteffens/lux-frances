@@ -48,7 +48,8 @@ function checkExercise(where, ex) {
 /* ---------- cobertura do léxico ---------- */
 LUX.lexicon.build();
 const missing = new Map();
-function cover(where, text, names, extra) {
+function cover(where, text, names, extra) { return coverFn(where, text, names, extra); }
+function coverFn(where, text, names, extra) {
   if (!text) return;
   const parsed = U.parseGloss(text);
   const gloss = Object.assign({}, (extra && extra.gloss) || {});
@@ -78,10 +79,15 @@ LUX.manifest.levels.forEach(lv => lv.units.forEach(u => u.lessons.forEach(id => 
   ['title', 'titlePt', 'objectives', 'vocabulary', 'reading', 'listening', 'grammar', 'grammarPractice', 'tipForBrazilians']
     .forEach(f => { if (!l[f]) err(id, `campo obrigatório ausente: ${f}`); });
   if (l.level !== lv.id || l.unit !== u.n) err(id, 'level/unit não batem com o manifesto');
+  checkLessonBody(id, l);
+})));
+function checkLessonBody(id, l, isPro) {
+  const fr = (l.lang || 'fr') === 'fr';  // cobertura do léxico e tópico de gramática só para francês
+  const cover2 = (w, t, n) => { if (fr) cover(w, t, n); };
   const names = {}; (l.names || []).forEach(n => { names[U.norm(n)] = 1; U.tokenize(n).filter(t => t.w).forEach(t => { names[U.norm(t.text)] = 1; }); });
   if (l.reading) {
     glossOk(id + ' leitura', l.reading.text);
-    cover(id + ' leitura', l.reading.text, names);
+    cover2(id + ' leitura', l.reading.text, names);
     const words = U.tokenize(U.stripGloss(l.reading.text)).filter(t => t.w).length;
     const lim = { A2: [120, 240], B1: [250, 420], B2: [400, 720] }[l.level];
     if (lim && (words < lim[0] || words > lim[1])) warn(id, `leitura com ${words} palavras (esperado ${lim[0]}–${lim[1]})`);
@@ -90,13 +96,17 @@ LUX.manifest.levels.forEach(lv => lv.units.forEach(u => u.lessons.forEach(id => 
   }
   if (l.listening) {
     const sp = new Set((l.listening.speakers || []).map(s => s.id));
-    (l.listening.script || []).forEach(s => { if (!sp.has(s.speaker)) err(id, `fala de personagem desconhecido: ${s.speaker}`); cover(id + ' áudio', s.text, names); });
+    (l.listening.script || []).forEach(s => { if (!sp.has(s.speaker)) err(id, `fala de personagem desconhecido: ${s.speaker}`); cover2(id + ' áudio', s.text, names); });
     l._listeningWords = (l.listening.script || []).reduce((n, s) => n + U.tokenize(s.text).filter(t => t.w).length, 0);
     (l.listening.exercises || []).forEach((ex, i) => checkExercise(`${id} áudio #${i + 1}`, ex));
   }
   (l.grammarPractice || []).forEach((ex, i) => checkExercise(`${id} prática #${i + 1}`, ex));
-  if (l.grammar && !LUX.data.grammar[l.grammar.topicId]) err(id, `topicId inexistente: ${l.grammar.topicId}`);
-})));
+  if (fr && l.grammar && !LUX.data.grammar[l.grammar.topicId]) err(id, `topicId inexistente: ${l.grammar.topicId}`);
+  if (fr && isPro) { // lições profissionais: exemplos do vocabulário e da gramática também precisam de cobertura
+    (l.vocabulary || []).forEach(v => { cover2(id + ' vocabulário', v.ex, names); });
+    ((l.grammar && l.grammar.examples) || []).forEach(e => cover2(id + ' gramática', e.fr, names));
+  }
+}
 Object.keys(LUX.data.lessons).forEach(id => { if (!lessonIds.has(id)) warn(id, 'lição carregada mas fora do manifesto'); });
 
 /* ---------- testes de nível ---------- */
@@ -156,9 +166,14 @@ const genIds = new Set();
 Object.keys(LUX.data.general).forEach(id => {
   const p = LUX.data.general[id], w = 'gerais ' + id;
   if (!genIds.has(id)) err(w, 'página não está no manifesto de Gerais');
+  checkBlocks(w, p, { letters: id === 'alfabeto' });
+});
+function checkBlocks(w, p, ex0) {
+  const fr = (p.lang || 'fr') === 'fr';
   (p.blocks || []).forEach((b, bi) => {
     if (!['intro', 'table', 'rules', 'phrases', 'tip', 'tool', 'quiz', 'links'].includes(b.type)) err(w, `bloco desconhecido: ${b.type}`);
-    const ex = { letters: id === 'alfabeto' };
+    const ex = ex0 || {};
+    const cover = (wh, t, n, e) => { if (fr) coverFn(wh, t, n, e); };
     if (b.type === 'table') (b.sections || []).forEach(s => { if (!s.letters) (s.items || []).forEach(it => cover(w, it.fr, {}, ex)); });
     if (b.type === 'phrases') (b.items || []).forEach(it => cover(w, it.fr, {}, ex));
     if (b.type === 'rules') (b.items || []).forEach(r => (r.examples || []).forEach(e => cover(w, e.fr, {}, ex)));
@@ -167,9 +182,46 @@ Object.keys(LUX.data.general).forEach(id => {
       const m = l.to.match(/^#\/(gramatica|gerais)\/(.+)$/);
       if (m && m[1] === 'gramatica' && !LUX.data.grammar[m[2]]) err(w, `link para gramática inexistente: ${m[2]}`);
       if (m && m[1] === 'gerais' && !genIds.has(m[2])) err(w, `link para página inexistente: ${m[2]}`);
+      const pm = l.to.match(/^#\/pro\/(licao|guia)\/(.+)$/);
+      if (pm && pm[1] === 'licao' && !LUX.data.pro.lessons[pm[2]]) err(w, `link para lição profissional inexistente: ${pm[2]}`);
+      if (pm && pm[1] === 'guia' && !LUX.data.pro.guides[pm[2]]) err(w, `link para guia inexistente: ${pm[2]}`);
     });
   });
-});
+}
+
+/* ---------- aba Profissional ---------- */
+const PM = LUX.proManifest;
+const proLessonIds = new Set(), proGuideIds = new Set();
+if (!PM) err('profissional', 'content/pro/manifest.js não carregado');
+else {
+  (PM.languages || []).forEach(lg => { if (!PM.tracks[lg.id]) err('profissional', `idioma sem trilha: ${lg.id}`); });
+  Object.keys(PM.tracks).forEach(lang => {
+    const tr = PM.tracks[lang];
+    (tr.levels || []).forEach(lv => (lv.lessons || []).forEach((it, i) => {
+      const w = 'pro ' + it.id;
+      if (proLessonIds.has(it.id)) err(w, 'id repetido no manifesto profissional');
+      proLessonIds.add(it.id);
+      const l = LUX.data.pro.lessons[it.id];
+      if (!l) { err(w, 'lição listada mas não carregada'); return; }
+      if (l.lang !== lang) err(w, `lang "${l.lang}" diferente da trilha "${lang}"`);
+      if (l.level !== lv.id) err(w, 'level não bate com o manifesto profissional');
+      if (it.unit && !LUX.manifest.levels.some(x => x.id === lv.id && x.units.some(u => u.n === it.unit))) err(w, `unidade do curso inexistente: ${it.unit}`);
+      ['title', 'titlePt', 'objectives', 'vocabulary', 'reading', 'listening', 'grammar', 'grammarPractice', 'tipForBrazilians']
+        .forEach(fl => { if (!l[fl]) err(w, `campo obrigatório ausente: ${fl}`); });
+      checkLessonBody(it.id, l, true);
+    }));
+    (tr.guides || []).forEach(gd => {
+      if (proGuideIds.has(gd.id)) err('pro guia ' + gd.id, 'guia repetido');
+      proGuideIds.add(gd.id);
+      const p = LUX.data.pro.guides[gd.id];
+      if (!p) return; // guia anunciado como "em breve"
+      if (p.lang !== lang) err('pro guia ' + gd.id, `lang "${p.lang}" diferente da trilha "${lang}"`);
+      checkBlocks('pro guia ' + gd.id, p);
+    });
+  });
+  Object.keys(LUX.data.pro.lessons).forEach(id => { if (!proLessonIds.has(id)) warn(id, 'lição profissional fora do manifesto'); });
+  Object.keys(LUX.data.pro.guides).forEach(id => { if (!proGuideIds.has(id)) err('pro guia ' + id, 'guia fora do manifesto profissional'); });
+}
 
 /* ---------- saída ---------- */
 const onlyMissing = process.argv.includes('--missing');
@@ -182,11 +234,12 @@ if (missing.size) {
 warnings.forEach(w => console.log(w));
 errors.forEach(e => console.log(e));
 
-const L = Object.values(LUX.data.lessons);
+const L = Object.values(LUX.data.lessons).concat(Object.values(LUX.data.pro.lessons));
 console.log('\nResumo:');
 L.forEach(l => console.log(`  ${l.id}  leitura: ${l._readingWords || 0} palavras · áudio: ${l._listeningWords || 0} palavras · exercícios: ${(l.reading.exercises.length + l.listening.exercises.length + l.grammarPractice.length)}`));
 Object.values(LUX.data.levelTests).forEach(t => console.log(`  teste ${t.level}: ${t._n || 0} questões`));
 console.log(`  ${L.length} lições · ${LUX.data.verbList.length} verbos · ${LUX.data.grammarList.length} tópicos de gramática · ${Object.keys(LUX.data.general).length} páginas de Gerais · ${LUX.data.lexicon.length} entradas no léxico`);
+console.log(`  Profissional: ${Object.keys(LUX.data.pro.lessons).length} lições · ${Object.keys(LUX.data.pro.guides).length} guias`);
 console.log(`  Cobertura do léxico: ${missing.size ? missing.size + ' palavra(s) faltando' : '100%'}`);
 console.log(errors.length ? `\n${errors.length} erro(s).` : '\nTudo certo ✔');
 process.exit(errors.length ? 1 : 0);

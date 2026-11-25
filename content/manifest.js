@@ -37,7 +37,7 @@ LUX.manifest = {
   files: [
     'content/verbs/irregular.js',
     'content/verbs/verbs-a-c.js', 'content/verbs/verbs-d-l.js', 'content/verbs/verbs-m-r.js', 'content/verbs/verbs-s-z.js',
-    'content/verbs/verbs-a2-extra.js',
+    'content/verbs/verbs-a2-extra.js', 'content/verbs/verbs-pro.js',
     'content/lexicon/function-words.js', 'content/lexicon/lexicon-a-f.js', 'content/lexicon/lexicon-g-z.js', 'content/lexicon/names.js',
     'content/lexicon/lexicon-a2-u02.js', 'content/lexicon/lexicon-a2-u03.js', 'content/lexicon/lexicon-a2-u04.js', 'content/lexicon/lexicon-a2-u05.js', 'content/lexicon/lexicon-a2-u06.js', 'content/lexicon/lexicon-a2-geral.js',
     'content/grammar/articles.js', 'content/grammar/nouns-adjectives.js', 'content/grammar/pronouns.js',
@@ -73,6 +73,13 @@ LUX.manifest = {
     'content/a2/u04/l01.js', 'content/a2/u04/l02.js', 'content/a2/u04/l03.js', 'content/a2/u04/l04.js', 'content/a2/u04/l05.js',
     'content/a2/u05/l01.js', 'content/a2/u05/l02.js', 'content/a2/u05/l03.js', 'content/a2/u05/l04.js', 'content/a2/u05/l05.js',
     'content/a2/u06/l01.js', 'content/a2/u06/l02.js', 'content/a2/u06/l03.js', 'content/a2/u06/l04.js', 'content/a2/u06/l05.js',
-    'content/a2/test.js'
+    'content/a2/test.js',
+    // aba Profissional (content/pro/manifest.js descreve idiomas, níveis e guias)
+    'content/lexicon/lexicon-pro.js',
+    'content/pro/manifest.js',
+    'content/pro/fr/a2/l01.js', 'content/pro/fr/a2/l02.js', 'content/pro/fr/a2/l03.js',
+    'content/pro/fr/a2/l04.js', 'content/pro/fr/a2/l05.js', 'content/pro/fr/a2/l06.js',
+    'content/pro/fr/guias/trabalhar-luxemburgo.js', 'content/pro/fr/guias/outros-paises.js', 'content/pro/fr/guias/glossario-rh.js',
+    'content/pro/fr/guias/empresas-tech.js', 'content/pro/fr/guias/reunioes.js', 'content/pro/fr/guias/emails.js', 'content/pro/fr/guias/entrevista.js'
   ]
 };

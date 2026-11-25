@@ -90,7 +90,7 @@
 
   var BLOCKS = {
     intro: function (b) { return h('div', { class: 'card intro' }, UI.md(b.textPt)); },
-    tip: function (b) { return h('div', { class: 'card tip-card' }, [h('h2', null, '💡 Dica para brasileiros'), UI.md(b.textPt)]); },
+    tip: function (b) { return h('div', { class: 'card tip-card' }, [h('h2', null, b.title || '💡 Dica para brasileiros'), UI.md(b.textPt)]); },
     table: function (b, page, source) {
       var wrap = h('div', { class: 'gen-tables' });
       b.sections.forEach(function (s) {
@@ -149,9 +149,17 @@
       return c;
     },
     links: function (b) {
-      return h('section', { class: 'card links' }, [h('h2', null, 'Ligações'), h('div', { class: 'chips' }, b.items.map(function (l) { return h('a', { class: 'chip link', href: l.to }, l.label + ' →'); }))]);
+      return h('section', { class: 'card links' }, [h('h2', null, 'Ligações'), h('div', { class: 'chips' }, b.items.map(function (l) {
+        var ext = /^https?:/.test(l.to);
+        return h('a', { class: 'chip link', href: l.to, target: ext ? '_blank' : null, rel: ext ? 'noopener' : null }, l.label + (ext ? ' ↗' : ' →'));
+      }))]);
     }
   };
+  /* usados também pela aba Profissional (guias com os mesmos blocos) */
+  GEN.renderBlocks = function (main, page, source) {
+    page.blocks.forEach(function (b) { var fn = BLOCKS[b.type]; if (fn) main.appendChild(fn(b, page, source)); });
+  };
+  GEN.allItems = function (page) { return allItems(page); };
 
   /* ---------- ferramentas ---------- */
   function variantSelect() {

@@ -23,6 +23,7 @@
   R.render = function () {
     var r = R.parse();
     LUX.tts.stop();
+    LUX.tts.contentLang = 'fr'; // a página pode trocar (ex.: lição profissional em inglês)
     LUX.ui.closePopup();
     var main = document.getElementById('main');
     // a página que está saindo pode guardar o próprio estado (ex.: lição em andamento)

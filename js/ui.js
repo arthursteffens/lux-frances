@@ -153,7 +153,9 @@
     if (inGloss) html += '</span>';
     if (inSent) html += '</span>';
     if (paraOpen) html += '</p>';
-    var el = h(opts.inline ? 'span' : 'div', { class: 'fr-text' + (opts.cls ? ' ' + opts.cls : ''), lang: 'fr', html: html });
+    // texto em outro idioma (trilhas profissionais em inglês/italiano): sem o balão do léxico francês
+    var lang = opts.lang || (LUX.tts && LUX.tts.contentLang) || 'fr';
+    var el = h(opts.inline ? 'span' : 'div', { class: 'fr-text' + (opts.cls ? ' ' + opts.cls : '') + (lang !== 'fr' ? ' no-popup' : ''), lang: lang, html: html });
     el._lux = {
       gloss: parsed.gloss, source: opts.source || null,
       sentences: sents.map(function (s, k) { return { text: s.text, el: null, index: k }; })

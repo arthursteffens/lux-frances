@@ -5,7 +5,7 @@
 'use strict';
 
 // <release>
-const BUILD = '20261125-1433-5753a1e';
+const BUILD = '20261125-1533-1c5b074';
 const FILES = [
   './',
   'version.json',
@@ -34,6 +34,7 @@ const FILES = [
   'js/lexicon.js',
   'js/notebook.js',
   'js/palette.js',
+  'js/pro.js',
   'js/profile-view.js',
   'js/profiles.js',
   'js/pwa.js',
@@ -124,13 +125,29 @@ const FILES = [
   'content/lexicon/lexicon-a2-u05.js',
   'content/lexicon/lexicon-a2-u06.js',
   'content/lexicon/lexicon-g-z.js',
+  'content/lexicon/lexicon-pro.js',
   'content/lexicon/names.js',
   'content/manifest.js',
+  'content/pro/fr/a2/l01.js',
+  'content/pro/fr/a2/l02.js',
+  'content/pro/fr/a2/l03.js',
+  'content/pro/fr/a2/l04.js',
+  'content/pro/fr/a2/l05.js',
+  'content/pro/fr/a2/l06.js',
+  'content/pro/fr/guias/emails.js',
+  'content/pro/fr/guias/empresas-tech.js',
+  'content/pro/fr/guias/entrevista.js',
+  'content/pro/fr/guias/glossario-rh.js',
+  'content/pro/fr/guias/outros-paises.js',
+  'content/pro/fr/guias/reunioes.js',
+  'content/pro/fr/guias/trabalhar-luxemburgo.js',
+  'content/pro/manifest.js',
   'content/verbs/irregular.js',
   'content/verbs/verbs-a-c.js',
   'content/verbs/verbs-a2-extra.js',
   'content/verbs/verbs-d-l.js',
   'content/verbs/verbs-m-r.js',
+  'content/verbs/verbs-pro.js',
   'content/verbs/verbs-s-z.js',
   'icons/apple-touch-icon.png',
   'icons/icon-192.png',

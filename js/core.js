@@ -14,7 +14,8 @@
     general: {},      // id -> página de Gerais
     lexicon: [],      // entradas do léxico geral
     names: {},        // nomes próprios (normalizados)
-    levelTests: {}    // nível -> teste de nível
+    levelTests: {},   // nível -> teste de nível
+    pro: { lessons: {}, guides: {} }  // aba Profissional (todas as línguas; cada item tem "lang")
   };
 
   /* ---------- registro de conteúdo ---------- */
@@ -42,6 +43,10 @@
   };
   LUX.registerGeneral = function (p) { LUX.data.general[p.id] = p; };
   LUX.registerLevelTest = function (t) { LUX.data.levelTests[t.level] = t; };
+  /* aba Profissional: lições (mesmo formato das lições do curso) e guias (mesmos blocos das páginas de Gerais).
+     lang: 'fr' (padrão) | 'en' | 'it' — inglês e italiano entram no futuro, só nesta aba. */
+  LUX.registerProLesson = function (l) { l.lang = l.lang || 'fr'; LUX.data.pro.lessons[l.id] = l; };
+  LUX.registerProGuide = function (gd) { gd.lang = gd.lang || 'fr'; LUX.data.pro.guides[gd.id] = gd; };
   LUX.registerLexicon = function (arr) { Array.prototype.push.apply(LUX.data.lexicon, arr); };
   LUX.registerNames = function (arr) {
     arr.forEach(function (n) { LUX.data.names[U.norm(n)] = n; });

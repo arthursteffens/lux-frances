@@ -39,17 +39,18 @@
      exatamente como estavam, inclusive a posição de rolagem. Só uma lição fica guardada por vez. */
   L.live = null;
 
-  LUX.router.add('/licao/:id', function (params) {
-    var l = LUX.data.lessons[params.id];
-    var p = LUX.profiles.current();
+  /* Monta a view de uma lição (curso ou Profissional), com o mecanismo de guardar/restaurar.
+     opts: {route, nav, crumbs, locked:{msg, back:[href,label]}|null, render: opções do renderLesson} */
+  L.view = function (l, p, params, opts) {
     var api = null;
+    var back = opts.back || ['#/curso', 'Voltar ao curso'];
     return {
-      title: l ? l.title : 'Lição', nav: 'curso',
-      crumbs: l ? [['Curso', '#/curso'], [l.level + ' · Unidade ' + l.unit, '#/curso?u=' + l.level + '-' + l.unit], [l.title, null]] : [['Curso', '#/curso']],
+      title: l ? l.title : 'Lição', nav: opts.nav, crumbs: opts.crumbs,
       render: function (main) {
-        if (!l) { main.appendChild(UI.empty('📭', 'Lição não encontrada', null, h('a', { class: 'btn primary', href: '#/curso' }, 'Voltar ao curso'))); return; }
-        if (!L.isUnlocked(p, l.id)) {
-          main.appendChild(UI.empty('🔒', 'Lição bloqueada', 'Conclua a lição anterior com pelo menos 70% para desbloquear esta. Você também pode desbloquear tudo em **Perfil e configurações**.', h('a', { class: 'btn primary', href: '#/curso' }, 'Voltar ao curso')));
+        if (LUX.tts) LUX.tts.contentLang = (l && l.lang) || 'fr';
+        if (!l) { main.appendChild(UI.empty('📭', 'Lição não encontrada', null, h('a', { class: 'btn primary', href: back[0] }, back[1]))); return; }
+        if (opts.locked) {
+          main.appendChild(UI.empty('🔒', 'Lição bloqueada', opts.locked, h('a', { class: 'btn primary', href: back[0] }, back[1])));
           return;
         }
         var live = L.live;
@@ -64,25 +65,35 @@
         }
         L.live = null;
         updatePill();
-        api = renderLesson(main, l, p, +(params.query.step || 0));
+        api = renderLesson(main, l, p, +(params.query.step || 0), Object.assign({ route: opts.route }, opts.render || {}));
       },
       onLeave: function (main) {
         if (!api || api.isSaved() || !p) { if (L.live && L.live.id === (l && l.id)) L.live = null; return; }
-        L.live = { id: l.id, profileId: p.id, title: l.title, api: api, scrollY: window.scrollY, nodes: Array.prototype.slice.call(main.childNodes) };
+        L.live = { id: l.id, route: opts.route, profileId: p.id, title: l.title, lang: l.lang || 'fr', api: api, scrollY: window.scrollY, nodes: Array.prototype.slice.call(main.childNodes) };
       }
     };
+  };
+
+  LUX.router.add('/licao/:id', function (params) {
+    var l = LUX.data.lessons[params.id];
+    var p = LUX.profiles.current();
+    return L.view(l, p, params, {
+      route: '#/licao/' + params.id, nav: 'curso',
+      crumbs: l ? [['Curso', '#/curso'], [l.level + ' · Unidade ' + l.unit, '#/curso?u=' + l.level + '-' + l.unit], [l.title, null]] : [['Curso', '#/curso']],
+      locked: l && !L.isUnlocked(p, l.id) ? 'Conclua a lição anterior com pelo menos 70% para desbloquear esta. Você também pode desbloquear tudo em **Perfil e configurações**.' : null
+    });
   });
 
   /* botão flutuante "Voltar à lição" nas outras páginas */
   function updatePill() {
     var old = document.getElementById('lesson-return');
     var live = L.live, p = LUX.profiles.current();
-    var show = live && p && live.profileId === p.id && !/^#\/licao\//.test(location.hash);
+    var show = live && p && live.profileId === p.id && location.hash.split('?')[0] !== live.route;
     if (!show) { if (old) old.remove(); return; }
     var pill = h('div', { id: 'lesson-return', class: 'return-pill', role: 'region', 'aria-label': 'Lição em andamento' }, [
-      h('a', { class: 'return-main', href: '#/licao/' + live.id }, [
+      h('a', { class: 'return-main', href: live.route }, [
         h('span', { 'aria-hidden': 'true' }, '↩'),
-        h('span', null, [h('b', null, 'Voltar à lição'), h('span', { class: 'return-sub', lang: 'fr' }, live.title + ' · ' + live.api.stepLabel())])
+        h('span', null, [h('b', null, 'Voltar à lição'), h('span', { class: 'return-sub', lang: live.lang }, live.title + ' · ' + live.api.stepLabel())])
       ]),
       h('button', { class: 'return-x', 'aria-label': 'Descartar a lição em andamento', title: 'Descartar', onclick: function () {
         UI.modal({
@@ -96,15 +107,19 @@
   }
   L.updatePill = updatePill;   // chamado pelo roteador depois de cada página
 
-  function renderLesson(main, l, p, startStep) {
-    var source = { lessonId: l.id, title: l.title, route: '#/licao/' + l.id };
+  /* opts: {route, kicker (linha acima do título), warmup (bool), afterSave(card, rec, pct) — ações depois de salvar} */
+  function renderLesson(main, l, p, startStep, opts) {
+    opts = opts || {};
+    var lang = l.lang || 'fr';
+    var route = opts.route || '#/licao/' + l.id;
+    var source = { lessonId: l.id, title: l.title, route: route };
     var results = {};     // chave -> {score, weight}
     var exKeys = [];
     var step = Math.max(0, Math.min(STEPS.length - 1, startStep));
 
     var head = h('div', { class: 'lesson-head' }, [
-      h('div', null, [h('div', { class: 'muted sm' }, l.level + ' · Unidade ' + l.unit + ' · Lição ' + l.order + (l.review ? ' · Revisão' : '')),
-        h('h1', { lang: 'fr' }, l.title), h('p', { class: 'muted' }, l.titlePt)])
+      h('div', null, [h('div', { class: 'muted sm' }, opts.kicker || (l.level + ' · Unidade ' + l.unit + ' · Lição ' + l.order + (l.review ? ' · Revisão' : ''))),
+        h('h1', { lang: lang }, l.title), h('p', { class: 'muted' }, l.titlePt)])
     ]);
     main.appendChild(head);
     var stepper = h('ol', { class: 'stepper', 'aria-label': 'Etapas da lição' });
@@ -142,7 +157,7 @@
     (function (pane) {
       var c = h('div', { class: 'card' }, [h('h2', null, '🎯 Ao final desta lição, você será capaz de:'), h('ul', { class: 'checklist' }, l.objectives.map(function (o) { return h('li', null, o); }))]);
       pane.appendChild(c);
-      if (p && p.settings.warmup) {
+      if (p && p.settings.warmup && opts.warmup !== false) {
         pane.appendChild(h('div', { class: 'card warmup' }, [
           h('div', null, [h('h3', null, '🔥 Aquecimento de 2 minutos'), h('p', { class: 'muted' }, '5 números, horas ou datas de ouvido antes de começar. (Dá para desligar no seu perfil.)')]),
           h('a', { class: 'btn', href: '#/treino/aquecimento?next=' + l.id }, 'Fazer aquecimento')
@@ -163,7 +178,7 @@
         var inf = isVerb ? v.fr.replace(/\s+de$/, '') : null;
         grid.appendChild(h('div', { class: 'vocab-item' }, [
           h('div', { class: 'row gap' }, [UI.playBtn(v.fr.replace(' / ', ', '), { small: true }), h('div', null, [
-            h('div', { class: 'vocab-fr', lang: 'fr' }, v.fr),
+            h('div', { class: 'vocab-fr', lang: lang }, v.fr),
             h('div', { class: 'vocab-pt' }, v.pt + (v.g === 'm' ? ' · masc.' : v.g === 'f' ? ' · fem.' : ''))
           ])]),
           v.ex ? h('div', { class: 'vocab-ex' }, [UI.playBtn(v.ex, { small: true }), UI.frText(v.ex, { source: source, block: false })]) : null,
@@ -181,7 +196,7 @@
       var text = UI.frText(r.text, { source: source });
       var sentences = text._lux.sentences.map(function (s) { return s.text; });
       c.appendChild(h('div', { class: 'row between wrap' }, [
-        h('div', null, [h('span', { class: 'tag' }, r.genre), r.title ? h('h2', { lang: 'fr' }, r.title) : null]),
+        h('div', null, [h('span', { class: 'tag' }, r.genre), r.title ? h('h2', { lang: lang }, r.title) : null]),
         h('div', { class: 'row gap' }, [UI.speedSelect(), UI.playBtn(sentences, {
           label: 'ouvir o texto', pause: 250,
           onItem: function (i) { UI.highlightSentence(text, i); }, onEnd: function () { UI.highlightSentence(text, -1); }
@@ -313,7 +328,7 @@
         if (!p) return;
         var rec = LUX.profiles.saveLessonResult(p, l.id, s.score, null);
         var added = 0;
-        l.vocabulary.forEach(function (v) {
+        if (lang === 'fr') l.vocabulary.forEach(function (v) { // revisão (SRS) ainda é só de francês
           added += LUX.srs.addWord(p, { fr: v.fr, display: v.fr, lemma: stripArticle(v.fr), pt: v.pt, gender: v.g === 'm' || v.g === 'f' ? v.g : null, example: v.ex || '', source: l.id });
         });
         saved = true;
@@ -322,8 +337,9 @@
         drawSummary();
       });
       c.appendChild(h('div', { class: 'row gap wrap' }, [finish,
-        h('a', { class: 'btn ghost', href: '#/licao/' + l.id + '?r=' + Date.now() }, '↺ Refazer a lição')]));
-      if (saved) {
+        h('a', { class: 'btn ghost', href: route + '?r=' + Date.now() }, '↺ Refazer a lição')]));
+      if (saved && opts.afterSave) opts.afterSave(c, p.progress[l.id], pct);
+      else if (saved) {
         var st = p.progress[l.id];
         var nx = L.next(l.id);
         if (st && st.status === 'done') {
