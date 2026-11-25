@@ -15,7 +15,10 @@
   var lastCheck = 0;
 
   function notices() { return document.getElementById('app-notices'); }
-  function inStudy() { return /^#\/(licao|teste)\//.test(location.hash) && !/[?&]cert=1/.test(location.hash); }
+  function inStudy() {
+    if (LUX.lessons && LUX.lessons.live) return true; // lição guardada para voltar: não recarregar
+    return /^#\/(licao|teste)\//.test(location.hash) && !/[?&]cert=1/.test(location.hash);
+  }
   function fmtBuild(b) {
     if (!b) return '';
     var d = b.date ? new Date(b.date) : null;

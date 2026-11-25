@@ -34,9 +34,15 @@
 
   function stripArticle(fr) { return fr.replace(/^(le \/ la |le |la |l'|les |un |une )/i, '').replace(/\s*\/.*$/, '').replace(/\(e\)$/, ''); }
 
+  /* Lição em andamento guardada ao sair dela (ex.: clicar em "ver conjugação").
+     Os elementos da página ficam intactos — etapa, respostas, transcrições abertas — e voltam
+     exatamente como estavam, inclusive a posição de rolagem. Só uma lição fica guardada por vez. */
+  L.live = null;
+
   LUX.router.add('/licao/:id', function (params) {
     var l = LUX.data.lessons[params.id];
     var p = LUX.profiles.current();
+    var api = null;
     return {
       title: l ? l.title : 'Lição', nav: 'curso',
       crumbs: l ? [['Curso', '#/curso'], [l.level + ' · Unidade ' + l.unit, '#/curso?u=' + l.level + '-' + l.unit], [l.title, null]] : [['Curso', '#/curso']],
@@ -46,10 +52,49 @@
           main.appendChild(UI.empty('🔒', 'Lição bloqueada', 'Conclua a lição anterior com pelo menos 70% para desbloquear esta. Você também pode desbloquear tudo em **Perfil e configurações**.', h('a', { class: 'btn primary', href: '#/curso' }, 'Voltar ao curso')));
           return;
         }
-        renderLesson(main, l, p, +(params.query.step || 0));
+        var live = L.live;
+        if (live && live.id === l.id && p && live.profileId === p.id && !params.query.r) {
+          L.live = null;
+          api = live.api;
+          live.nodes.forEach(function (n) { main.appendChild(n); });
+          if (params.query.step != null) api.go(+params.query.step);
+          else setTimeout(function () { window.scrollTo(0, live.scrollY); }, 0);
+          updatePill();
+          return;
+        }
+        L.live = null;
+        updatePill();
+        api = renderLesson(main, l, p, +(params.query.step || 0));
+      },
+      onLeave: function (main) {
+        if (!api || api.isSaved() || !p) { if (L.live && L.live.id === (l && l.id)) L.live = null; return; }
+        L.live = { id: l.id, profileId: p.id, title: l.title, api: api, scrollY: window.scrollY, nodes: Array.prototype.slice.call(main.childNodes) };
       }
     };
   });
+
+  /* botão flutuante "Voltar à lição" nas outras páginas */
+  function updatePill() {
+    var old = document.getElementById('lesson-return');
+    var live = L.live, p = LUX.profiles.current();
+    var show = live && p && live.profileId === p.id && !/^#\/licao\//.test(location.hash);
+    if (!show) { if (old) old.remove(); return; }
+    var pill = h('div', { id: 'lesson-return', class: 'return-pill', role: 'region', 'aria-label': 'Lição em andamento' }, [
+      h('a', { class: 'return-main', href: '#/licao/' + live.id }, [
+        h('span', { 'aria-hidden': 'true' }, '↩'),
+        h('span', null, [h('b', null, 'Voltar à lição'), h('span', { class: 'return-sub', lang: 'fr' }, live.title + ' · ' + live.api.stepLabel())])
+      ]),
+      h('button', { class: 'return-x', 'aria-label': 'Descartar a lição em andamento', title: 'Descartar', onclick: function () {
+        UI.modal({
+          title: 'Descartar a lição em andamento?',
+          body: h('p', null, 'As respostas ainda não salvas de "' + live.title + '" serão perdidas. Para guardar a nota, volte à lição e clique em "Concluir lição e salvar" no Resumo.'),
+          actions: [{ label: 'Cancelar' }, { label: 'Descartar', danger: true, onClick: function () { L.live = null; updatePill(); } }]
+        });
+      } }, '×')
+    ]);
+    if (old) old.replaceWith(pill); else document.body.appendChild(pill);
+  }
+  L.updatePill = updatePill;   // chamado pelo roteador depois de cada página
 
   function renderLesson(main, l, p, startStep) {
     var source = { lessonId: l.id, title: l.title, route: '#/licao/' + l.id };
@@ -330,5 +375,10 @@
       head.scrollIntoView({ block: 'start' });
     }
     go(step);
+    return {
+      go: go,
+      isSaved: function () { return saved; },
+      stepLabel: function () { return STEPS[step].label; }
+    };
   }
 })(window);

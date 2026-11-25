@@ -1,6 +1,6 @@
 {
   "version": "2.0.0-fase2",
-  "build": "20261125-1356-0d96c6c",
-  "date": "2026-11-25T16:56:58.190Z",
-  "notes": "Backup no Google Drive: conecte cada perfil à sua conta Google em Perfil e configurações; restauração pelo Drive na tela inicial."
+  "build": "20261125-1433-5753a1e",
+  "date": "2026-11-25T17:33:52.883Z",
+  "notes": "Ao sair de uma lição (ex.: ver conjugação), você volta exatamente onde estava: etapa, respostas e rolagem. Botão flutuante \"Voltar à lição\" nas outras páginas."
 }

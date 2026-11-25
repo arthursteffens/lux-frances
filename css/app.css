@@ -253,6 +253,21 @@ label.btn { position: relative; }
 .toast.ok { background: var(--ok); color: #fff; }
 .toast.bad { background: var(--bad); color: #fff; }
 @media (max-width: 639px) { .toast { bottom: 84px; } }
+
+/* botão flutuante "Voltar à lição" */
+.return-pill { position: fixed; right: 20px; bottom: 20px; z-index: 90; display: flex; align-items: stretch; background: var(--primary); color: var(--on-primary); border-radius: 14px; box-shadow: var(--shadow-lg); max-width: min(420px, calc(100vw - 32px)); }
+.return-pill .return-main { flex: 1; display: flex; align-items: center; gap: 10px; padding: 10px 6px 10px 16px; color: inherit; text-decoration: none; min-width: 0; }
+.return-pill .return-main > span:first-child { font-size: 1.3rem; }
+.return-pill .return-main b { display: block; }
+.return-pill .return-sub { display: block; font-size: .85rem; opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.return-pill .return-main > span:last-child { min-width: 0; }
+.return-pill .return-x { background: none; border: 0; color: inherit; font-size: 1.3rem; padding: 0 14px; cursor: pointer; border-left: 1px solid rgba(255,255,255,.25); border-radius: 0 14px 14px 0; }
+.return-pill .return-x:hover, .return-pill .return-main:hover { background: var(--primary-2); }
+.return-pill .return-main:hover { border-radius: 14px 0 0 14px; }
+.return-pill a:focus-visible, .return-pill button:focus-visible { outline: 3px solid var(--mark); outline-offset: 2px; }
+body.welcome-mode .return-pill { display: none; }
+@media (max-width: 639px) { .return-pill { right: 16px; left: 16px; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); max-width: none; } }
+@media print { .return-pill { display: none !important; } }
 .empty { text-align: center; padding: 40px 16px; }
 .empty-ico { font-size: 44px; }
 .empty .row { justify-content: center; }

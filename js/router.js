@@ -25,6 +25,10 @@
     LUX.tts.stop();
     LUX.ui.closePopup();
     var main = document.getElementById('main');
+    // a página que está saindo pode guardar o próprio estado (ex.: lição em andamento)
+    if (R.current && R.current.view && R.current.view.onLeave) {
+      try { R.current.view.onLeave(main); } catch (e) { console.error(e); }
+    }
     for (var i = 0; i < R.routes.length; i++) {
       var m = r.path.match(R.routes[i].re);
       if (!m) continue;
@@ -44,6 +48,7 @@
       LUX.sidebar.setActive(view.nav || r.path.split('/')[1]);
       if (!r.query.keepScroll) window.scrollTo(0, 0);
       main.focus({ preventScroll: true });
+      if (LUX.lessons && LUX.lessons.updatePill) LUX.lessons.updatePill();
       return;
     }
     R.go('#/curso');
