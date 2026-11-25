@@ -119,10 +119,11 @@
       (sec.audios || []).forEach(function (a, ai) {
         var spk = {};
         a.speakers.forEach(function (x) { spk[x.id] = x; });
+        var rank = LUX.tts.speakerRanks(a.speakers);
         var plays = 0, MAX = 3;
         var counter = h('span', { class: 'muted sm' }, 'Você pode ouvir ' + MAX + ' vezes.');
         var btn = UI.playBtn(function () {
-          return a.script.map(function (ln) { return { text: ln.text, gender: (spk[ln.speaker] || {}).gender }; });
+          return a.script.map(function (ln) { return { text: ln.text, gender: (spk[ln.speaker] || {}).gender, rank: rank[ln.speaker] }; });
         }, {
           label: 'ouvir o áudio', pause: 450,
           onStart: function () {

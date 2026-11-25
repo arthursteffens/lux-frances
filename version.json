@@ -1,6 +1,6 @@
 {
   "version": "2.0.0-fase2",
-  "build": "20261125-1822-9d7ce01",
-  "date": "2026-11-25T21:22:47.920Z",
-  "notes": "Revisão com alternativas: cada cartão traz uma pergunta e 4 opções; acertou, você diz se foi difícil/bom/fácil. Modo 'Só lembrar' opcional e explicação de como funciona."
+  "build": "20261125-1853-f37f769",
+  "date": "2026-11-25T21:53:15.904Z",
+  "notes": "Diálogos com uma voz para cada personagem: dois homens agora têm vozes diferentes (quando o aparelho tem vozes suficientes; senão, tons diferentes)."
 }

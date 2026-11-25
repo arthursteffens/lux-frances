@@ -1,6 +1,6 @@
 /* LUX — síntese de voz (Web Speech API).
    Camada de abstração: LUX.tts.speak(segmentos, opções). No futuro pode tocar MP3 sem mudar as lições.
-   segmento = string | {text, gender:'f'|'m', speaker} */
+   segmento = string | {text, gender:'f'|'m', rank: nº do personagem dentro do gênero (0, 1, …)} */
 (function (g) {
   'use strict';
   var LUX = g.LUX, U = LUX.util;
@@ -8,8 +8,8 @@
     contentLang: 'fr' };  // idioma do conteúdo da página atual ('fr' | 'en' | 'it'); o roteador volta para 'fr' a cada página
   var LANG_TAG = { fr: 'fr-FR', en: 'en-GB', it: 'it-IT' };
 
-  var FEMALE = /(denise|eloise|élo|vivienne|julie|hortense|am[eé]lie|audrey|aur[eé]lie|marie|c[eé]line|brigitte|charline|coralie|jacqueline|jos[eé]phine|yvette|ariane|sylvie|l[eé]a|virginie|female|femme|sylvia|caroline|chantal|claire|natalie|ad[eè]le|seraphina|clara|sabine|ophélie|ophelie)/i;
-  var MALE = /(henri|paul|claude|thomas|r[eé]my|remi|antoine|j[eé]r[oô]me|yves|daniel|nicolas|guillaume|mathieu|jean|louis|g[eé]rard|alain|fabrice|maxime|lucien|male|homme|cl[eé]ment|fabien|olivier|gabriel)/i;
+  var FEMALE = /(denise|eloise|élo|vivienne|julie|hortense|am[eé]lie|audrey|aur[eé]lie|marie|c[eé]line|brigitte|charline|coralie|jacqueline|jos[eé]phine|yvette|ariane|sylvie|l[eé]a\b|virginie|female|femme|sylvia|caroline|chantal|claire|nath?alie|ad[eè]le|seraphina|clara|sabine|ophélie|ophelie|juliette|manon|c[eé]leste|agn[eè]s|monique|google fran)/i;
+  var MALE = /(henri|paul|claude|thomas|r[eé]my|remi|antoine|j[eé]r[oô]me|yves|daniel|nicolas|guillaume|mathieu|jean|louis|g[eé]rard|alain|fabrice|maxime|lucien|\bmale|homme|cl[eé]ment|fabien|olivier|gabriel|jacques|thierry|vincent|pierre|beno[iî]t|alexandre|arnaud|maurice)/i;
 
   function loadVoices() {
     if (!T.supported) return;
@@ -63,17 +63,47 @@
     var v = T.voices.filter(function (x) { return x.voiceURI === s.voiceURI; })[0];
     return v || T.voices[0] || null;
   };
-  /* escolhe voz por gênero do personagem; se só houver uma voz, varia o pitch */
-  T.voiceFor = function (gender) {
+  /* vozes francesas de um gênero, da preferida para a menos preferida:
+     a voz escolhida no perfil (se for desse gênero), depois França, depois Canadá/Bélgica/Suíça. Sem repetir o mesmo nome. */
+  function voicesOf(gender) {
+    var main = T.mainVoice(), seen = {}, out = [];
+    function add(v) { var k = v.name.replace(/\s*\(.*$/, '').toLowerCase(); if (seen[k]) return; seen[k] = 1; out.push(v); }
+    if (main && T.genderOf(main) === gender) add(main);
+    T.voices.filter(function (v) { return T.genderOf(v) === gender && /^fr[-_]FR/i.test(v.lang); }).forEach(add);
+    T.voices.filter(function (v) { return T.genderOf(v) === gender; }).forEach(add);
+    return out;
+  }
+  /* tons alternativos quando faltam vozes: o 2º personagem do mesmo gênero fica mais grave/agudo que o 1º, etc. */
+  var SHIFT = { m: [1, 0.82, 1.12, 0.7], f: [1, 1.16, 0.9, 1.28], '?': [1, 0.85, 1.15, 0.75] };
+
+  /* escolhe a voz de um personagem.
+     gender: 'f' | 'm'; rank: 0 para o 1º personagem desse gênero no diálogo, 1 para o 2º...
+     Cada personagem ganha uma voz diferente quando o aparelho tem vozes suficientes; senão, a mesma voz com outro tom. */
+  T.voiceFor = function (gender, rank) {
     var main = T.mainVoice();
+    rank = rank || 0;
     if (!gender || !main) return { voice: main, pitch: 1 };
-    if (T.genderOf(main) === gender) return { voice: main, pitch: 1 };
-    var same = T.voices.filter(function (v) { return T.genderOf(v) === gender && /^fr[-_]FR/i.test(v.lang); })
-      .concat(T.voices.filter(function (v) { return T.genderOf(v) === gender; }));
-    if (same.length) return { voice: same[0], pitch: 1 };
-    var other = T.voices.filter(function (v) { return v !== main; });
-    if (other.length) return { voice: other[0], pitch: gender === 'f' ? 1.1 : 0.9 };
-    return { voice: main, pitch: gender === 'f' ? 1.18 : 0.82 };
+    var list = voicesOf(gender);
+    if (list.length > rank) return { voice: list[rank], pitch: 1 };
+    var shifts = SHIFT[gender] || SHIFT['?'];
+    if (list.length) {
+      var extra = rank - list.length + 1; // quantas vezes já "faltou" voz
+      return { voice: list[rank % list.length], pitch: shifts[Math.min(extra, shifts.length - 1)] };
+    }
+    // nenhuma voz reconhecida desse gênero: usa outras vozes (que não a principal) e ajusta o tom
+    var other = T.voices.filter(function (v) { return v !== main && T.genderOf(v) !== (gender === 'm' ? 'f' : 'm'); });
+    if (other.length > rank) return { voice: other[rank], pitch: gender === 'f' ? 1.1 : 0.9 };
+    // só uma voz no aparelho: o gênero vem do tom; personagens do mesmo gênero ficam em volta desse tom, sem exagero
+    var base = gender === 'f' ? 1.18 : 0.82;
+    var around = gender === 'f' ? [1, 0.9, 1.1, 0.85] : [1, 1.12, 0.9, 1.2];
+    return { voice: main, pitch: Math.max(0.6, Math.min(1.5, base * around[Math.min(rank, around.length - 1)])) };
+  };
+  /* número de cada personagem dentro do seu gênero, na ordem em que aparecem em speakers:
+     [{id:'H', gender:'m'}, {id:'L', gender:'f'}, {id:'C', gender:'m'}] → {H:0, L:0, C:1} */
+  T.speakerRanks = function (speakers) {
+    var count = {}, out = {};
+    (speakers || []).forEach(function (s) { var g = s.gender || '?'; out[s.id] = count[g] || 0; count[g] = (count[g] || 0) + 1; });
+    return out;
   };
 
   /* divide textos longos em frases (o Chrome corta falas longas) */
@@ -99,7 +129,7 @@
     items.forEach(function (it, i) {
       var seg = typeof it === 'string' ? { text: it } : it;
       var lang = seg.lang || opts.lang || T.contentLang || 'fr';
-      chunk(seg.text, lang).forEach(function (txt, j) { if (txt) queue.push({ text: txt, index: i, first: j === 0, gender: seg.gender, lang: lang }); });
+      chunk(seg.text, lang).forEach(function (txt, j) { if (txt) queue.push({ text: txt, index: i, first: j === 0, gender: seg.gender, rank: seg.rank || 0, lang: lang }); });
     });
     var k = 0;
     T.keep = [];
@@ -109,7 +139,7 @@
       var q = queue[k++];
       if (q.first && opts.onItem) opts.onItem(q.index);
       var u = new SpeechSynthesisUtterance(q.text);
-      var vp = q.lang === 'fr' ? T.voiceFor(q.gender) : { voice: T.voiceForLang(q.lang), pitch: 1 };
+      var vp = q.lang === 'fr' ? T.voiceFor(q.gender, q.rank) : { voice: T.voiceForLang(q.lang), pitch: 1 };
       if (vp.voice) { u.voice = vp.voice; u.lang = vp.voice.lang; } else u.lang = LANG_TAG[q.lang] || 'fr-FR';
       u.pitch = vp.pitch; u.rate = rate;
       u.onend = function () { if (!handle.stopped) setTimeout(next, k < queue.length && queue[k].first ? pause : 60); };
