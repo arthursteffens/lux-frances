@@ -5,7 +5,7 @@
 'use strict';
 
 // <release>
-const BUILD = '20261125-1317-765bd56';
+const BUILD = '20261125-1356-0d96c6c';
 const FILES = [
   './',
   'version.json',
@@ -17,6 +17,7 @@ const FILES = [
   'js/course.js',
   'js/drills/ear-training.js',
   'js/drills/numbers.js',
+  'js/drive.js',
   'js/exercises/base.js',
   'js/exercises/dictation.js',
   'js/exercises/fill-blank.js',

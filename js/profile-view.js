@@ -15,6 +15,7 @@
         main.appendChild(UI.pageHead('Perfil e configurações', 'Cada pessoa tem o próprio perfil, com progresso, revisão, caderno e preferências separados.'));
         main.appendChild(profilesCard(p));
         main.appendChild(settingsCard(p));
+        if (LUX.drive) main.appendChild(LUX.drive.card(p));
         main.appendChild(storageCard(p));
         if (LUX.pwa) main.appendChild(LUX.pwa.card());
         var sec = params.query && params.query.sec && document.getElementById(params.query.sec);

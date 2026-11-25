@@ -243,6 +243,8 @@
     a.lastBackupAt = later(a.lastBackupAt, b.lastBackupAt);
     a.unlockedAll = a.unlockedAll || b.unlockedAll;
   }
+  /* usado pela sincronização com o Google Drive: junta o perfil b dentro do a (mesmas regras do "Mesclar") */
+  P.mergeProfiles = function (a, b) { P.normalize(a); P.normalize(b); mergeInto(a, b); return a; };
   function union(x, y) {
     var out = (x || []).slice();
     (y || []).forEach(function (v) { if (out.indexOf(v) < 0) out.push(v); });

@@ -1,6 +1,6 @@
 {
   "version": "2.0.0-fase2",
-  "build": "20261125-1317-765bd56",
-  "date": "2026-11-25T16:17:04.011Z",
-  "notes": "Primeira versão publicada: app instalável, offline, atualização automática e opção de voltar à versão anterior."
+  "build": "20261125-1356-0d96c6c",
+  "date": "2026-11-25T16:56:58.190Z",
+  "notes": "Backup no Google Drive: conecte cada perfil à sua conta Google em Perfil e configurações; restauração pelo Drive na tela inicial."
 }

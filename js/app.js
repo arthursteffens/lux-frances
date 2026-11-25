@@ -137,6 +137,17 @@
       h('h1', null, 'Quem vai estudar?'),
       h('p', { class: 'muted' }, 'Crie um perfil para cada pessoa. Cada um tem o próprio progresso, revisão e caderno — e dá para trocar de perfil a qualquer momento.'),
       h('div', { class: 'card' }, [f.el, create]),
+      LUX.drive && LUX.drive.supported ? h('div', { class: 'card muted-card' }, [
+        h('p', null, [h('b', null, 'Já conectou seu perfil ao Google Drive?'), ' Entre com a mesma conta Google para continuar de onde parou:']),
+        h('button', { class: 'btn primary', onclick: function () {
+          LUX.drive.restoreNew().then(function (p) {
+            if (!p) return;
+            document.body.classList.remove('welcome-mode'); w.hidden = true;
+            A.start(); location.hash = '#/curso'; LUX.router.render();
+            UI.toast('☁️ Progresso de ' + p.name + ' restaurado do Google Drive.', 'ok');
+          });
+        } }, '☁️ Restaurar do Google Drive')
+      ]) : null,
       h('div', { class: 'card muted-card' }, [
         h('p', null, [h('b', null, 'Já usou o curso em outro computador ou neste?'), ' Importe seu backup:']),
         h('label', { class: 'btn' }, ['⬆ Importar backup (.json)', file]),
@@ -196,6 +207,7 @@
     if (!P.current()) P.switchTo(S.state.order[0]);
     A.start();
     LUX.router.render();
+    if (LUX.drive) LUX.drive.onOpen();
     // constrói índices pesados quando o navegador estiver ocioso
     (window.requestIdleCallback || function (fn) { setTimeout(fn, 600); })(function () { LUX.lexicon.build(); LUX.verbSearch.search('a'); });
     S.requestPersist();

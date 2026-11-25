@@ -31,7 +31,8 @@ A busca global abre com **Ctrl+K** ou **/**.
 ## Onde ficam os dados (importante)
 
 - O progresso é salvo **no navegador** (`localStorage`, chave `lux-fr:v1`), separado por perfil. Não há servidor nem banco de dados.
-- O progresso **não sincroniza entre aparelhos** nem entre navegadores. Limpar os dados de navegação apaga tudo.
+- **Google Drive (opcional, só pelo endereço online):** em *Perfil e configurações › Backup no Google Drive*, cada perfil se liga à conta Google da pessoa ([js/drive.js](js/drive.js)). O progresso vai para `lux-progress.json` na pasta oculta do app (escopo `drive.appdata`), no mesmo formato do Exportar. A cada sincronização o app baixa, mescla (mesmas regras do "Mesclar") e envia. Sincroniza ao abrir, ao concluir lição/teste, a cada 10 min com mudanças e ao sair. O acesso do Google dura 1 h; depois, o aviso "toque para sincronizar" renova sem senha. Num aparelho novo, a tela inicial tem **Restaurar do Google Drive**. A ligação perfil ↔ conta fica só no aparelho (`state.drive`), fora dos backups.
+- Sem o Drive, o progresso **não sincroniza entre aparelhos** nem entre navegadores. Limpar os dados de navegação apaga tudo.
 - **Backup:** em *Perfil e configurações › Armazenamento e backup › Exportar*. O app lembra de fazer backup a cada 7 dias (o intervalo é configurável).
 - **Levar para outro computador:**
   1. Copie a pasta do curso.
