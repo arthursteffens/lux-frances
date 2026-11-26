@@ -84,6 +84,7 @@ LUX.manifest = {
     'content/pro/en/b2/l01.js', 'content/pro/en/b2/l02.js', 'content/pro/en/b2/l03.js',
     'content/pro/en/b2/l04.js', 'content/pro/en/b2/l05.js', 'content/pro/en/b2/l06.js',
     'content/pro/it/b1/l01.js', 'content/pro/it/b1/l02.js', 'content/pro/it/b1/l03.js',
-    'content/pro/it/b1/l04.js', 'content/pro/it/b1/l05.js', 'content/pro/it/b1/l06.js'
+    'content/pro/it/b1/l04.js', 'content/pro/it/b1/l05.js', 'content/pro/it/b1/l06.js',
+    'content/audio.js' // gerado por tools/gen-audio.js: falas dos diálogos com áudio pré-gravado
   ]
 };

@@ -5,7 +5,7 @@
 'use strict';
 
 // <release>
-const BUILD = '20261125-2323-077f301';
+const BUILD = '20261126-1919-8ead1b2';
 const FILES = [
   './',
   'version.json',
@@ -80,6 +80,7 @@ const FILES = [
   'content/a2/u06/l03.js',
   'content/a2/u06/l04.js',
   'content/a2/u06/l05.js',
+  'content/audio.js',
   'content/general/alfabeto.js',
   'content/general/anos-seculos.js',
   'content/general/clima.js',
@@ -221,6 +222,34 @@ async function activeCacheName() {
   return PREFIX + BUILD;
 }
 
+/* áudios pré-gravados dos diálogos: não entram na instalação (seriam muitos MB);
+   cada um é guardado na primeira vez que toca e depois funciona offline.
+   O nome do arquivo muda quando o conteúdo muda, então um cache único, fora das versões, basta.
+   O player pede trechos (Range): respondemos com 206 a partir do arquivo inteiro guardado. */
+const AUDIO_CACHE = 'lux-audio';
+async function audioResponse(req, url) {
+  const key = url.origin + url.pathname;
+  const cache = await caches.open(AUDIO_CACHE);
+  let res = await cache.match(key);
+  if (!res) {
+    res = await fetch(key);
+    if (!res.ok) return res;
+    await cache.put(key, res.clone());
+  }
+  const range = req.headers.get('range');
+  if (!range) return res;
+  const buf = await res.arrayBuffer();
+  const size = buf.byteLength;
+  const m = /bytes=(\d*)-(\d*)/.exec(range) || [];
+  let start = m[1] ? +m[1] : 0, end = m[2] ? +m[2] : size - 1;
+  if (!m[1] && m[2]) { start = Math.max(0, size - +m[2]); end = size - 1; }
+  end = Math.min(end, size - 1);
+  if (start > end) return new Response(null, { status: 416, headers: { 'Content-Range': 'bytes */' + size } });
+  return new Response(buf.slice(start, end + 1), { status: 206, headers: {
+    'Content-Type': 'audio/mpeg', 'Content-Length': String(end - start + 1),
+    'Content-Range': 'bytes ' + start + '-' + end + '/' + size, 'Accept-Ranges': 'bytes' } });
+}
+
 self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
@@ -228,6 +257,7 @@ self.addEventListener('fetch', event => {
   if (url.origin !== self.location.origin) return;
   // pedidos explícitos de "sem cache" (verificação de versão) vão direto à rede
   if (url.searchParams.has('lux-network')) return;
+  if (/\/audio\/[^/]+\/[^/]+\.mp3$/.test(url.pathname)) { event.respondWith(audioResponse(req, url)); return; }
   event.respondWith((async () => {
     const cache = await caches.open(await activeCacheName());
     const isNav = req.mode === 'navigate';

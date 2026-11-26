@@ -60,10 +60,21 @@ git add -A && git commit -m "..." && git push        # o GitHub Pages publica em
 
 ## Áudio
 
-O áudio usa a **Web Speech API** (a voz do próprio navegador).
+**Diálogos das lições** (audição com mais de um personagem, no curso e no Profissional) usam **MP3 pré-gravados** com as vozes neurais do Edge, uma voz por personagem (homem/mulher), iguais em qualquer navegador e no celular.
+
+- Arquivos em `audio/<id da lição>/<chave>.mp3`; a lista fica em `content/audio.js` (gerado). Se o texto de uma fala mudar e o áudio não for regenerado, o app usa a voz do navegador para ela.
+- Os MP3 não entram na instalação offline: cada um é guardado pelo service worker na primeira vez que toca.
+- Para gerar/atualizar (só o que falta; apaga os que sobraram):
+  ```
+  pip install edge-tts
+  node tools/gen-audio.js
+  ```
+  As vozes por idioma estão no topo de [tools/gen-audio.js](tools/gen-audio.js). O edge-tts usa o serviço online do Edge sem ser oficial: serve para este uso pessoal.
+
+O resto (palavras, frases soltas, verbos, leituras) usa a **Web Speech API** (a voz do próprio navegador).
 
 - Se não houver voz francesa instalada, o app mostra como instalar uma (Windows, macOS, Android e iOS). As transcrições continuam disponíveis.
-- Toda a fala passa por `LUX.tts.speak()` em [js/tts.js](js/tts.js). No futuro, dá para trocar por MP3 pré-gravados sem mexer nas lições.
+- Toda a fala passa por `LUX.tts.speak()` em [js/tts.js](js/tts.js); um segmento com `audio` toca o MP3.
 
 ## Estrutura
 
@@ -93,7 +104,8 @@ content/
   grammar/            tópicos por categoria (32 tópicos)
   general/            manifest.js (barra lateral de Gerais) + uma página por arquivo
   lexicon/            léxico geral, léxico por unidade do A2 (lexicon-a2-uNN.js, lexicon-a2-geral.js) + nomes próprios
-tools/                validadores e testes (Node, opcional)
+audio/                MP3 dos diálogos (gerado por tools/gen-audio.js)
+tools/                validadores e testes (Node, opcional); gen-audio.js + edge_tts_batch.py geram os áudios
 ```
 
 ## Testes e validação

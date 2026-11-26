@@ -1,5 +1,5 @@
 /* LUX — síntese de voz (Web Speech API).
-   Camada de abstração: LUX.tts.speak(segmentos, opções). No futuro pode tocar MP3 sem mudar as lições.
+   Camada de abstração: LUX.tts.speak(segmentos, opções). Segmento com .audio toca o MP3 pré-gravado (diálogos das lições).
    segmento = string | {text, gender:'f'|'m', rank: nº do personagem dentro do gênero (0, 1, …)} */
 (function (g) {
   'use strict';
@@ -121,12 +121,39 @@
     return U.sentences(text).map(function (s) { return s.text; });
   }
 
+  /* áudio pré-gravado de uma fala de lição (tools/gen-audio.js), ou undefined se não houver ou se o texto mudou */
+  T.audioFor = function (lessonId, i, ln, gender, rank) {
+    var m = LUX.data.audio && LUX.data.audio[lessonId], e = m && m[i];
+    if (!e || !ln || e[1] !== U.audioHash(ln.text + '|' + (gender || '') + (rank || 0))) return undefined;
+    return 'audio/' + lessonId + '/' + e[0] + '.mp3';
+  };
+  var audioEl = null;
+  function player() {
+    if (!audioEl) { audioEl = new Audio(); audioEl.preload = 'auto'; }
+    return audioEl;
+  }
+  /* toca um MP3; done(true) no fim, done(false) se falhar (aí a fala vai para a voz do navegador) */
+  function playFile(url, rate, done) {
+    var a = player(), over = false;
+    function fin(ok) { if (over) return; over = true; a.onended = a.onerror = null; done(ok); }
+    a.onended = function () { fin(true); };
+    a.onerror = function () { fin(false); };
+    a.src = url;
+    a.defaultPlaybackRate = a.playbackRate = rate;
+    a.preservesPitch = true;
+    var p = a.play();
+    if (p && p.catch) p.catch(function (e) { if (e && e.name !== 'AbortError') fin(false); });
+  }
+  function prefetch(url) { try { if (g.fetch) fetch(url).catch(function () { }); } catch (e) { } }
+
   /* toca uma lista de segmentos em sequência.
+     segmento com .audio (URL de MP3) toca o arquivo; sem ele, usa a síntese de voz do navegador.
      opts: {rate, pause(ms), onItem(i), onEnd(completed), group} — retorna um handle {stop()} */
   T.speak = function (items, opts) {
     opts = opts || {};
     T.stop();
-    if (!T.supported) { LUX.ui && LUX.ui.toast('Seu navegador não tem síntese de voz.'); if (opts.onEnd) opts.onEnd(false); return null; }
+    var hasAudio = (Array.isArray(items) ? items : [items]).some(function (it) { return it && it.audio; });
+    if (!T.supported && !hasAudio) { LUX.ui && LUX.ui.toast('Seu navegador não tem síntese de voz.'); if (opts.onEnd) opts.onEnd(false); return null; }
     if (!Array.isArray(items)) items = [items];
     var rate = opts.rate || settings().rate || 1;
     var pause = opts.pause == null ? 350 : opts.pause;
@@ -136,6 +163,7 @@
     items.forEach(function (it, i) {
       var seg = typeof it === 'string' ? { text: it } : it;
       var lang = seg.lang || opts.lang || T.contentLang || 'fr';
+      if (seg.audio) { queue.push({ text: chunk(seg.text, lang).join(' '), audio: seg.audio, index: i, first: true, gender: seg.gender, rank: seg.rank || 0, lang: lang }); return; }
       chunk(seg.text, lang).forEach(function (txt, j) { if (txt) queue.push({ text: txt, index: i, first: j === 0, gender: seg.gender, rank: seg.rank || 0, lang: lang }); });
     });
     var k = 0;
@@ -145,11 +173,23 @@
       if (k >= queue.length) { finish(true); return; }
       var q = queue[k++];
       if (q.first && opts.onItem) opts.onItem(q.index);
+      var gap = function () { return k < queue.length && queue[k].first ? pause : 60; };
+      if (q.audio) {
+        if (queue[k] && queue[k].audio) prefetch(queue[k].audio);
+        playFile(q.audio, rate, function (ok) {
+          if (handle.stopped) return;
+          if (ok) { setTimeout(next, gap()); return; }
+          q.audio = null; q.first = false; k--; // falhou: a mesma fala pela voz do navegador
+          if (T.supported) next(); else setTimeout(next, 60);
+        });
+        return;
+      }
+      if (!T.supported) { setTimeout(next, 60); return; }
       var u = new SpeechSynthesisUtterance(q.text);
       var vp = T.voiceFor(q.gender, q.rank, q.lang);
       if (vp.voice) { u.voice = vp.voice; u.lang = vp.voice.lang; } else u.lang = LANG_TAG[q.lang] || 'fr-FR';
       u.pitch = vp.pitch; u.rate = rate;
-      u.onend = function () { if (!handle.stopped) setTimeout(next, k < queue.length && queue[k].first ? pause : 60); };
+      u.onend = function () { if (!handle.stopped) setTimeout(next, gap()); };
       u.onerror = function (e) { if (e.error !== 'interrupted' && e.error !== 'canceled') console.warn('TTS', e.error); if (!handle.stopped) setTimeout(next, 60); };
       T.keep.push(u);
       speechSynthesis.speak(u);
@@ -164,16 +204,17 @@
       handle.stopped = true;
       finish(false);
     };
-    // pequeno atraso após cancel() evita falhas do Chrome
-    setTimeout(next, 30);
+    // pequeno atraso após cancel() evita falhas do Chrome; MP3 começa já, ainda dentro do toque (exigência do iPhone)
+    if (queue[0] && queue[0].audio) next(); else setTimeout(next, 30);
     T.emit();
     return handle;
   };
   T.stop = function () {
-    if (!T.supported) return;
     var h = T.playing;
     T.playing = null;
     if (h) h.stop();
+    if (audioEl) { audioEl.onended = audioEl.onerror = null; try { audioEl.pause(); } catch (e) { } }
+    if (!T.supported) return;
     try { speechSynthesis.cancel(); } catch (e) { }
   };
   T.isPlaying = function (group) { return !!(T.playing && (!group || T.playing.opts.group === group)); };

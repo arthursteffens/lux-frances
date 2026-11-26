@@ -275,6 +275,13 @@
   function sameWord(a, b) { return a === b || U.stripAccents(a) === U.stripAccents(b); }
 
   /* limpa texto para o TTS: "allé(e)s" -> "allés", "il / elle" -> "il, elle" */
+  /* hash curto e estável (FNV-1a 32 bits, base 36) — nomes dos áudios pré-gravados e conferência do texto */
+  U.audioHash = function (s) {
+    s = String(s);
+    var hsh = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) { hsh ^= s.charCodeAt(i); hsh = Math.imul(hsh, 0x01000193) >>> 0; }
+    return hsh.toString(36);
+  };
   U.ttsClean = function (s) {
     return String(s)
       .replace(/\((?:e|es|s)\)/g, '')

@@ -204,6 +204,11 @@
       var spk = {};
       a.speakers.forEach(function (s) { spk[s.id] = s; });
       var rank = LUX.tts.speakerRanks(a.speakers); // 2 homens no diálogo → 2 vozes masculinas diferentes
+      // fala i do roteiro → segmento para o LUX.tts (com o MP3 pré-gravado, se houver)
+      function seg(i) {
+        var ln = a.script[i], g = (spk[ln.speaker] || {}).gender, r = rank[ln.speaker];
+        return { text: ln.text, gender: g, rank: r, audio: LUX.tts.audioFor(l.id, i, ln, g, r) };
+      }
       var c = h('div', { class: 'card listening' });
       var plays = 0;
       var counter = h('span', { class: 'muted sm' }, 'Ainda não ouviu.');
@@ -214,13 +219,13 @@
         var row = h('div', { class: 'line' }, [
           h('span', { class: 'speaker', 'data-g': s.gender || '' }, s.name || ln.speaker),
           h('div', { class: 'line-text' }, UI.frText(ln.text, { source: source, block: false })),
-          UI.playBtn({ text: ln.text, gender: s.gender, rank: rank[ln.speaker] }, { small: true })
+          UI.playBtn(seg(i), { small: true })
         ]);
         lines.push(row);
         transcript.appendChild(row);
       });
       var cur = 0;
-      function segs(from) { return a.script.slice(from || 0).map(function (ln) { return { text: ln.text, gender: (spk[ln.speaker] || {}).gender, rank: rank[ln.speaker] }; }); }
+      function segs(from) { return a.script.slice(from || 0).map(function (ln, i) { return seg((from || 0) + i); }); }
       function onItemFrom(base) { return function (i) { cur = base + i; lines.forEach(function (r, k) { r.classList.toggle('current', k === cur); }); }; }
       function count() { plays++; counter.textContent = 'Ouviu ' + U.plural(plays, 'vez', 'vezes') + '.'; if (plays >= 2) revealBtn.disabled = false; }
       var playAll = UI.playBtn(function () { return segs(0); }, { label: 'ouvir o áudio', onStart: count, onItem: onItemFrom(0), onEnd: function () { lines.forEach(function (r) { r.classList.remove('current'); }); }, pause: 450 });
@@ -228,9 +233,8 @@
       var again = h('button', { class: 'btn sm ghost', title: 'Repetir a fala atual', onclick: function () { speakOne(); } }, '🔁 repetir');
       var next = h('button', { class: 'btn sm ghost', title: 'Próxima fala', onclick: function () { cur = Math.min(a.script.length - 1, cur + 1); speakOne(); } }, 'próxima ⏭');
       function speakOne() {
-        var ln = a.script[cur];
         lines.forEach(function (r, k) { r.classList.toggle('current', k === cur); });
-        LUX.tts.speak({ text: ln.text, gender: (spk[ln.speaker] || {}).gender, rank: rank[ln.speaker] }, { onEnd: function () { } });
+        LUX.tts.speak(seg(cur), { onEnd: function () { } });
       }
       var revealBtn = h('button', { class: 'btn', disabled: true }, '👁 Mostrar transcrição');
       revealBtn.addEventListener('click', function () {
