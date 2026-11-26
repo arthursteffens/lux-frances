@@ -2,11 +2,17 @@
 (function (g) {
   'use strict';
   var LUX = g.LUX, U = LUX.util, h = U.h, X = LUX.ex;
-  var OPTS = [['V', 'Vrai'], ['F', 'Faux'], ['NM', 'Non mentionné']];
+  /* rótulos no idioma do conteúdo (francês no curso; inglês/italiano nas trilhas profissionais) */
+  var LABELS = {
+    fr: [['V', 'Vrai'], ['F', 'Faux'], ['NM', 'Non mentionné']],
+    en: [['V', 'True'], ['F', 'False'], ['NM', 'Not mentioned']],
+    it: [['V', 'Vero'], ['F', 'Falso'], ['NM', 'Non menzionato']]
+  };
 
   X.types.true_false_nm = function (ex, ctx) {
     var root = h('div');
-    root.appendChild(h('p', { class: 'ex-prompt muted' }, 'Para cada frase, escolha: Vrai (verdadeiro), Faux (falso) ou Non mentionné (o texto não diz).'));
+    var OPTS = LABELS[(LUX.tts && LUX.tts.contentLang) || 'fr'] || LABELS.fr;
+    root.appendChild(h('p', { class: 'ex-prompt muted' }, 'Para cada frase, escolha: ' + OPTS[0][1] + ' (verdadeiro), ' + OPTS[1][1] + ' (falso) ou ' + OPTS[2][1] + ' (o texto não diz).'));
     var answers = {};
     var rows = ex.statements.map(function (s, i) {
       var row = h('div', { class: 'tf-row' });

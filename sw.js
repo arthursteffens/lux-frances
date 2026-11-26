@@ -5,7 +5,7 @@
 'use strict';
 
 // <release>
-const BUILD = '20261125-2006-e815ea7';
+const BUILD = '20261125-2247-22c7725';
 const FILES = [
   './',
   'version.json',
@@ -147,6 +147,12 @@ const FILES = [
   'content/pro/fr/guias/outros-paises.js',
   'content/pro/fr/guias/reunioes.js',
   'content/pro/fr/guias/trabalhar-luxemburgo.js',
+  'content/pro/it/b1/l01.js',
+  'content/pro/it/b1/l02.js',
+  'content/pro/it/b1/l03.js',
+  'content/pro/it/b1/l04.js',
+  'content/pro/it/b1/l05.js',
+  'content/pro/it/b1/l06.js',
   'content/pro/manifest.js',
   'content/verbs/irregular.js',
   'content/verbs/verbs-a-c.js',

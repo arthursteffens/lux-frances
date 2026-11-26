@@ -25,7 +25,7 @@ Aplicação web estática (HTML + CSS + JavaScript puro).
 | 🗂 **Gerais** | 29 páginas do dia a dia em 5 grupos: números e quantidades (cardinais, ordinais, frações, dinheiro, medidas), tempo e calendário, comunicação básica (saudações, cortesia, perguntas, tu/vous, alfabeto), pessoas e mundo (família, países, profissões, cores, clima) e situações práticas (saúde, emergências, direções, restaurante, transporte, telefone e e-mail). Inclui conversor, relógio interativo e soletrador. |
 | 📓 **Caderno** | Clique em **qualquer palavra** de um texto e salve. Também dá para selecionar várias palavras e salvar uma expressão. Tem filtros, anotações e exportação em CSV (para o Anki). |
 | 👤 **Perfil** | Perfis, voz, velocidade, nível, tema, backup e testes de armazenamento. |
-| 💼 **Profissional** | Francês para o trabalho: RH em empresas de tecnologia (e um pouco de fintech), em Luxemburgo e outros países francófonos. Lições no mesmo formato do curso, que liberam conforme as unidades do curso (A2: 6 lições), e 7 guias de consulta (trabalhar em Luxemburgo, outros países, glossário de RH, tech e fintech, reuniões, e-mails, entrevista). Preparada para trilhas em inglês e italiano. |
+| 💼 **Profissional** | Francês para o trabalho: RH em empresas de tecnologia (e um pouco de fintech), em Luxemburgo e outros países francófonos. Lições no mesmo formato do curso, que liberam conforme as unidades do curso (A2: 6 lições), e 7 guias de consulta (trabalhar em Luxemburgo, outros países, glossário de RH, tech e fintech, reuniões, e-mails, entrevista). Também tem trilhas em **inglês** (6 lições B2–C1) e **italiano** (6 lições B1) para a mesma vaga, todas liberadas. |
 
 A busca global abre com **Ctrl+K** ou **/**.
 
@@ -215,9 +215,10 @@ Para criar uma página: crie o arquivo, liste-o em `content/manifest.js` e confi
 - [content/pro/manifest.js](content/pro/manifest.js): idiomas (`languages`, com `status: 'active' | 'soon'`) e, por idioma, níveis com a lista de lições e os guias.
 - **Lição:** `content/pro/<lang>/<nível>/lNN.js` com `LUX.registerProLesson({ id, lang, level, order, sector, ...mesmo formato das lições do curso })`. No manifesto, `unit: N` libera a lição quando a unidade N do curso (mesmo nível) estiver concluída; `0` ou ausente = liberada.
 - **Guia:** `content/pro/<lang>/guias/<id>.js` com `LUX.registerProGuide({ id, lang, title, titleFr, blocks })`, usando os mesmos blocos das páginas de Gerais (o bloco `tip` aceita `title`; links externos abrem em nova aba).
-- **Outros idiomas (inglês, italiano):** o motor já trata `lang`:
+- **Outros idiomas (inglês e italiano já ativos):** o motor trata `lang`:
   - a voz escolhe uma voz do idioma (`LUX.tts.voiceForLang`, com `LUX.tts.contentLang` definido pela página);
-  - os textos ganham `lang` e ficam sem o balão do léxico francês;
+  - os textos ganham `lang` e ficam sem o balão do léxico francês (o glossário [[...]] abre a tradução ao toque);
+  - os rótulos de verdadeiro/falso seguem o idioma (Vrai/Faux, True/False, Vero/Falso);
   - a revisão (SRS) e a busca de conjugação ficam só para francês;
   - o validador pula a cobertura do léxico.
 

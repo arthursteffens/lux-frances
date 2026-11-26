@@ -4,12 +4,12 @@
      "unit": a lição libera quando a unidade N do curso (mesmo nível) estiver concluída; 0 = liberada desde o início.
      Trilhas sem curso correspondente (inglês, italiano) podem omitir "unit": ficam liberadas.
    - Guia: content/pro/<lang>/guias/<id>.js com LUX.registerProGuide({ id, lang, title, blocks: [... blocos de Gerais] }).
-   Para ativar inglês ou italiano: crie os arquivos, liste-os aqui e em content/manifest.js (files) e mude "status" para 'active'. */
+   Para ativar um novo idioma: crie os arquivos, liste-os aqui e em content/manifest.js (files) e mude "status" para 'active'. */
 LUX.proManifest = {
   languages: [
     { id: 'fr', label: 'Français', flag: '🇫🇷', status: 'active', desc: 'Luxemburgo, França, Bélgica, Suíça e Québec.' },
     { id: 'en', label: 'English', flag: '🇬🇧', status: 'active', desc: 'Inglês de negócios para HR Business Partner (B2–C1): stakeholders, entrevistas, desenho organizacional, dados, coaching e planejamento.' },
-    { id: 'it', label: 'Italiano', flag: '🇮🇹', status: 'soon', desc: 'Italiano profissional — em breve.' }
+    { id: 'it', label: 'Italiano', flag: '🇮🇹', status: 'active', desc: 'Italiano profissional para HR Business Partner (B1): stakeholders, entrevistas, reorganização, dados, coaching e planejamento — com o tratamento formal (Lei) e os falsos amigos do português.' }
   ],
   tracks: {
     fr: {
@@ -46,6 +46,15 @@ LUX.proManifest = {
       ],
       guides: []
     },
-    it: { levels: [], guides: [] }
+    it: {
+      levels: [
+        { id: 'B1', title: 'B1 — HR Business Partner em italiano', desc: 'As mesmas competências da vaga, em italiano. O português ajuda muito: o foco está no que é diferente (Lei, passato prossimo × imperfetto, congiuntivo). Todas as lições já liberadas.',
+          lessons: [
+            { id: 'pro-it-b1-l01' }, { id: 'pro-it-b1-l02' }, { id: 'pro-it-b1-l03' },
+            { id: 'pro-it-b1-l04' }, { id: 'pro-it-b1-l05' }, { id: 'pro-it-b1-l06' }
+          ] }
+      ],
+      guides: []
+    }
   }
 };
