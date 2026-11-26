@@ -5,7 +5,7 @@
 'use strict';
 
 // <release>
-const BUILD = '20261125-2247-22c7725';
+const BUILD = '20261125-2323-077f301';
 const FILES = [
   './',
   'version.json',
@@ -46,6 +46,7 @@ const FILES = [
   'js/tts.js',
   'js/ui.js',
   'js/verbs/conjugator.js',
+  'js/verbs/pt-conj.js',
   'js/verbs/search.js',
   'js/verbs/view.js',
   'content/a2/test.js',

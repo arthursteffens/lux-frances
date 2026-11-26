@@ -1,6 +1,6 @@
 {
   "version": "2.0.0-fase2",
-  "build": "20261125-2247-22c7725",
-  "date": "2026-11-26T01:47:49.737Z",
-  "notes": "Trilha de italiano no Profissional (6 lições B1); rótulos Verdadeiro/Falso no idioma da lição; vozes italianas e correção de vozes masculinas em inglês"
+  "build": "20261125-2323-077f301",
+  "date": "2026-11-26T02:23:56.912Z",
+  "notes": "Tradução em português embaixo de cada forma conjugada (menos no presente); removido o botão flutuante Voltar à lição (o Voltar continua restaurando a lição)"
 }

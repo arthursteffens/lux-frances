@@ -84,26 +84,12 @@
     });
   });
 
-  /* botão flutuante "Voltar à lição" nas outras páginas */
+  /* A lição em andamento continua guardada em L.live (o botão Voltar e o voltar do navegador/celular
+     restauram exatamente onde a pessoa estava). O antigo botão flutuante "Voltar à lição" foi removido;
+     esta função só limpa algum que tenha ficado na tela. */
   function updatePill() {
     var old = document.getElementById('lesson-return');
-    var live = L.live, p = LUX.profiles.current();
-    var show = live && p && live.profileId === p.id && location.hash.split('?')[0] !== live.route;
-    if (!show) { if (old) old.remove(); return; }
-    var pill = h('div', { id: 'lesson-return', class: 'return-pill', role: 'region', 'aria-label': 'Lição em andamento' }, [
-      h('a', { class: 'return-main', href: live.route }, [
-        h('span', { 'aria-hidden': 'true' }, '↩'),
-        h('span', null, [h('b', null, 'Voltar à lição'), h('span', { class: 'return-sub', lang: live.lang }, live.title + ' · ' + live.api.stepLabel())])
-      ]),
-      h('button', { class: 'return-x', 'aria-label': 'Descartar a lição em andamento', title: 'Descartar', onclick: function () {
-        UI.modal({
-          title: 'Descartar a lição em andamento?',
-          body: h('p', null, 'As respostas ainda não salvas de "' + live.title + '" serão perdidas. Para guardar a nota, volte à lição e clique em "Concluir lição e salvar" no Resumo.'),
-          actions: [{ label: 'Cancelar' }, { label: 'Descartar', danger: true, onClick: function () { L.live = null; updatePill(); } }]
-        });
-      } }, '×')
-    ]);
-    if (old) old.replaceWith(pill); else document.body.appendChild(pill);
+    if (old) old.remove();
   }
   L.updatePill = updatePill;   // chamado pelo roteador depois de cada página
 

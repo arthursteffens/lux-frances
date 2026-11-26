@@ -10,7 +10,7 @@
   /* ---------- tempos (ordem do mais simples ao mais complexo) ---------- */
   C.TENSES = [
     { id: 'present', fr: 'Présent', mood: 'Indicatif', pt: 'Presente', level: 'A1' },
-    { id: 'passe_compose', fr: 'Passé composé', mood: 'Indicatif', pt: 'Pretérito perfeito composto', level: 'A2', compound: 'present' },
+    { id: 'passe_compose', fr: 'Passé composé', mood: 'Indicatif', pt: 'Pretérito perfeito', level: 'A2', compound: 'present' },
     { id: 'imparfait', fr: 'Imparfait', mood: 'Indicatif', pt: 'Pretérito imperfeito', level: 'A2' },
     { id: 'futur_proche', fr: 'Futur proche (aller + infinitif)', mood: 'Indicatif', pt: 'Futuro próximo', level: 'A2' },
     { id: 'futur', fr: 'Futur simple', mood: 'Indicatif', pt: 'Futuro do presente', level: 'A2' },

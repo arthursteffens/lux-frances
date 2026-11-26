@@ -139,12 +139,12 @@
     var expandAll = h('button', { class: 'btn sm ghost' }, 'Expandir todos');
     var collapseAll = h('button', { class: 'btn sm ghost' }, 'Recolher todos');
     conj.appendChild(h('div', { class: 'conj-toolbar' }, [h('h2', null, 'Conjugação'), h('div', { class: 'row gap wrap' }, [UI.speedSelect(), litToggle, expandAll, collapseAll])]));
-    conj.appendChild(h('p', { class: 'muted sm' }, 'Do mais simples ao mais complexo. ▶ em cada linha toca só aquela forma; "tocar todos" lê o tempo inteiro em ordem.' + (f.aux === 'être' && !f.pronominal ? ' Com o auxiliar être, o particípio concorda com o sujeito.' : '')));
+    conj.appendChild(h('p', { class: 'muted sm' }, 'Do mais simples ao mais complexo. Embaixo de cada forma (menos no presente), a tradução em português. ▶ em cada linha toca só aquela forma; "tocar todos" lê o tempo inteiro em ordem.' + (f.aux === 'être' && !f.pronominal ? ' Com o auxiliar être, o particípio concorda com o sujeito.' : '')));
     var grid = h('div', { class: 'tense-grid' });
     var root = C.root(f);
     var cards = [];
     res.tenses.forEach(function (t) {
-      var tc = tenseCard(t, root, f, openLevels.indexOf(t.tense.level) >= 0 || query.t === t.tense.id);
+      var tc = tenseCard(t, root, f, openLevels.indexOf(t.tense.level) >= 0 || query.t === t.tense.id, v);
       if (t.tense.literary) { tc.classList.add('literary'); tc.hidden = true; }
       cards.push(tc);
       grid.appendChild(tc);
@@ -165,7 +165,7 @@
 
   function fact(label, value) { return h('div', { class: 'fact' }, [h('span', { class: 'muted sm' }, label), h('b', { lang: 'fr' }, value || '—')]); }
 
-  function tenseCard(t, root, f, open) {
+  function tenseCard(t, root, f, open, v) {
     var det = h('details', { class: 'tense-card', 'data-tense': t.tense.id });
     if (open) det.open = true;
     var rowsEls = [];
@@ -182,10 +182,20 @@
     playAll.addEventListener('click', function (e) { e.preventDefault(); }, true);
     det.appendChild(sum);
     var list = h('ul', { class: 'conj-rows' });
+    var tid = t.tense.id;
     t.rows.forEach(function (r) {
       var li = h('li', { class: 'conj-row' });
       if (r.label) li.appendChild(h('span', { class: 'conj-label muted sm' }, r.label));
-      li.appendChild(h('span', { class: 'conj-text', lang: 'fr', html: highlightRow(r, root, t) }));
+      // tradução em português embaixo de cada forma (menos no presente)
+      var pt = '';
+      if (tid !== 'present' && v && LUX.ptConj) {
+        var person = /^imperatif/.test(tid) ? { 1: 0, 3: 1, 4: 2 }[r.person] : r.person;
+        try { pt = LUX.ptConj.translate(v, tid, person, r.label, f.impersonal); } catch (e) { pt = ''; }
+      }
+      li.appendChild(h('span', { class: 'conj-main' }, [
+        h('span', { class: 'conj-text', lang: 'fr', html: highlightRow(r, root, t) }),
+        pt ? h('span', { class: 'conj-pt', lang: 'pt-BR' }, pt) : null
+      ]));
       li.appendChild(UI.playBtn(C.rowSpeech(r), { small: true, title: 'Ouvir: ' + C.rowDisplay(r) }));
       rowsEls.push(li);
       list.appendChild(li);
