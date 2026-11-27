@@ -12,14 +12,16 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 const { loadAll, ROOT } = require('./load');
 
-/* vozes por idioma e gênero; o 1º personagem de um gênero usa a 1ª voz, o 2º a 2ª, e assim por diante */
+/* vozes por idioma e gênero; o 1º personagem de um gênero usa a 1ª voz, o 2º a 2ª, e assim por diante.
+   Nada de vozes "Multilingual": elas detectam o idioma frase a frase e leem em português
+   uma frase com nome brasileiro ("Je viens de Belo Horizonte"). */
 const VOICES = {
-  fr: { f: ['fr-FR-DeniseNeural', 'fr-FR-EloiseNeural', 'fr-FR-VivienneMultilingualNeural', 'fr-CH-ArianeNeural', 'fr-BE-CharlineNeural'],
-        m: ['fr-FR-HenriNeural', 'fr-FR-RemyMultilingualNeural', 'fr-CH-FabriceNeural', 'fr-BE-GerardNeural'] },
+  fr: { f: ['fr-FR-DeniseNeural', 'fr-FR-EloiseNeural', 'fr-CH-ArianeNeural', 'fr-BE-CharlineNeural'],
+        m: ['fr-FR-HenriNeural', 'fr-CH-FabriceNeural', 'fr-BE-GerardNeural'] },
   en: { f: ['en-GB-SoniaNeural', 'en-GB-LibbyNeural', 'en-GB-MaisieNeural'],
         m: ['en-GB-RyanNeural', 'en-GB-ThomasNeural'] },
   it: { f: ['it-IT-ElsaNeural', 'it-IT-IsabellaNeural'],
-        m: ['it-IT-DiegoNeural', 'it-IT-GiuseppeMultilingualNeural'] }
+        m: ['it-IT-DiegoNeural'] }
 };
 
 const ctx = loadAll();
