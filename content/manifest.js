@@ -1,8 +1,22 @@
 /* Manifesto do curso: níveis, unidades, lições e a lista de arquivos de conteúdo.
    Para adicionar uma lição: crie o arquivo, acrescente o id em "lessons" da unidade e o caminho em "files". */
 LUX.manifest = {
-  version: '2.0.0-fase2',
+  version: '2.1.0-a1',
   levels: [
+    { id: 'A1', title: 'A1 — Primeiros passos', units: [
+      { n: 1, title: 'Olá! Sons, cumprimentos e apresentações', grammar: "je, tu, vous; être; s'appeler",
+        lessons: ['a1-u01-l01', 'a1-u01-l02', 'a1-u01-l03', 'a1-u01-l04', 'a1-u01-l05'] },
+      { n: 2, title: 'Pessoas e coisas: a casa nova', grammar: "artigos, gênero e plural; avoir; c'est, il y a; possessivos",
+        lessons: ['a1-u02-l01', 'a1-u02-l02', 'a1-u02-l03', 'a1-u02-l04', 'a1-u02-l05'] },
+      { n: 3, title: 'No café, na padaria e no mercado', grammar: 'je voudrais; números e preços; verbos em -er; aimer + le/la/les',
+        lessons: ['a1-u03-l01', 'a1-u03-l02', 'a1-u03-l03', 'a1-u03-l04', 'a1-u03-l05'] },
+      { n: 4, title: 'O quarto, o bairro e a cidade', grammar: 'preposições de lugar; aller + au/à la; adjetivos',
+        lessons: ['a1-u04-l01', 'a1-u04-l02', 'a1-u04-l03', 'a1-u04-l04', 'a1-u04-l05'] },
+      { n: 5, title: 'Meu dia: horas, dias e rotina', grammar: 'as horas; faire, prendre; verbos pronominais',
+        lessons: ['a1-u05-l01', 'a1-u05-l02', 'a1-u05-l03', 'a1-u05-l04', 'a1-u05-l05'] },
+      { n: 6, title: 'Tempo livre, clima e convites', grammar: 'faire du / jouer au; perguntas; vouloir, pouvoir + infinitivo',
+        lessons: ['a1-u06-l01', 'a1-u06-l02', 'a1-u06-l03', 'a1-u06-l04', 'a1-u06-l05'] }
+    ] },
     { id: 'A2', title: 'A2 — Comunicação do dia a dia', units: [
       { n: 1, title: 'Rotina, família, apresentações', grammar: 'revisão do presente, verbos pronominais, negação',
         lessons: ['a2-u01-l01', 'a2-u01-l02', 'a2-u01-l03', 'a2-u01-l04', 'a2-u01-l05'] },
@@ -40,9 +54,9 @@ LUX.manifest = {
     'content/verbs/verbs-a-c.js', 'content/verbs/verbs-d-l.js', 'content/verbs/verbs-m-r.js', 'content/verbs/verbs-s-z.js',
     'content/verbs/verbs-a2-extra.js', 'content/verbs/verbs-pro.js',
     'content/lexicon/function-words.js', 'content/lexicon/lexicon-a-f.js', 'content/lexicon/lexicon-g-z.js', 'content/lexicon/names.js',
-    'content/lexicon/lexicon-a2-u02.js', 'content/lexicon/lexicon-a2-u03.js', 'content/lexicon/lexicon-a2-u04.js', 'content/lexicon/lexicon-a2-u05.js', 'content/lexicon/lexicon-a2-u06.js', 'content/lexicon/lexicon-a2-geral.js',
+    'content/lexicon/lexicon-a2-u02.js', 'content/lexicon/lexicon-a2-u03.js', 'content/lexicon/lexicon-a2-u04.js', 'content/lexicon/lexicon-a2-u05.js', 'content/lexicon/lexicon-a2-u06.js', 'content/lexicon/lexicon-a2-geral.js', 'content/lexicon/lexicon-a1.js',
     'content/grammar/articles.js', 'content/grammar/nouns-adjectives.js', 'content/grammar/pronouns.js',
-    'content/grammar/prepositions.js', 'content/grammar/tenses-a2.js', 'content/grammar/negation-questions.js', 'content/grammar/a2-extra.js',
+    'content/grammar/prepositions.js', 'content/grammar/tenses-a2.js', 'content/grammar/negation-questions.js', 'content/grammar/a2-extra.js', 'content/grammar/a1-extra.js',
     'content/general/manifest.js',
     'content/general/numeros-cardinais.js', 'content/general/numeros-ordinais.js', 'content/general/anos-seculos.js',
     'content/general/meses.js', 'content/general/dias-semana.js', 'content/general/horas.js', 'content/general/datas.js',
@@ -68,6 +82,13 @@ LUX.manifest = {
     'content/general/restaurante.js',
     'content/general/transporte.js',
     'content/general/telefone-email.js',
+    'content/a1/u01/l01.js', 'content/a1/u01/l02.js', 'content/a1/u01/l03.js', 'content/a1/u01/l04.js', 'content/a1/u01/l05.js',
+    'content/a1/u02/l01.js', 'content/a1/u02/l02.js', 'content/a1/u02/l03.js', 'content/a1/u02/l04.js', 'content/a1/u02/l05.js',
+    'content/a1/u03/l01.js', 'content/a1/u03/l02.js', 'content/a1/u03/l03.js', 'content/a1/u03/l04.js', 'content/a1/u03/l05.js',
+    'content/a1/u04/l01.js', 'content/a1/u04/l02.js', 'content/a1/u04/l03.js', 'content/a1/u04/l04.js', 'content/a1/u04/l05.js',
+    'content/a1/u05/l01.js', 'content/a1/u05/l02.js', 'content/a1/u05/l03.js', 'content/a1/u05/l04.js', 'content/a1/u05/l05.js',
+    'content/a1/u06/l01.js', 'content/a1/u06/l02.js', 'content/a1/u06/l03.js', 'content/a1/u06/l04.js', 'content/a1/u06/l05.js',
+    'content/a1/test.js',
     'content/a2/u01/l01.js', 'content/a2/u01/l02.js', 'content/a2/u01/l03.js', 'content/a2/u01/l04.js', 'content/a2/u01/l05.js',
     'content/a2/u02/l01.js', 'content/a2/u02/l02.js', 'content/a2/u02/l03.js', 'content/a2/u02/l04.js', 'content/a2/u02/l05.js',
     'content/a2/u03/l01.js', 'content/a2/u03/l02.js', 'content/a2/u03/l03.js', 'content/a2/u03/l04.js', 'content/a2/u03/l05.js',

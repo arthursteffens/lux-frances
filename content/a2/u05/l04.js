@@ -80,7 +80,7 @@ LUX.registerLesson({
     explanationPt: '**Y** substitui um **lugar** já mencionado (introduzido por *à, en, au, chez, dans, sur…*). Corresponde ao nosso "lá" — que em português muitas vezes nem dizemos.\n\n' +
       '- *Tu vas à Marseille ? — Oui, j\'**y** vais demain.* (vou amanhã)\n- *Elle habite en Suisse ? — Non, elle n\'**y** habite plus.*\n- *Tu es allé chez Hugo ? — Oui, j\'**y** suis allé hier.*\n\n' +
       '**Posição:** igual aos outros pronomes — antes do verbo conjugado, do auxiliar ou do infinitivo: *j\'y vais · j\'y suis allé · je vais y aller*. No imperativo afirmativo: ***Vas-y !** **Allons-y !*** (note o **-s** de *vas*, para facilitar a pronúncia).\n\n' +
-      '**Expressões com y:** *on y va* (vamos), *ça y est* (pronto!), *il y a* (há), *vas-y !* (vai! força!), *j\'y suis* (entendi!).\n\n' +
+      '**Expressões com y:**\n- ***on y va*** (vamos)\n- ***ça y est*** (pronto!)\n- ***il y a*** (há)\n- ***vas-y !*** (vai! força!)\n- ***j\'y suis*** (entendi!)\n\n' +
       '**Cuidado:** com *aller* no futuro e no condicional, **não** se usa *y*: *J\'irai* (e não ~~j\'y irai~~).',
     table: { head: ['pergunta', 'resposta com y'], rows: [
       ['Tu vas à la plage ?', "Oui, j'y vais. / Non, je n'y vais pas."], ['Vous habitez en France ?', 'Oui, nous y habitons depuis un an.'],

@@ -9,12 +9,14 @@
 
   P.defaultSettings = function () {
     return {
-      voiceURI: '', rate: 0.8, showTranslation: true, theme: 'auto', level: 'A2',
+      voiceURI: '', rate: 0.8, showTranslation: true, theme: 'auto', level: 'A2', startLevel: 'A1',
       accentFull: false, warmup: true, backupIntervalDays: 7
     };
   };
 
   P.normalize = function (p) {
+    // perfis criados antes do A1 existir começaram no A2: o A1 fica opcional para eles
+    if (p.settings && !p.settings.startLevel) p.settings.startLevel = 'A2';
     p.settings = Object.assign(P.defaultSettings(), p.settings || {});
     p.progress = p.progress || {};
     p.proCourses = p.proCourses || {}; // cursos do Profissional: { id: { modules: { mId: {best, last, attempts, updatedAt} } } }
@@ -43,16 +45,23 @@
     return (st.lastProfileId && st.profiles[st.lastProfileId]) || null;
   };
 
-  P.create = function (name, avatar, color) {
+  P.create = function (name, avatar, color, startLevel) {
     var p = P.normalize({
       id: U.uid('p'), name: String(name).trim() || 'Aluno', avatar: avatar || P.AVATARS[0],
       color: color || P.COLORS[S.state.order.length % P.COLORS.length], createdAt: new Date().toISOString()
     });
+    P.setStartLevel(p, startLevel || 'A1');
     S.state.profiles[p.id] = p;
     S.state.order.push(p.id);
     S.state.lastProfileId = p.id;
     S.save(true);
     return p;
+  };
+  /* ponto de partida no curso: A1 (nunca estudou) ou A2 (já sabe o básico). Ajusta o nível e a velocidade da voz. */
+  P.setStartLevel = function (p, lv) {
+    p.settings.startLevel = lv;
+    if (lv === 'A1') { p.settings.level = 'A1'; if (p.settings.rate === 0.8) p.settings.rate = 0.7; }
+    else if (p.settings.level === 'A1') { p.settings.level = 'A2'; if (p.settings.rate === 0.7) p.settings.rate = 0.8; }
   };
   P.switchTo = function (id) {
     if (!S.state.profiles[id]) return;

@@ -171,7 +171,8 @@
       crumbs: [['Estudar', null], ['Treino de ouvido', '#/treino'], [warm ? 'Aquecimento' : (m ? m.title : mode), null]],
       render: function (main) {
         if (!m && !warm) { main.appendChild(UI.empty('🎧', 'Modo desconhecido', null, h('a', { class: 'btn primary', href: '#/treino' }, 'Voltar'))); return; }
-        if (warm) { startSession(main, { mode: 'misto', range: warmRange(), variant: 'fr', count: 5, warmup: true, next: params.query.next }); return; }
+        // no A1, o aquecimento é só de números de 0 a 20 (horas e datas chegam depois)
+        if (warm) { var wr = warmRange(); startSession(main, { mode: wr === '0-20' ? 'numeros' : 'misto', range: wr, variant: 'fr', count: 5, warmup: true, next: params.query.next }); return; }
         setupScreen(main, m);
       }
     };
@@ -180,7 +181,7 @@
   function warmRange() {
     var p = LUX.profiles.current();
     var lv = p ? p.settings.level : 'A2';
-    return lv === 'A2' ? '70-99' : lv === 'B1' ? '100-999' : 'tudo';
+    return lv === 'A1' ? '0-20' : lv === 'A2' ? '70-99' : lv === 'B1' ? '100-999' : 'tudo';
   }
 
   function setupScreen(main, m) {

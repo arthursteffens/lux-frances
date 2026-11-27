@@ -17,20 +17,39 @@
     LUX.manifest.levels.forEach(function (lv) { lv.units.forEach(function (u) { u.lessons.forEach(function (id) { if (LUX.data.lessons[id]) out.push(id); }); }); });
     return out;
   };
+  /* índice (na ordem global) da 1ª lição do nível em que o aluno começou (A1 ou A2).
+     As lições de níveis anteriores ficam abertas para revisar; o caminho obrigatório começa aqui. */
+  L.startIndex = function (p) {
+    var lv = p && p.settings && p.settings.startLevel, ord = L.order();
+    if (!lv) return 0;
+    for (var i = 0; i < ord.length; i++) if (LUX.data.lessons[ord[i]].level === lv) return i;
+    return 0;
+  };
+  /* lições do caminho do aluno (do nível de partida em diante) */
+  L.path = function (p) { return L.order().slice(L.startIndex(p)); };
   L.isUnlocked = function (p, id) {
     if (!p) return false;
     if (p.unlockedAll) return true;
     var ord = L.order(), i = ord.indexOf(id);
-    if (i <= 0) return i === 0;
+    if (i < 0) return false;
+    if (i <= L.startIndex(p)) return true;
     var prev = p.progress[ord[i - 1]];
     return !!(prev && prev.status === 'done');
   };
   L.next = function (id) { var ord = L.order(), i = ord.indexOf(id); return i >= 0 ? ord[i + 1] || null : null; };
   L.current = function (p) {
-    var ord = L.order();
+    var ord = L.path(p);
     for (var i = 0; i < ord.length; i++) if (!(p.progress[ord[i]] && p.progress[ord[i]].status === 'done')) return ord[i];
     return ord[ord.length - 1] || null;
   };
+
+  /* botão que mostra/esconde um bloco (tradução do texto) */
+  function translationToggle(showLabel, hideLabel, box) {
+    box.hidden = true;
+    var b = h('button', { class: 'btn sm ghost tr-btn' }, showLabel);
+    b.addEventListener('click', function () { box.hidden = !box.hidden; b.textContent = box.hidden ? showLabel : hideLabel; });
+    return h('div', { class: 'translation' }, [b, box]);
+  }
 
   function stripArticle(fr) { return fr.replace(/^(le \/ la |le |la |l'|les |un |une )/i, '').replace(/\s*\/.*$/, '').replace(/\(e\)$/, ''); }
 
@@ -148,7 +167,9 @@
     (function (pane) {
       var c = h('div', { class: 'card' }, [h('h2', null, '🎯 Ao final desta lição, você será capaz de:'), h('ul', { class: 'checklist' }, l.objectives.map(function (o) { return h('li', null, o); }))]);
       pane.appendChild(c);
-      if (p && p.settings.warmup && opts.warmup !== false) {
+      if (l.introPt) pane.appendChild(h('div', { class: 'card intro-card' }, [h('h2', null, l.introTitle || '👋 Antes de começar'), UI.md(l.introPt)]));
+      // aquecimento de ouvido (no A1 só depois da unidade 1, quando os números de 0 a 10 já foram vistos)
+      if (p && p.settings.warmup && opts.warmup !== false && !(l.level === 'A1' && l.unit === 1)) {
         pane.appendChild(h('div', { class: 'card warmup' }, [
           h('div', null, [h('h3', null, '🔥 Aquecimento de 2 minutos'), h('p', { class: 'muted' }, '5 números, horas ou datas de ouvido antes de começar. (Dá para desligar no seu perfil.)')]),
           h('a', { class: 'btn', href: '#/treino/aquecimento?next=' + l.id }, 'Fazer aquecimento')
@@ -168,14 +189,27 @@
         grid.appendChild(h('div', { class: 'vocab-item' }, [
           h('div', { class: 'row gap' }, [UI.playBtn(v.fr.replace(' / ', ', '), { small: true }), h('div', null, [
             h('div', { class: 'vocab-fr', lang: lang }, v.fr),
-            h('div', { class: 'vocab-pt' }, v.pt + (v.g === 'm' ? ' · masc.' : v.g === 'f' ? ' · fem.' : ''))
+            h('div', { class: 'vocab-pt' }, v.pt + (v.g === 'm' ? ' · masc.' : v.g === 'f' ? ' · fem.' : '')),
+            v.say ? h('div', { class: 'vocab-say', title: 'Pronúncia aproximada, com letras do português. A sílaba em maiúsculas é a mais forte.' }, '🗣 soa ' + v.say) : null
           ])]),
           v.ex ? h('div', { class: 'vocab-ex' }, [UI.playBtn(v.ex, { small: true }), UI.frText(v.ex, { source: source, block: false })]) : null,
           inf && LUX.verbSearch.get(inf) ? h('a', { class: 'sm', href: '#/verbos/' + encodeURIComponent(inf) }, 'ver conjugação →') : null
         ]));
       });
       c.appendChild(grid);
+      if (l.vocabulary.some(function (v) { return v.say; })) c.appendChild(h('p', { class: 'muted sm' }, '🗣 = pronúncia aproximada com letras do português; a sílaba em MAIÚSCULAS é a mais forte (em francês, quase sempre a última). Ouça sempre o ▶: ele é a referência.'));
       pane.appendChild(c);
+      // som da lição (A1): explicação + exemplos com áudio
+      var pr = l.pronunciation;
+      if (pr) {
+        var pc = h('div', { class: 'card pron-card' }, [h('h2', null, '🗣 ' + (pr.title || 'Pronúncia')), UI.md(pr.textPt)]);
+        if (pr.examples) {
+          var exs = h('div', { class: 'examples compact' });
+          pr.examples.forEach(function (e) { exs.appendChild(UI.example(e.fr, e.pt, source)); });
+          pc.appendChild(exs);
+        }
+        pane.appendChild(pc);
+      }
     })(panes[1]);
 
     /* --- leitura --- */
@@ -193,6 +227,7 @@
       ]));
       c.appendChild(h('p', { class: 'muted sm' }, lang === 'fr' ? 'Clique em qualquer palavra para ver a tradução. Os trechos sublinhados têm uma nota do glossário. Selecione várias palavras para salvar uma expressão.' : 'Toque nos trechos sublinhados para ver a tradução.'));
       c.appendChild(h('div', { class: 'text-box' }, text));
+      if (r.translationPt) c.appendChild(translationToggle('🇧🇷 Ver a tradução do texto', '🙈 Esconder a tradução', UI.md(r.translationPt, 'translation-box')));
       pane.appendChild(c);
       pane.appendChild(h('h2', { class: 'section-title' }, 'Compreensão do texto'));
       pane.appendChild(exList(r.exercises, 'r'));
@@ -218,7 +253,7 @@
         var s = spk[ln.speaker] || {};
         var row = h('div', { class: 'line' }, [
           h('span', { class: 'speaker', 'data-g': s.gender || '' }, s.name || ln.speaker),
-          h('div', { class: 'line-text' }, UI.frText(ln.text, { source: source, block: false })),
+          h('div', { class: 'line-text' }, [UI.frText(ln.text, { source: source, block: false }), ln.pt ? h('div', { class: 'line-pt muted sm', hidden: true }, ln.pt) : null]),
           UI.playBtn(seg(i), { small: true })
         ]);
         lines.push(row);
@@ -235,6 +270,16 @@
       function speakOne() {
         lines.forEach(function (r, k) { r.classList.toggle('current', k === cur); });
         LUX.tts.speak(seg(cur), { onEnd: function () { } });
+      }
+      // tradução das falas (A1): botão dentro da transcrição
+      if (a.script.some(function (ln) { return ln.pt; })) {
+        var trBtn = h('button', { class: 'btn sm ghost tr-btn' }, '🇧🇷 Mostrar a tradução das falas');
+        trBtn.addEventListener('click', function () {
+          var on = trBtn.classList.toggle('on');
+          [].forEach.call(transcript.querySelectorAll('.line-pt'), function (x) { x.hidden = !on; });
+          trBtn.textContent = on ? '🙈 Esconder a tradução' : '🇧🇷 Mostrar a tradução das falas';
+        });
+        transcript.insertBefore(trBtn, transcript.firstChild);
       }
       var revealBtn = h('button', { class: 'btn', disabled: true }, '👁 Mostrar transcrição');
       revealBtn.addEventListener('click', function () {

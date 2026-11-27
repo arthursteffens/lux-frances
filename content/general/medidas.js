@@ -2,7 +2,7 @@ LUX.registerGeneral({
   id: 'medidas', group: 'numeros', title: 'Medidas e pesos', titleFr: 'Les mesures et les poids', level: 'A2',
   keywords: ['medida', 'peso', 'quilo', 'grama', 'litro', 'metro', 'altura', 'tamanho', 'temperatura', 'kilo', 'gramme', 'litre', 'mètre', 'mesurer', 'peser'],
   blocks: [
-    { type: 'intro', textPt: 'A França usa o **sistema métrico**, como o Brasil: quilos, gramas, litros, metros e graus Celsius. A diferença está nas palavras e nas abreviações faladas: *un kilo* (1 kg), *une livre* (500 g, ainda usado na feira!), *un mètre quatre-vingts* (1,80 m).' },
+    { type: 'intro', textPt: 'A França usa o **sistema métrico**, como o Brasil: quilos, gramas, litros, metros e graus Celsius. A diferença está nas palavras e nas abreviações faladas:\n- ***un kilo*** (1 kg)\n- ***une livre*** (500 g, ainda usado na feira!)\n- ***un mètre quatre-vingts*** (1,80 m)' },
     { type: 'table', sections: [
       { title: 'Peso', items: [
         { fr: 'un gramme', pt: '1 g' }, { fr: 'cent grammes', pt: '100 g' }, { fr: 'une livre', pt: '500 g (meio quilo)', note: 'uso popular' },

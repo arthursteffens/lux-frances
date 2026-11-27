@@ -117,5 +117,5 @@ LUX.registerLesson({
       explanationPt: 'Gosto em geral → le; quantidade indefinida → du.' },
     { type: 'order_sentence', prompt: 'Monte a frase.', answer: "Je ne mange pas de viande.", translation: 'Eu não como carne.' }
   ],
-  tipForBrazilians: '**Os "falsos gêneros" da feira:** muitas palavras mudam de gênero entre o português e o francês: *la tomate* (o tomate), *le légume* (o legume, ok), *les fruits* (as frutas — masculino em francês!), *la salade* (a alface, ok), *le lait* (o leite, ok), *la mangue* (a manga). Ao aprender, memorize sempre com o artigo: não "tomate", mas **"la tomate"**.'
+  tipForBrazilians: '**Os "falsos gêneros" da feira:** muitas palavras mudam de gênero entre o português e o francês:\n- ***la tomate*** (o tomate)\n- ***le légume*** (o legume, ok)\n- ***les fruits*** (as frutas — masculino em francês!)\n- ***la salade*** (a alface, ok)\n- ***le lait*** (o leite, ok)\n- ***la mangue*** (a manga)\n\nAo aprender, memorize sempre com o artigo: não "tomate", mas **"la tomate"**.'
 });

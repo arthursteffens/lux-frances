@@ -7,7 +7,7 @@
     keywords: ['negação', 'ne pas', 'jamais', 'plus', 'rien', 'personne', 'pas de', 'não', 'nunca', 'nada', 'ninguém'],
     summaryPt: 'Duas partes em volta do verbo: ne + verbo + pas/jamais/plus/rien. Depois da negação, un/une/des/du viram de.',
     explanationPt: 'A negação francesa "abraça" o verbo: **ne + verbo + pas**.\n\n' +
-      '- *ne... pas* (não), *ne... jamais* (nunca), *ne... plus* (não... mais), *ne... rien* (nada), *ne... personne* / *personne ne* (ninguém).\n' +
+      '- ***ne... pas*** (não)\n- ***ne... jamais*** (nunca)\n- ***ne... plus*** (não... mais)\n- ***ne... rien*** (nada)\n- ***ne... personne*** / ***personne ne*** (ninguém)\n' +
       '- *ne* → *n\'* antes de vogal.\n' +
       '- Depois da negação: **un, une, des, du, de la → de**: *Je n\'ai pas de voiture.*\n' +
       '- Com tempo composto, em volta do auxiliar: *Je n\'ai pas compris.*\n' +
@@ -37,7 +37,7 @@
       '- **Entonação** (o mais comum na fala): *Tu viens ?*\n' +
       '- **Est-ce que**: *Est-ce que tu viens ?*\n' +
       '- **Inversão** (formal/escrita): *Viens-tu ?* — com *-t-* entre vogais: *Parle-t-il ?*\n\n' +
-      '**Palavras interrogativas:** *qui* (quem), *que / quoi* (o quê), *où* (onde), *quand* (quando), *comment* (como), *pourquoi* (por quê), *combien* (quanto), *quel/quelle* (qual).\n\n' +
+      '**Palavras interrogativas:**\n- ***qui*** (quem)\n- ***que / quoi*** (o quê)\n- ***où*** (onde)\n- ***quand*** (quando)\n- ***comment*** (como)\n- ***pourquoi*** (por quê)\n- ***combien*** (quanto)\n- ***quel/quelle*** (qual)\n\n' +
       'Na fala, a palavra interrogativa pode ir no fim: *Tu fais quoi ? Tu habites où ?*',
     tables: [{ caption: 'A mesma pergunta em três registros', head: ['informal', 'neutro', 'formal'], rows: [
       ['Tu habites où ?', 'Où est-ce que tu habites ?', 'Où habites-tu ?'], ['Vous voulez quoi ?', "Qu'est-ce que vous voulez ?", 'Que voulez-vous ?']

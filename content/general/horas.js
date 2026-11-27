@@ -11,7 +11,7 @@ LUX.registerGeneral({
     { type: 'rules', items: [
       { title: 'Une heure (feminino)', textPt: '*heure* é feminino: **une heure**, **vingt et une heures**. Os minutos também: *dix heures vingt et une*.',
         examples: [{ fr: 'Il est une heure.', pt: 'É uma hora.' }, { fr: 'vingt et une heures', pt: '21h' }] },
-      { title: 'Quart, demie, moins', textPt: '*et quart* (e quinze), *et demie* (e meia), *moins le quart* (quinze para), *moins dix* (dez para). Depois de *midi* e *minuit* escreve-se *et demi* (sem e).',
+      { title: 'Quart, demie, moins', textPt: '\n- ***et quart*** (e quinze)\n- ***et demie*** (e meia)\n- ***moins le quart*** (quinze para)\n- ***moins dix*** (dez para)\n\nDepois de *midi* e *minuit* escreve-se *et demi* (sem e).',
         examples: [{ fr: 'trois heures et quart', pt: '3h15' }, { fr: 'six heures moins le quart', pt: '5h45' }, { fr: 'midi et demi', pt: '12h30' }] },
       { title: 'Midi e minuit', textPt: 'Na forma coloquial, 12h = *midi*, 0h = *minuit*. Na formal: *douze heures* e *zéro heure*.',
         examples: [{ fr: 'Il est midi.', pt: 'É meio-dia.' }, { fr: 'à minuit', pt: 'à meia-noite' }] },

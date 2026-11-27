@@ -14,7 +14,7 @@ LUX.registerGeneral({
     { type: 'rules', items: [
       { title: 'Em + mês', textPt: '**en** + mês, ou **au mois de** + mês. Os dois significam "em".',
         examples: [{ fr: 'en janvier', pt: 'em janeiro' }, { fr: 'au mois de mai', pt: 'no mês de maio' }, { fr: "en août, il fait chaud.", pt: 'Em agosto faz calor.' }] },
-      { title: 'Início, meio e fim', textPt: '*début mars* (início de março), *mi-mars* (meados de março), *fin mars* (fim de março) — sem preposição.',
+      { title: 'Início, meio e fim', textPt: '\n- ***début mars*** (início de março)\n- ***mi-mars*** (meados de março)\n- ***fin mars*** (fim de março)\n\nTudo sem preposição.',
         examples: [{ fr: 'début septembre', pt: 'no início de setembro' }, { fr: 'fin décembre', pt: 'no fim de dezembro' }] },
       { title: 'Juin × juillet', textPt: 'Os franceses também confundem ao ouvir! Na fala, às vezes dizem *juillet* destacando bem o "-et", e *juin* com som nasal curto.',
         examples: [{ fr: 'juin', pt: 'junho' }, { fr: 'juillet', pt: 'julho' }] }

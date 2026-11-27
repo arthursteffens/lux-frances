@@ -224,13 +224,13 @@
       h('div', { class: 'cert-scores' }, t.sections.map(function (s) {
         return h('div', null, [h('b', null, Math.round(((cr.sections || {})[s.id] || 0) * 100) + '%'), h('span', { class: 'muted sm' }, s.title)]);
       }).concat([h('div', null, [h('b', null, Math.round(cr.score * 100) + '%'), h('span', { class: 'muted sm' }, 'Nota final')])])),
-      h('div', { class: 'cert-foot' }, [h('span', { lang: 'fr' }, 'Fait le ' + dateFr), h('span', null, 'Lux · curso de francês A2 → B2')])
+      h('div', { class: 'cert-foot' }, [h('span', { lang: 'fr' }, 'Fait le ' + dateFr), h('span', null, 'Lux · curso de francês A1 → B2')])
     ]);
     main.appendChild(cert);
     main.appendChild(h('div', { class: 'row gap wrap no-print cert-actions' }, [
       h('button', { class: 'btn primary', onclick: function () { g.print(); } }, '🖨 Imprimir / salvar em PDF'),
       h('a', { class: 'btn', href: '#/curso' }, 'Voltar ao curso')
     ]));
-    main.appendChild(h('p', { class: 'muted sm no-print' }, 'Certificado simbólico de progresso pessoal, sem valor oficial. Para um diploma reconhecido, procure o DELF (A2, B1, B2) da France Éducation international.'));
+    main.appendChild(h('p', { class: 'muted sm no-print' }, 'Certificado simbólico de progresso pessoal, sem valor oficial. Para um diploma reconhecido, procure o DELF (A1, A2, B1, B2) da France Éducation international.'));
   }
 })(window);

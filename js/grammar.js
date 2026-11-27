@@ -104,8 +104,8 @@
         main.appendChild(h('section', { class: 'card' }, [h('h2', null, 'Exemplos'), exs]));
         var pc = t.ptComparison;
         var comp = h('section', { class: 'card compare' }, [h('h2', null, '🇧🇷 Em português é assim / 🇫🇷 em francês é assado')]);
-        if (pc.same) comp.appendChild(h('div', { class: 'cmp-row' }, [h('span', { class: 'tag ok' }, 'igual'), h('p', { html: U.mdInline(pc.same) })]));
-        if (pc.different) comp.appendChild(h('div', { class: 'cmp-row' }, [h('span', { class: 'tag warn' }, 'diferente'), h('p', { html: U.mdInline(pc.different) })]));
+        if (pc.same) comp.appendChild(h('div', { class: 'cmp-row' }, [h('span', { class: 'tag ok' }, 'igual'), UI.md(pc.same)]));
+        if (pc.different) comp.appendChild(h('div', { class: 'cmp-row' }, [h('span', { class: 'tag warn' }, 'diferente'), UI.md(pc.different)]));
         if (pc.commonErrors && pc.commonErrors.length) {
           comp.appendChild(h('h3', null, 'Erros típicos de brasileiros'));
           comp.appendChild(h('ul', { class: 'errors' }, pc.commonErrors.map(function (e) {

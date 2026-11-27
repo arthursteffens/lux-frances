@@ -27,7 +27,7 @@ LUX.registerProGuide({
     { type: 'rules', items: [
       { title: 'Franglais na tech', textPt: 'Em start-ups, ouve-se muito inglês misturado: *un call, une deadline, le feedback, un process*. Em documentos formais, com clientes e com a administração, prefira o francês: *un appel, une échéance, un retour, un processus*. No Québec, o francês é ainda mais preferido.',
         examples: [{ fr: 'On a un call à quinze heures pour la roadmap.', pt: 'Temos uma call às 15h sobre o roadmap. (informal)' }, { fr: 'Nous avons un appel à quinze heures sur la feuille de route.', pt: 'Temos uma ligação às 15h sobre o roadmap. (formal)' }] },
-      { title: 'Ler o negócio', textPt: 'A vaga de HRBP pede para "ler um P&L". Em francês: *le compte de résultat* mostra *le chiffre d\'affaires* (receita), *les coûts* (custos) e *le résultat* (lucro ou prejuízo). Em empresas de tecnologia, **a folha de pagamento costuma ser o maior custo** — por isso as decisões de pessoas são decisões de negócio.',
+      { title: 'Ler o negócio', textPt: 'A vaga de HRBP pede para "ler um P&L". Em francês: *le compte de résultat* mostra:\n- ***le chiffre d\'affaires*** (receita)\n- ***les coûts*** (custos)\n- ***le résultat*** (lucro ou prejuízo)\n\nEm empresas de tecnologia, **a folha de pagamento costuma ser o maior custo** — por isso as decisões de pessoas são decisões de negócio.',
         examples: [{ fr: 'Les salaires représentent la plus grande partie de nos coûts.', pt: 'Os salários representam a maior parte dos nossos custos.' }] }
     ] },
     { type: 'phrases', items: [

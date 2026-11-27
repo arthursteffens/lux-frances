@@ -114,6 +114,6 @@ LUX.registerProLesson({
       explanationPt: 'Y substitui o lugar (à la cafétéria) e vem antes do verbo.' },
     { type: 'order_sentence', prompt: 'Monte a frase.', answer: "N'hésitez pas à poser des questions.", translation: 'Fique à vontade para fazer perguntas.' }
   ],
-  tipForBrazilians: '**Onboarding é a primeira impressão.** Um bom parcours d\'intégration tem três momentos: *avant l\'arrivée* (contrato, equipamento), *la première semaine* (pessoas, ferramentas) e *les trois premiers mois* (objetivos, feedback). Em muitas empresas em Luxemburgo, o novo funcionário ganha um ***parrain/marraine*** (buddy).\n\n' +
+  tipForBrazilians: '**Onboarding é a primeira impressão.** Um bom parcours d\'intégration tem três momentos:\n- ***avant l\'arrivée*** (contrato, equipamento)\n- ***la première semaine*** (pessoas, ferramentas)\n- ***les trois premiers mois*** (objetivos, feedback)\n\nEm muitas empresas em Luxemburgo, o novo funcionário ganha um ***parrain/marraine*** (buddy).\n\n' +
     '**Mutuelle × CNS:** na França, *la mutuelle* é o plano de saúde complementar oferecido pela empresa. Em Luxemburgo, a saúde básica é coberta pela **CNS** (*Caisse nationale de santé*): o seguro-saúde público, e algumas empresas oferecem um seguro complementar.'
 });

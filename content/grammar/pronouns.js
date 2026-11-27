@@ -83,7 +83,7 @@
       '- um **lugar** introduzido por *à, en, dans, chez, sur*: *Tu vas à Paris ? — Oui, j\'y vais.*\n' +
       '- **à + coisa/ideia**: *Tu penses à ton examen ? — Oui, j\'y pense.*\n\n' +
       'Para **pessoas** com "à", use *lui/leur*, não *y*.\n\n' +
-      'Expressões fixas: *Il y a* (há), *On y va !* (vamos!), *Ça y est !* (pronto!, consegui!).',
+      'Expressões fixas:\n- ***Il y a*** (há)\n- ***On y va !*** (vamos!)\n- ***Ça y est !*** (pronto!, consegui!)',
     tables: [{ caption: 'Exemplos', head: ['frase', 'com y'], rows: [
       ['Je vais au cinéma.', "J'y vais."], ['Il habite à Lyon.', 'Il y habite.'], ['Je pense à mes vacances.', "J'y pense."]
     ] }],

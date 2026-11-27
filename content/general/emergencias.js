@@ -2,7 +2,7 @@ LUX.registerGeneral({
   id: 'emergencias', group: 'situacoes', title: 'Emergências', titleFr: 'Les urgences', level: 'A2',
   keywords: ['emergência', 'socorro', 'ajuda', 'polícia', 'ambulância', 'bombeiros', 'roubo', 'acidente', 'urgence', 'au secours', 'police', 'pompiers', 'SAMU', '112'],
   blocks: [
-    { type: 'intro', textPt: 'Guarde estes números: **112** (emergência europeia, de qualquer celular, atende em várias línguas), **15** (SAMU — ambulância), **17** (polícia), **18** (bombeiros). Para surdos ou quem não pode falar, existe o **114** por SMS.' },
+    { type: 'intro', textPt: 'Guarde estes números:\n- **112** (emergência europeia, de qualquer celular, atende em várias línguas)\n- **15** (SAMU — ambulância)\n- **17** (polícia)\n- **18** (bombeiros)\n\nPara surdos ou quem não pode falar, existe o **114** por SMS.' },
     { type: 'table', sections: [
       { title: 'Números de emergência', items: [
         { fr: 'le cent douze', pt: '112 — emergência europeia (qualquer situação)', tts: 'cent douze' }, { fr: 'le quinze', pt: '15 — SAMU (urgência médica)', tts: 'quinze' },

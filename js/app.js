@@ -112,11 +112,11 @@
     document.body.classList.add('welcome-mode');
     var w = document.getElementById('welcome');
     w.hidden = false; w.innerHTML = '';
-    var f = A.profileForm({ color: P.COLORS[0], avatar: P.AVATARS[0] });
+    var f = A.profileForm({ color: P.COLORS[0], avatar: P.AVATARS[0], withStart: true });
     var create = h('button', { class: 'btn primary big' }, 'Começar a estudar →');
     create.addEventListener('click', function () {
       if (!f.name.value.trim()) { f.name.focus(); UI.toast('Digite seu nome.'); return; }
-      P.create(f.name.value, f.sel.avatar, f.sel.color);
+      P.create(f.name.value, f.sel.avatar, f.sel.color, f.sel.start);
       if (!S.state.ui.firstUse) { S.state.ui.firstUse = new Date().toISOString(); S.save(true); }
       document.body.classList.remove('welcome-mode');
       w.hidden = true;

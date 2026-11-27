@@ -77,7 +77,7 @@ LUX.registerProLesson({
     title: 'Descrever tendências com precisão',
     explanationPt: 'Para apresentar dados, você precisa de verbos de movimento, advérbios de intensidade e das preposições certas:\n\n' +
       '- **Subir:** *rise (rose), increase, go up, climb, double*. **Cair:** *fall (fell), drop, decrease, go down, halve*. **Estável:** *remain stable, level off*. **Pico:** *peak, reach a high*.\n' +
-      '- **Intensidade:** *sharply / significantly* (muito), *steadily* (constante), *slightly* (pouco).\n' +
+      '**Intensidade:**\n- ***sharply / significantly*** (muito)\n- ***steadily*** (constante)\n- ***slightly*** (pouco)\n' +
       '- **Preposições:** **by** = a diferença (*rose **by** 4 points*); **to** = o valor final (*rose **to** 18%*); **from… to…** = de… para… (*from 14% **to** 18%*).\n' +
       '- **Percent × percentage point:** de 14% para 18% é **+4 percentage points** (ou um aumento de cerca de 29 percent).',
     table: { head: ['Movimento', 'Verbo', 'Substantivo'], rows: [

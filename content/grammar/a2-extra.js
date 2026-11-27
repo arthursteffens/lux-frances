@@ -124,8 +124,8 @@
     keywords: ['conector', "d'abord", 'ensuite', 'puis', 'enfin', 'parce que', 'donc', 'alors', 'mais', 'pourtant', 'narrativa', 'ordem'],
     summaryPt: "Para organizar uma história: d'abord, ensuite, puis, après, enfin. Para explicar: parce que, car, donc, alors, mais.",
     explanationPt: '**Ordem dos acontecimentos (cronológicos):**\n- *d\'abord* (primeiro) → *ensuite / puis / après* (depois, em seguida) → *enfin / finalement* (por fim, finalmente)\n- *soudain / tout à coup* (de repente), *pendant ce temps* (enquanto isso)\n\n' +
-      '**Causa e consequência:**\n- *parce que* (porque — responde a *pourquoi ?*), *car* (pois — mais escrito), *comme* (como, no início da frase)\n- *donc* (portanto, então), *alors* (então — mais falado)\n\n' +
-      '**Oposição:** *mais* (mas), *pourtant* (no entanto), *par contre* (por outro lado — muito falado)\n\n' +
+      '**Causa e consequência:**\n- ***parce que*** (porque — responde a *pourquoi ?*)\n- ***car*** (pois — mais escrito)\n- ***comme*** (como, no início da frase)\n- ***donc*** (portanto, então)\n- ***alors*** (então — mais falado)\n\n' +
+      '**Oposição:**\n- ***mais*** (mas)\n- ***pourtant*** (no entanto)\n- ***par contre*** (por outro lado — muito falado)\n\n' +
       '**Adição:** *et, aussi, en plus* (além disso)',
     tables: [{ caption: 'Conectores por função', head: ['função', 'conectores', 'exemplo'], rows: [
       ['começar', "d'abord, premièrement", "D'abord, je me lève."], ['continuar', 'ensuite, puis, après', 'Ensuite, je prends le métro.'],
@@ -159,8 +159,8 @@
     id: 'position-prepositions', category: 'preposicoes', level: 'A2', title: 'Localização: sur, sous, devant, à côté de...', titleFr: 'Les prépositions de lieu',
     keywords: ['onde', 'localização', 'em cima', 'embaixo', 'ao lado', 'em frente', 'atrás', 'perto', 'longe', 'à côté de', 'en face de', 'devant', 'derrière', 'sur', 'sous', 'transporte', 'en train', 'à pied'],
     summaryPt: 'sur/sous, devant/derrière, dans, entre (sem "de") e à côté de, en face de, près de, loin de, au coin de (com "de", que se contrai: à côté du parc).',
-    explanationPt: '**Sem "de":** *sur* (em cima de), *sous* (debaixo de), *devant* (na frente de), *derrière* (atrás de), *dans* (dentro de), *entre* (entre), *chez* (na casa de).\n\n' +
-      '**Com "de" (que se contrai com o artigo):** *à côté de* (ao lado de), *en face de* (em frente a), *près de* (perto de), *loin de* (longe de), *au coin de* (na esquina de), *au bout de* (no fim de), *au milieu de* (no meio de), *au-dessus de* (acima de), *en dessous de* (abaixo de).\n' +
+    explanationPt: '**Sem "de":**\n- ***sur*** (em cima de)\n- ***sous*** (debaixo de)\n- ***devant*** (na frente de)\n- ***derrière*** (atrás de)\n- ***dans*** (dentro de)\n- ***entre*** (entre)\n- ***chez*** (na casa de)\n\n' +
+      '**Com "de" (que se contrai com o artigo):**\n- ***à côté de*** (ao lado de)\n- ***en face de*** (em frente a)\n- ***près de*** (perto de)\n- ***loin de*** (longe de)\n- ***au coin de*** (na esquina de)\n- ***au bout de*** (no fim de)\n- ***au milieu de*** (no meio de)\n- ***au-dessus de*** (acima de)\n- ***en dessous de*** (abaixo de)\n' +
       '→ *à côté **du** parc*, *en face **de la** gare*, *près **de l\'**école*, *loin **des** magasins*.\n\n' +
       '**Meios de transporte:** **en** para veículos em que se entra (*en train, en voiture, en avion, en bus, en métro, en bateau*) e **à** para os que se monta ou a pé (*à pied, à vélo, à moto, à cheval*).',
     tables: [{ caption: 'Pares de opostos', head: ['', '', ''], rows: [

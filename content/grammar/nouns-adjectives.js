@@ -7,7 +7,7 @@
     keywords: ['gênero', 'masculino', 'feminino', 'le ou la', 'la mer', 'terminações'],
     summaryPt: 'Todo substantivo é masculino ou feminino, e muitas vezes o gênero é diferente do português. Aprenda sempre com o artigo.',
     explanationPt: 'Algumas **terminações** ajudam a adivinhar o gênero:\n\n' +
-      '- Geralmente **masculinas**: *-age* (le voyage, le fromage), *-ment* (le moment), *-eau* (le bureau), *-isme*.\n' +
+      'Geralmente **masculinas**:\n- ***-age*** (le voyage, le fromage)\n- ***-ment*** (le moment)\n- ***-eau*** (le bureau)\n- ***-isme*** (le tourisme)\n' +
       '- Geralmente **femininas**: *-tion/-sion* (la nation), *-té* (la liberté), *-ette*, *-ure* (la voiture), *-ence/-ance*.\n\n' +
       'Mas há exceções: *la plage, l\'eau (f), la page, le lycée*. A regra de ouro: **aprenda cada palavra com o artigo**.',
     tables: [{ caption: 'Gênero diferente do português', head: ['francês', 'português'], rows: [
@@ -65,7 +65,7 @@
     id: 'adjectives', category: 'substantivos-adjetivos', level: 'A1', title: 'Adjetivos: concordância e posição', titleFr: "L'accord et la place de l'adjectif",
     keywords: ['adjetivo', 'concordância', 'feminino', 'posição', 'beau bel belle', 'BANGS'],
     summaryPt: 'O adjetivo concorda com o substantivo e geralmente vem depois. Alguns curtos e frequentes vêm antes (beau, grand, petit, bon...).',
-    explanationPt: '**Feminino:** em geral + e (*grand → grande*). Casos especiais: *-eux → -euse* (heureux/heureuse), *-if → -ive* (sportif/sportive), *-er → -ère* (cher/chère), *-en → -enne* (italien/italienne).\n\n' +
+    explanationPt: '**Feminino:** em geral + e (*grand → grande*). Casos especiais:\n- ***-eux → -euse*** (heureux/heureuse)\n- ***-if → -ive*** (sportif/sportive)\n- ***-er → -ère*** (cher/chère)\n- ***-en → -enne*** (italien/italienne)\n\n' +
       '**Posição:** a maioria vem **depois** do substantivo (*une ville française*). Mas os adjetivos de **B**eleza, **I**dade, **N**úmero, **B**ondade e **T**amanho costumam vir **antes**: *beau, joli, jeune, vieux, nouveau, premier, bon, mauvais, grand, petit*.\n\n' +
       '**Beau, nouveau, vieux** têm forma especial antes de vogal: *un bel appartement, un nouvel ami, un vieil homme*.',
     tables: [{ caption: 'Concordância', head: ['masc. sing.', 'fem. sing.', 'masc. pl.', 'fem. pl.'], rows: [

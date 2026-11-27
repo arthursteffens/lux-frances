@@ -160,7 +160,7 @@
     var conj = h('section', { class: 'card conj-section' });
     var showLit = false;
     var level = p ? p.settings.level : 'A2';
-    var openLevels = { A2: ['A1', 'A2'], B1: ['A1', 'A2', 'B1'], B2: ['A1', 'A2', 'B1', 'B2', '—'] }[level] || ['A1', 'A2'];
+    var openLevels = { A1: ['A1'], A2: ['A1', 'A2'], B1: ['A1', 'A2', 'B1'], B2: ['A1', 'A2', 'B1', 'B2', '—'] }[level] || ['A1', 'A2'];
     var litToggle = h('label', { class: 'switch' }, [h('input', { type: 'checkbox' }), h('span', null, 'mostrar tempos literários')]);
     var expandAll = h('button', { class: 'btn sm ghost' }, 'Expandir todos');
     var collapseAll = h('button', { class: 'btn sm ghost' }, 'Recolher todos');

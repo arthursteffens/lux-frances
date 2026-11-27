@@ -28,7 +28,7 @@ LUX.registerGeneral({
       { fr: "Quelle est ta couleur préférée ?", pt: 'Qual é sua cor preferida?' }, { fr: 'Vous l\'avez en noir ?', pt: 'Vocês têm em preto?' },
       { fr: 'Elle a les yeux bleus.', pt: 'Ela tem olhos azuis.' }, { fr: 'Le feu est vert, on peut traverser.', pt: 'O sinal está verde, podemos atravessar.' }
     ] },
-    { type: 'tip', textPt: '**Expressões com cores:** *voir la vie en rose* (ver tudo cor-de-rosa), *être vert de rage* (verde de raiva), *rire jaune* (rir amarelo — igual ao português!), *une nuit blanche* (uma noite em claro), *être dans le rouge* (estar no vermelho).' },
+    { type: 'tip', textPt: '**Expressões com cores:**\n- ***voir la vie en rose*** (ver tudo cor-de-rosa)\n- ***être vert de rage*** (verde de raiva)\n- ***rire jaune*** (rir amarelo — igual ao português!)\n- ***une nuit blanche*** (uma noite em claro)\n- ***être dans le rouge*** (estar no vermelho)' },
     { type: 'quiz', items: [
       { type: 'multiple_choice', prompt: '"uma bolsa branca"', options: ['un sac blanc', 'un blanc sac', 'une sac blanche', 'un sac blanche'], answer: 0, explanationPt: '"sac" é masculino em francês.' },
       { type: 'multiple_choice', prompt: '"tênis laranja" (plural)', options: ['des baskets orange', 'des baskets oranges', 'des orange baskets', 'des baskets orangées'], answer: 0 },

@@ -98,7 +98,7 @@ LUX.registerLesson({
       { fr: 'Nous nous couchons tard.', pt: 'Nós vamos dormir tarde.' },
       { fr: 'Le week-end, on se repose.', pt: 'No fim de semana a gente descansa.' }
     ],
-    ptComparison: 'Muitos verbos são pronominais em francês mas **não** em português: *se réveiller* (acordar), *se reposer* (descansar), *se promener* (passear), *se coucher* (ir dormir). Não esqueça o pronome: *je me réveille*, nunca *je réveille* (isso significaria "eu acordo [alguém]").\n\n' +
+    ptComparison: 'Muitos verbos são pronominais em francês mas **não** em português:\n- ***se réveiller*** (acordar)\n- ***se reposer*** (descansar)\n- ***se promener*** (passear)\n- ***se coucher*** (ir dormir)\n\nNão esqueça o pronome: *je me réveille*, nunca *je réveille* (isso significaria "eu acordo [alguém]").\n\n' +
       'Com **nous** e **vous**, o pronome se repete: *nous nous levons, vous vous levez*. Parece estranho, mas está certo!'
   },
   grammarPractice: [

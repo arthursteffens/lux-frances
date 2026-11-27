@@ -15,7 +15,7 @@
         var p = LUX.profiles.current();
         var hour = new Date().getHours();
         var hello = hour < 12 ? 'Bonjour' : hour < 18 ? 'Bon après-midi' : 'Bonsoir';
-        main.appendChild(UI.pageHead(hello + ', ' + p.name + ' !', 'Seu curso de francês do **A2 ao B2**.'));
+        main.appendChild(UI.pageHead(hello + ', ' + p.name + ' !', 'Seu curso de francês do **A1 ao B2**.'));
 
         // lembrete de backup
         var rem = LUX.profiles.backupReminder(p);
@@ -24,7 +24,7 @@
         // continuar
         var curId = L.current(p);
         var cur = curId ? LUX.data.lessons[curId] : null;
-        var ord = L.order();
+        var ord = L.path(p);
         var allDone = ord.length && ord.every(function (id) { return p.progress[id] && p.progress[id].status === 'done'; });
         var pendingTest = allDone && LUX.manifest.levels.filter(function (lv) { return LUX.levelTests.isUnlocked(p, lv.id) && !(p.levelTests[lv.id] && p.levelTests[lv.id].passed); })[0];
         if (pendingTest) {
@@ -76,6 +76,8 @@
           var sec = h('section', { class: 'card level' });
           sec.appendChild(h('div', { class: 'row between wrap' }, [h('h2', null, lv.title), h('span', { class: 'muted sm' }, doneN + ' de ' + total + ' lições')]));
           sec.appendChild(UI.progress(total ? doneN / total * 100 : 0, 'Progresso no nível ' + lv.id));
+          var skipped = ids.length && L.order().indexOf(ids[0]) < L.startIndex(p);
+          if (skipped) sec.appendChild(h('p', { class: 'muted sm' }, 'Você começou no ' + p.settings.startLevel + ', então este nível é opcional: todas as lições estão abertas para revisar. (Dá para mudar o ponto de partida em Perfil e configurações.)'));
           var units = h('div', { class: 'units' });
           lv.units.forEach(function (u) {
             var avail = u.lessons.filter(function (id) { return LUX.data.lessons[id]; });

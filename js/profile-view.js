@@ -63,18 +63,36 @@
       } }));
     });
     var el = h('div', { class: 'stack' }, [h('div', { class: 'row gap' }, [preview, field('Nome', name)]), h('div', null, [h('span', { class: 'field-l' }, 'Avatar'), av]), h('div', null, [h('span', { class: 'field-l' }, 'Cor'), co])]);
+    if (init.withStart) { sel.start = 'A1'; el.appendChild(startPicker(sel)); }
     return { el: el, name: name, sel: sel };
+  }
+  /* "Por onde começar?" — A1 (do zero) ou A2 (já sabe o básico) */
+  var START_OPTS = [
+    ['A1', '🌱 Nunca estudei francês', 'Começar do zero, no A1: sons, cumprimentos, números, tudo com calma.'],
+    ['A2', '📗 Já sei o básico', 'Começar no A2. O A1 fica aberto para revisar quando quiser.']
+  ];
+  function startPicker(sel, onChange) {
+    var box = h('div', { class: 'start-pick', role: 'radiogroup', 'aria-label': 'Por onde começar' });
+    START_OPTS.forEach(function (o) {
+      box.appendChild(h('button', { type: 'button', class: 'start-opt' + (sel.start === o[0] ? ' on' : ''), role: 'radio', 'aria-checked': String(sel.start === o[0]), onclick: function (e) {
+        sel.start = o[0];
+        [].forEach.call(box.children, function (x) { x.classList.remove('on'); x.setAttribute('aria-checked', 'false'); });
+        e.currentTarget.classList.add('on'); e.currentTarget.setAttribute('aria-checked', 'true');
+        if (onChange) onChange(o[0]);
+      } }, [h('b', null, o[1]), h('span', { class: 'muted sm' }, o[2])]));
+    });
+    return h('div', null, [h('span', { class: 'field-l' }, 'Por onde começar?'), box]);
   }
   LUX.app.profileForm = profileForm;
 
   LUX.app.newProfileDialog = function () {
-    var f = profileForm({ color: P.COLORS[P.list().length % P.COLORS.length], avatar: P.AVATARS[P.list().length % P.AVATARS.length] });
+    var f = profileForm({ color: P.COLORS[P.list().length % P.COLORS.length], avatar: P.AVATARS[P.list().length % P.AVATARS.length], withStart: true });
     UI.modal({
       title: 'Novo perfil', body: f.el, actions: [
         { label: 'Cancelar', ghost: true },
         { label: 'Criar e trocar', primary: true, onClick: function () {
           if (!f.name.value.trim()) { f.name.focus(); UI.toast('Digite um nome.'); return false; }
-          var p = P.create(f.name.value, f.sel.avatar, f.sel.color);
+          var p = P.create(f.name.value, f.sel.avatar, f.sel.color, f.sel.start);
           LUX.app.switchProfile(p.id);
         } }
       ]
@@ -139,15 +157,22 @@
     if (!LUX.tts.voices.length) c.appendChild(LUX.app.noVoiceHelp());
     // velocidade
     var rate = h('select', { class: 'select', 'aria-label': 'Velocidade padrão' });
-    [[0.6, '0,6× (bem devagar)'], [0.8, '0,8× (A2)'], [0.9, '0,9× (B1)'], [1, '1× (B2, natural)'], [1.15, '1,15× (rápido)']].forEach(function (r) {
+    [[0.6, '0,6× (bem devagar)'], [0.7, '0,7× (A1)'], [0.8, '0,8× (A2)'], [0.9, '0,9× (B1)'], [1, '1× (B2, natural)'], [1.15, '1,15× (rápido)']].forEach(function (r) {
       var o = h('option', { value: r[0] }, r[1]); if (Math.abs(s.rate - r[0]) < 0.01) o.selected = true; rate.appendChild(o);
     });
     rate.addEventListener('change', function () { s.rate = +rate.value; S.save(); });
     c.appendChild(field('Velocidade padrão da voz', rate));
     // nível
-    var lv = h('select', { class: 'select', 'aria-label': 'Seu nível' }, ['A2', 'B1', 'B2'].map(function (x) { var o = h('option', { value: x }, x); if (s.level === x) o.selected = true; return o; }));
+    var lv = h('select', { class: 'select', 'aria-label': 'Seu nível' }, ['A1', 'A2', 'B1', 'B2'].map(function (x) { var o = h('option', { value: x }, x); if (s.level === x) o.selected = true; return o; }));
     lv.addEventListener('change', function () { s.level = lv.value; S.save(); });
     c.appendChild(field('Seu nível atual', lv, 'Define quais tempos verbais aparecem abertos na aba Verbos e a faixa do aquecimento.'));
+    // ponto de partida (A1 ou A2)
+    var stSel = { start: s.startLevel || 'A2' };
+    c.appendChild(startPicker(stSel, function (v) {
+      P.setStartLevel(p, v); S.save();
+      UI.toast(v === 'A1' ? 'Pronto: seu curso começa no A1.' : 'Pronto: seu curso começa no A2. O A1 fica aberto para revisar.', 'ok');
+      LUX.router.render();
+    }));
     // tema
     var th = h('select', { class: 'select', 'aria-label': 'Tema' }, [['auto', 'Automático (do sistema)'], ['light', 'Claro'], ['dark', 'Escuro']].map(function (x) { var o = h('option', { value: x[0] }, x[1]); if (s.theme === x[0]) o.selected = true; return o; }));
     th.addEventListener('change', function () { s.theme = th.value; S.save(); LUX.app.applyTheme(); });

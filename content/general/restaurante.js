@@ -2,7 +2,7 @@ LUX.registerGeneral({
   id: 'restaurante', group: 'situacoes', title: 'No café e no restaurante', titleFr: 'Au café et au restaurant', level: 'A2',
   keywords: ['restaurante', 'café', 'cardápio', 'conta', 'garçom', 'pedir', 'gorjeta', 'reserva', 'restaurant', 'carte', 'addition', 'serveur', 'menu', 'pourboire'],
   blocks: [
-    { type: 'intro', textPt: 'Numa refeição francesa há três tempos: *l\'entrée* (entrada), *le plat* (prato principal) e *le dessert* (sobremesa) — ou o queijo. *La carte* é o cardápio; *le menu* (ou *la formule*) é uma combinação a preço fixo. O serviço já vem incluído (*service compris*).' },
+    { type: 'intro', textPt: 'Numa refeição francesa há três tempos:\n- ***l\'entrée*** (entrada)\n- ***le plat*** (prato principal)\n- ***le dessert*** (sobremesa) ou o queijo\n\n*La carte* é o cardápio; *le menu* (ou *la formule*) é uma combinação a preço fixo. O serviço já vem incluído (*service compris*).' },
     { type: 'table', sections: [
       { title: 'No café', items: [
         { fr: 'un café / un express', pt: 'um café expresso' }, { fr: 'un crème / un café crème', pt: 'um café com leite' }, { fr: 'un déca', pt: 'um descafeinado' },

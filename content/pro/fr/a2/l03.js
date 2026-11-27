@@ -107,5 +107,5 @@ LUX.registerProLesson({
     { type: 'order_sentence', prompt: 'Monte a frase.', answer: 'Au début, tout le monde se connaissait.', translation: 'No começo, todo mundo se conhecia.' }
   ],
   tipForBrazilians: '**Mudança organizacional é emoção.** Quando as pessoas dizem *"avant, c\'était mieux"*, elas falam de pertencimento, não só de processos. Uma boa resposta de RH reconhece o passado antes de propor o futuro: *"Je comprends, avant c\'était plus simple. Qu\'est-ce qui était important pour toi ?"*\n\n' +
-    '**Vocabulário de reorganização:** *la taille des équipes* (tamanho), *le nombre de personnes par manager* (span of control), *les rôles* (papéis). Em francês de empresa, o inglês *span of control* também é usado.'
+    '**Vocabulário de reorganização:**\n- ***la taille des équipes*** (tamanho)\n- ***le nombre de personnes par manager*** (span of control)\n- ***les rôles*** (papéis)\n\nEm francês de empresa, o inglês *span of control* também é usado.'
 });

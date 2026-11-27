@@ -112,5 +112,5 @@ LUX.registerLesson({
     { type: 'multiple_choice', prompt: '"Você não quer sobremesa? — Quero sim!"', options: ['Tu ne veux pas de dessert ? — Si !', 'Tu ne veux pas de dessert ? — Oui !', 'Tu ne veux pas du dessert ? — Si !', 'Tu veux pas le dessert ? — Oui !'], answer: 0 },
     { type: 'order_sentence', prompt: 'Monte a frase.', answer: "Je n'ai que deux euros.", translation: 'Só tenho dois euros.' }
   ],
-  tipForBrazilians: '**Padaria francesa — o que pedir:** *une baguette* (a comum), *une tradition* (baguete artesanal, mais cara e melhor), *un pain de campagne* (pão rústico), *un croissant* (só manteiga), *un pain au chocolat* (no sudoeste da França dizem *une chocolatine*!), *un pain aux raisins*, *une brioche*. Peça a baguete *bien cuite* (mais assada) ou *pas trop cuite* (mais clara).'
+  tipForBrazilians: '**Padaria francesa — o que pedir:**\n- ***une baguette*** (a comum)\n- ***une tradition*** (baguete artesanal, mais cara e melhor)\n- ***un pain de campagne*** (pão rústico)\n- ***un croissant*** (só manteiga)\n- ***un pain au chocolat*** (no sudoeste da França dizem *une chocolatine*!)\n- ***un pain aux raisins*** (caracol de passas)\n- ***une brioche*** (brioche)\n\nPeça a baguete *bien cuite* (mais assada) ou *pas trop cuite* (mais clara).'
 });

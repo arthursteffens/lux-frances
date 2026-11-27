@@ -7,8 +7,8 @@
     keywords: ['artigo', 'le la les', 'un une des', 'definido', 'indefinido', "l'"],
     summaryPt: 'le/la/les = o/a/os/as; un/une/des = um/uma/uns/umas. Antes de vogal, le/la viram l\'.',
     explanationPt: 'O francês quase **sempre usa artigo** antes do substantivo, mesmo quando o português não usa.\n\n' +
-      '- **Definidos:** *le* (masc.), *la* (fem.), *l\'* (antes de vogal ou h mudo), *les* (plural).\n' +
-      '- **Indefinidos:** *un* (masc.), *une* (fem.), *des* (plural — "uns, umas", muitas vezes não se traduz).\n\n' +
+      '**Definidos:**\n- ***le*** (masc.)\n- ***la*** (fem.)\n- ***l\'*** (antes de vogal ou h mudo)\n- ***les*** (plural)\n' +
+      '**Indefinidos:**\n- ***un*** (masc.)\n- ***une*** (fem.)\n- ***des*** (plural — "uns, umas", muitas vezes não se traduz)\n\n' +
       'Para falar de **gostos e generalidades**, use o definido: *J\'aime le café* (gosto de café).',
     tables: [{ caption: 'Formas', head: ['', 'masculino', 'feminino', 'plural'], rows: [
       ['definido', 'le / l\'', 'la / l\'', 'les'], ['indefinido', 'un', 'une', 'des']
@@ -110,7 +110,7 @@
     explanationPt: 'O francês tem um só demonstrativo para "este, esse, aquele":\n\n' +
       '- *ce livre*, *cet homme* (masc. antes de vogal/h mudo), *cette ville*, *ces gens*.\n\n' +
       'Para distinguir perto/longe, acrescente **-ci** (aqui) ou **-là** (lá): *ce livre-ci, ce livre-là*.\n\n' +
-      'Com tempo: *ce matin* (hoje de manhã), *ce soir* (hoje à noite), *cette semaine* (esta semana).',
+      'Com tempo:\n- ***ce matin*** (hoje de manhã)\n- ***ce soir*** (hoje à noite)\n- ***cette semaine*** (esta semana)',
     tables: [{ caption: 'Formas', head: ['masc.', 'masc. + vogal', 'fem.', 'plural'], rows: [['ce', 'cet', 'cette', 'ces']] }],
     examples: [
       { fr: 'Ce week-end, je reste à Lyon.', pt: 'Neste fim de semana, fico em Lyon.' },

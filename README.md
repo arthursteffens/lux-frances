@@ -1,11 +1,11 @@
-# Lux — curso de francês A2 → B2 para brasileiros
+# Lux — curso de francês A1 → B2 para brasileiros
 
 Aplicação web estática (HTML + CSS + JavaScript puro).
 
 - **Online (recomendado):** <https://arthursteffens.github.io/lux-frances/>. Funciona offline depois da primeira visita, pode ser instalado no PC e no celular ("Instalar app" / "Adicionar à Tela de Início") e se atualiza sozinho.
 - **Arquivo local:** abra o `index.html` com duplo clique. Não precisa de servidor nem internet, mas não se atualiza sozinho.
 
-> **Status: Fase 2 concluída.** O nível **A2 está completo**: 6 unidades (30 lições) e o teste de nível com certificado. B1 e B2 aparecem como "em breve".
+> **Status:** os níveis **A1 e A2 estão completos**: 6 unidades (30 lições) cada um e o teste de nível com certificado. B1 e B2 aparecem como "em breve".
 
 ## Como usar
 
@@ -17,15 +17,15 @@ Aplicação web estática (HTML + CSS + JavaScript puro).
 
 | Aba | O que tem |
 |---|---|
-| 📘 **Curso** | Painel (sequência de dias, tempo estudado, revisões, recorde) e mapa A2/B1/B2. Cada lição tem 8 etapas: objetivos, vocabulário, leitura, audição, gramática, prática, dica e resumo. A próxima lição abre com 70% ou mais. Ao concluir todas as lições de um nível, libera-se o **teste de nível** (leitura, audição e gramática, sem glossário; aprovação com 70% no total e 50% em cada parte), que gera um **certificado** para imprimir ou salvar em PDF. |
+| 📘 **Curso** | Painel (sequência de dias, tempo estudado, revisões, recorde) e mapa A1/A2/B1/B2. Cada perfil escolhe o **ponto de partida** ao ser criado: A1 (nunca estudou francês) ou A2 (já sabe o básico; o A1 fica aberto para revisar). Perfis criados antes do A1 começam no A2. Cada lição tem 8 etapas: objetivos, vocabulário, leitura, audição, gramática, prática, dica e resumo. A próxima lição abre com 70% ou mais. Ao concluir todas as lições de um nível, libera-se o **teste de nível** (leitura, audição e gramática, sem glossário; aprovação com 70% no total e 50% em cada parte), que gera um **certificado** para imprimir ou salvar em PDF. |
 | 🔁 **Revisar** | Revisão espaçada (SM-2 simplificado). Usa os cartões de vocabulário das lições, do caderno, dos verbos e de Gerais. |
 | 🎧 **Treino de ouvido** | Números (por faixa, com as variantes belga e suíça), horas, datas, preços, telefones e modo misto. Rodadas de 10 itens, recordes por perfil e aquecimento de 2 minutos. |
 | 📖 **Dicionário** | Dicionário completo francês ↔ português: cerca de 70 mil palavras e 35 mil verbos, do Wiktionary. Busca nos dois sentidos e por palavra flexionada ("chevaux" → cheval, "mangeons" → manger). As palavras do curso aparecem primeiro, com a tradução e as notas revisadas (📘 curso). É baixado na primeira vez que a aba é aberta (≈1,3 MB) e depois funciona offline. |
 | 🔤 **Verbos** | 328 verbos. Busca em português ou francês desde a 1ª letra, sem diferenciar acentos, inclusive por forma conjugada ("cours" → courir). A ficha mostra definição pt/fr, 3 exemplos, sinônimos e os 18 grupos de tempos, com ▶ por linha e "tocar todos". Embaixo de cada forma (menos no presente) aparece a tradução em português (*j'ai couru* → eu corri). Com o dicionário completo baixado, aparecem também os ~35 mil verbos dele (tradução e conjugação, sem ficha). |
-| 📐 **Gramática** | 32 tópicos. Gramática de bolso com busca, dúvidas frequentes, comparação com o português, erros típicos e teste rápido. |
+| 📐 **Gramática** | 35 tópicos. Gramática de bolso com busca, dúvidas frequentes, comparação com o português, erros típicos e teste rápido. |
 | 🗂 **Gerais** | 29 páginas do dia a dia em 5 grupos: números e quantidades (cardinais, ordinais, frações, dinheiro, medidas), tempo e calendário, comunicação básica (saudações, cortesia, perguntas, tu/vous, alfabeto), pessoas e mundo (família, países, profissões, cores, clima) e situações práticas (saúde, emergências, direções, restaurante, transporte, telefone e e-mail). Inclui conversor, relógio interativo e soletrador. |
 | 📓 **Caderno** | Clique em **qualquer palavra** de um texto e salve. Também dá para selecionar várias palavras e salvar uma expressão. Tem filtros, anotações e exportação em CSV (para o Anki). |
-| 👤 **Perfil** | Perfis, voz, velocidade, nível, tema, backup e testes de armazenamento. |
+| 👤 **Perfil** | Perfis, ponto de partida (A1 ou A2), voz, velocidade, nível, tema, backup e testes de armazenamento. |
 | 💼 **Profissional** | Sub-abas por **carreira** (por enquanto **HRBP**). Na HRBP: **cursos** de legislação e prática em português com os termos em francês (1º: *Direito do trabalho em Luxemburgo: o essencial*, 5 módulos com exercícios e progresso) e língua para o trabalho. Francês para o trabalho: RH em empresas de tecnologia (e um pouco de fintech), em Luxemburgo e outros países francófonos. Lições no mesmo formato do curso, que liberam conforme as unidades do curso (A2: 6 lições), e 7 guias de consulta (trabalhar em Luxemburgo, outros países, glossário de RH, tech e fintech, reuniões, e-mails, entrevista). Também tem trilhas em **inglês** (6 lições B2–C1) e **italiano** (6 lições B1) para a mesma vaga, todas liberadas. |
 
 A busca global abre com **Ctrl+K** ou **/**.
@@ -110,10 +110,11 @@ js/
   drills/numbers.js   números/horas/datas/preços por extenso · drills/ear-training.js
 content/
   manifest.js         níveis, unidades, lições e lista de arquivos
-  a2/u01/l01.js ...   lições (a2/u01 a a2/u06)
+  a1/u01/l01.js ...   lições do A1 (a1/u01 a a1/u06) · a1/test.js teste de nível A1
+  a2/u01/l01.js ...   lições do A2 (a2/u01 a a2/u06)
   a2/test.js          teste de nível A2
   verbs/              irregular.js (tabelas) + verbs-*.js (dicionário, 309 verbos)
-  grammar/            tópicos por categoria (32 tópicos)
+  grammar/            tópicos por categoria (35 tópicos)
   general/            manifest.js (barra lateral de Gerais) + uma página por arquivo
   lexicon/            léxico geral, léxico por unidade do A2 (lexicon-a2-uNN.js, lexicon-a2-geral.js) + nomes próprios
 audio/                MP3 dos diálogos (gerado por tools/gen-audio.js)
@@ -151,6 +152,18 @@ LUX.registerLesson({
   tipForBrazilians: '...'
 });
 ```
+
+Campos opcionais, usados no A1 (para quem nunca estudou francês):
+
+- `introTitle`, `introPt`: quadro "Antes de começar" na etapa de objetivos.
+- `vocabulary[].say`: pronúncia aproximada com letras do português (`'bõ-JURR'`; MAIÚSCULAS = sílaba forte, `rr` = R francês, `ü`/`ö` = vogais com biquinho, `ã õ ẽ` = nasais).
+- `pronunciation: { title, textPt, examples: [{ fr, pt }] }`: o som da lição, com áudio, na etapa de vocabulário.
+- `reading.translationPt`: tradução do texto, escondida atrás de um botão.
+- `listening.script[].pt`: tradução de cada fala, mostrada na transcrição por um botão.
+
+No A1, o validador exige `translationPt` e a tradução de todas as falas, e confere a cobertura do léxico também nos exemplos do vocabulário, da gramática e da pronúncia.
+
+**Listas:** quando um texto explica vários itens em sequência ("**é** = ê fechado; **è** = é aberto…"), escreva um item por linha, como lista markdown (`- **é** = …`). O primeiro negrito de cada item ganha cor.
 
 ### Exercícios
 
@@ -256,6 +269,7 @@ Para criar uma página: crie o arquivo, liste-o em `content/manifest.js` e confi
 ## Próximas fases
 
 - ~~Fase 2~~ (concluída): unidades 2 a 6 do A2, teste de nível A2, 309 verbos, as 29 páginas de Gerais e o léxico do A2.
+- ~~A1~~ (concluído): 6 unidades (30 lições) para quem nunca estudou francês, com pronúncia aproximada, tradução dos textos e das falas, 3 tópicos novos de gramática e o teste de nível A1. A história do Lucas no A1 termina onde o A2 começa.
 - **Fase 3:** B1 completo (cerca de 400 verbos).
 - **Fase 4:** B2 completo (500 verbos ou mais).
 - **Futuro:** exercícios de fala (o tipo `speaking` já está reservado) e, se desejado, MP3 pré-gravados.

@@ -19,7 +19,7 @@ LUX.registerGeneral({
       ] }
     ] },
     { type: 'rules', items: [
-      { title: 'Votos', textPt: '*Joyeux Noël !* (Feliz Natal!), *Bonne année !* (Feliz Ano-Novo! — diz-se durante todo o mês de janeiro), *Joyeuses Pâques !* (Feliz Páscoa!), *Bonnes fêtes !* (Boas festas!).',
+      { title: 'Votos', textPt: '\n- ***Joyeux Noël !*** (Feliz Natal!)\n- ***Bonne année !*** (Feliz Ano-Novo! — diz-se durante todo o mês de janeiro)\n- ***Joyeuses Pâques !*** (Feliz Páscoa!)\n- ***Bonnes fêtes !*** (Boas festas!)',
         examples: [{ fr: 'Bonne année et bonne santé !', pt: 'Feliz ano-novo e muita saúde!' }, { fr: 'Joyeux Noël à toute la famille !', pt: 'Feliz Natal para toda a família!' }] },
       { title: 'Le 14 juillet', textPt: 'Os franceses quase não dizem "la Bastille" ou "fête nationale" no dia a dia: dizem simplesmente *le 14 juillet* (o "quatorze juillet").',
         examples: [{ fr: 'Tu fais quoi pour le 14 juillet ?', pt: 'O que você vai fazer no 14 de julho?' }] }

@@ -677,6 +677,10 @@ a.stat:hover { border-color: var(--primary); color: var(--text); }
 .profile-row { display: flex; align-items: center; gap: 14px; padding: 12px; border: 1px solid var(--border); border-radius: 12px; flex-wrap: wrap; }
 .profile-row.current { border-color: var(--primary); background: var(--primary-soft); }
 .avatar-pick, .color-pick { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.start-pick { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin-top: 6px; }
+.start-opt { display: flex; flex-direction: column; gap: 2px; text-align: left; padding: 10px 12px; border: 2px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--text); cursor: pointer; font: inherit; }
+.start-opt:hover { border-color: var(--primary); }
+.start-opt.on { border-color: var(--primary); background: var(--primary-soft); }
 .av-opt { width: 42px; height: 42px; border-radius: 10px; border: 2px solid var(--border); background: var(--surface); font-size: 22px; cursor: pointer; }
 .av-opt.on { border-color: var(--primary); background: var(--primary-soft); }
 .co-opt { width: 34px; height: 34px; border-radius: 50%; border: 3px solid transparent; cursor: pointer; }
@@ -760,3 +764,11 @@ em.fr-in .w:hover, em.fr-in .w:focus { background: var(--primary-soft); }
 .case-card .case-answer { margin-top: .5rem; border-top: 1px solid var(--border, #ddd); padding-top: .5rem; }
 .case-card .case-answer summary { cursor: pointer; font-weight: 600; color: var(--primary); }
 .case-card .case-answer[open] summary { margin-bottom: .4rem; }
+
+/* A1: pronúncia aproximada, som da lição, traduções */
+.vocab-say { font-size: .85rem; color: var(--primary-2); margin-top: 2px; }
+.pron-card h2, .intro-card h2 { margin-top: 0; }
+.translation { margin-top: 10px; }
+.translation-box { margin-top: 8px; padding: 10px 12px; background: var(--surface-2); border-radius: 10px; border-left: 3px solid var(--primary); }
+.line-pt { margin-top: 2px; font-style: italic; }
+.transcript .tr-btn { margin-bottom: 8px; }

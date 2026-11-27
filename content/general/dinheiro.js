@@ -21,7 +21,7 @@ LUX.registerGeneral({
         examples: [{ fr: 'deux euros', pt: '2 €' }, { fr: 'dix euros vingt', pt: '10,20 €' }] },
       { title: 'Bon marché', textPt: '"Barato" é *bon marché* (invariável) ou *pas cher*. *Moins cher* = mais barato.',
         examples: [{ fr: "C'est moins cher au marché.", pt: 'É mais barato na feira.' }, { fr: 'des chaussures pas chères', pt: 'sapatos baratos' }] },
-      { title: 'Pagar', textPt: '*payer par carte* (com cartão), *payer en espèces* (em dinheiro), *payer sans contact* (por aproximação). "Pagar algo" é direto: *payer le café* (sem "por").',
+      { title: 'Pagar', textPt: '\n- ***payer par carte*** (com cartão)\n- ***payer en espèces*** (em dinheiro)\n- ***payer sans contact*** (por aproximação)\n\n"Pagar algo" é direto: *payer le café* (sem "por").',
         examples: [{ fr: 'Je peux payer par carte ?', pt: 'Posso pagar com cartão?' }, { fr: "C'est moi qui paie le café.", pt: 'O café é por minha conta.' }] }
     ] },
     { type: 'phrases', items: [

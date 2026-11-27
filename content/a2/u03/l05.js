@@ -117,5 +117,5 @@ LUX.registerLesson({
     { type: 'multiple_choice', prompt: '"No dia em que cheguei, chovia."', options: ['Le jour où je suis arrivé, il pleuvait.', 'Le jour que je suis arrivé, il pleuvait.', 'Le jour où j\'arrivais, il a plu.', 'Le jour quand je suis arrivé, il pleuvait.'], answer: 0 },
     { type: 'order_sentence', prompt: 'Monte a frase.', answer: 'Ils se sont mariés il y a soixante ans.', translation: 'Eles se casaram há sessenta anos.' }
   ],
-  tipForBrazilians: '**Fechamentos de carta pessoal:** *Je t\'embrasse* (um beijo — família e amigos), *Grosses bises / Gros bisous* (beijos — amigos próximos), *Bises* (beijos — informal), *Amitiés* (abraços — amigos menos próximos), *Bien à toi* (um abraço). Para alguém que você trata por *vous*: *Bien cordialement* ou *Cordialement* (atenciosamente).'
+  tipForBrazilians: '**Fechamentos de carta pessoal:**\n- ***Je t\'embrasse*** (um beijo — família e amigos)\n- ***Grosses bises / Gros bisous*** (beijos — amigos próximos)\n- ***Bises*** (beijos — informal)\n- ***Amitiés*** (abraços — amigos menos próximos)\n- ***Bien à toi*** (um abraço)\n\nPara alguém que você trata por *vous*: *Bien cordialement* ou *Cordialement* (atenciosamente).'
 });

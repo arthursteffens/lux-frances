@@ -87,7 +87,7 @@ LUX.registerProLesson({
     title: 'Apresentar-se no trabalho com o presente',
     explanationPt: 'Para falar de **quem você é** e **o que você faz** no trabalho, o presente resolve quase tudo:\n\n' +
       '- ***être*** + cargo (sem artigo!): *Je suis HR Business Partner.* / *Elle est développeuse.*\n' +
-      '- ***travailler dans / chez / avec***: *dans les RH* (área), *chez Nuvio* (empresa), *avec les managers* (pessoas).\n' +
+      '***travailler dans / chez / avec***:\n- ***dans les RH*** (área)\n- ***chez Nuvio*** (empresa)\n- ***avec les managers*** (pessoas)\n' +
       '- ***s\'occuper de*** = cuidar de, ser responsável por: *je m\'occupe **du** recrutement* (de + le = du).\n' +
       '- **depuis** + duração, com o verbo no **presente**: *Je travaille dans les RH depuis huit ans* = trabalho com RH **há** oito anos.',
     table: { head: ['', 'être', 'travailler', "s'occuper"], rows: [

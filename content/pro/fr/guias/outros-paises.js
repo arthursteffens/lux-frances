@@ -9,7 +9,7 @@ LUX.registerProGuide({
         examples: [{ fr: 'Nous sommes septante dans l\'équipe.', pt: 'Somos setenta na equipe. (Bélgica)' }] },
       { title: '🇨🇭 Suíça', textPt: 'O francês é falado na **Suíça romanda** (Genebra, Lausanne, Neuchâtel). Também se diz *septante* e *nonante* (e *huitante* para 80, no cantão de Vaud). Salários altos e custo de vida alto. Estrangeiros fora da UE têm regras de autorização bem restritas.',
         examples: [{ fr: "J'habite à Lausanne et je travaille à Genève.", pt: 'Moro em Lausanne e trabalho em Genebra.' }] },
-      { title: '🇨🇦 Québec', textPt: 'O **francês é a língua oficial do trabalho** por lei. O *tu* é muito comum, inclusive com chefes. Palavras próprias: *courriel* (e-mail), *fin de semaine* (fim de semana), *magasiner* (fazer compras).',
+      { title: '🇨🇦 Québec', textPt: 'O **francês é a língua oficial do trabalho** por lei. O *tu* é muito comum, inclusive com chefes. Palavras próprias:\n- ***courriel*** (e-mail)\n- ***fin de semaine*** (fim de semana)\n- ***magasiner*** (fazer compras)',
         examples: [{ fr: 'Je t\'envoie un courriel cet après-midi.', pt: 'Te mando um e-mail hoje à tarde. (Québec)' }] }
     ] },
     { type: 'table', sections: [

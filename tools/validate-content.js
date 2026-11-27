@@ -89,7 +89,7 @@ function checkLessonBody(id, l, isPro) {
     glossOk(id + ' leitura', l.reading.text);
     cover2(id + ' leitura', l.reading.text, names);
     const words = U.tokenize(U.stripGloss(l.reading.text)).filter(t => t.w).length;
-    const lim = fr ? { A2: [120, 240], B1: [250, 420], B2: [400, 720] }[l.level] : null; // limites pensados para o francês
+    const lim = fr ? { A1: [40, 160], A2: [120, 240], B1: [250, 420], B2: [400, 720] }[l.level] : null; // limites pensados para o francês
     if (lim && (words < lim[0] || words > lim[1])) warn(id, `leitura com ${words} palavras (esperado ${lim[0]}–${lim[1]})`);
     l._readingWords = words;
     (l.reading.exercises || []).forEach((ex, i) => checkExercise(`${id} leitura #${i + 1}`, ex));
@@ -102,7 +102,14 @@ function checkLessonBody(id, l, isPro) {
   }
   (l.grammarPractice || []).forEach((ex, i) => checkExercise(`${id} prática #${i + 1}`, ex));
   if (fr && l.grammar && !LUX.data.grammar[l.grammar.topicId]) err(id, `topicId inexistente: ${l.grammar.topicId}`);
-  if (fr && isPro) { // lições profissionais: exemplos do vocabulário e da gramática também precisam de cobertura
+  if (l.level === 'A1' && !isPro) { // A1: tudo tem tradução e todo exemplo precisa abrir o balão de tradução
+    if (!l.reading.translationPt) err(id, 'A1: leitura sem translationPt');
+    (l.listening.script || []).forEach((s, i) => { if (!s.pt) err(id, `A1: fala ${i + 1} sem tradução (pt)`); });
+    (l.vocabulary || []).forEach(v => { if (!v.say) warn(id, `A1: vocabulário sem pronúncia (say): ${v.fr}`); });
+    if (!l.pronunciation) warn(id, 'A1: lição sem bloco de pronúncia');
+    ((l.pronunciation && l.pronunciation.examples) || []).forEach(e => cover2(id + ' pronúncia', e.fr, names));
+  }
+  if (fr && (isPro || l.level === 'A1')) { // exemplos do vocabulário e da gramática também precisam de cobertura
     (l.vocabulary || []).forEach(v => { cover2(id + ' vocabulário', v.ex, names); });
     ((l.grammar && l.grammar.examples) || []).forEach(e => cover2(id + ' gramática', e.fr, names));
   }

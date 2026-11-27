@@ -2,7 +2,7 @@ LUX.registerGeneral({
   id: 'perguntas', group: 'comunicacao', title: 'Perguntas essenciais', titleFr: 'Les questions essentielles', level: 'A1',
   keywords: ['pergunta', 'perguntar', 'onde', 'quando', 'como', 'quanto', 'por que', 'quem', 'qual', 'o que', 'où', 'quand', 'comment', 'combien', 'pourquoi', 'qui', 'quel', 'quoi', "qu'est-ce que"],
   blocks: [
-    { type: 'intro', textPt: 'Há três jeitos de fazer uma pergunta: **entonação** (informal: *Tu viens ?*), **est-ce que** (neutro: *Est-ce que tu viens ?*) e **inversão** (formal: *Viens-tu ?*). Os pronomes interrogativos são os mesmos nos três.' },
+    { type: 'intro', textPt: 'Há três jeitos de fazer uma pergunta:\n- **entonação** (informal: *Tu viens ?*)\n- ***est-ce que*** (neutro: *Est-ce que tu viens ?*)\n- **inversão** (formal: *Viens-tu ?*)\n\nOs pronomes interrogativos são os mesmos nos três.' },
     { type: 'table', sections: [
       { title: 'Palavras interrogativas', items: [
         { fr: 'où ?', pt: 'onde?' }, { fr: "d'où ?", pt: 'de onde?' }, { fr: 'quand ?', pt: 'quando?' }, { fr: 'comment ?', pt: 'como?' },

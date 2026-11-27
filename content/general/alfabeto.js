@@ -51,7 +51,7 @@ LUX.registerGeneral({
     { type: 'rules', items: [
       { title: 'Os sons nasais (o "ão" francês)', textPt: 'Vogal + **n** ou **m** no fim da sílaba vira som nasal, e **o n/m não se pronuncia**:\n\n- **an, am, en, em** = "ã" aberto, perto de "ã" em "lã": *enfant*, *temps*, *chambre*.\n- **in, im, ain, ein, un** = "ẽ" aberto, quase "én" sem fechar o n: *vin*, *pain*, *plein*, *lundi*.\n- **on, om** = "õ": *bon*, *nom*, *maison*.\n- **ien** = "iẽ": *bien*, *chien*.\n\n**Não fica nasal** quando vem vogal depois ou o n/m é dobrado: *bon* (nasal) × *bonne* ("bón"); *an* (nasal) × *année* ("anê").',
         examples: [{ fr: 'enfant', pt: 'an/en = ã' }, { fr: 'vin', pt: 'in = ẽ' }, { fr: 'bon', pt: 'on = õ' }, { fr: 'bonne', pt: 'sem nasal' }, { fr: 'bien', pt: 'ien = iẽ' }] },
-      { title: 'Vent, vin, vont: três palavras diferentes', textPt: 'Os três sons nasais mudam o sentido: *vent* (vento), *vin* (vinho), *vont* (vão). Ouça várias vezes e repita.',
+      { title: 'Vent, vin, vont: três palavras diferentes', textPt: 'Os três sons nasais mudam o sentido:\n- ***vent*** (vento)\n- ***vin*** (vinho)\n- ***vont*** (vão)\n\nOuça várias vezes e repita.',
         examples: [{ fr: 'vent', pt: 'vento' }, { fr: 'vin', pt: 'vinho' }, { fr: 'vont', pt: 'eles vão' }] }
     ] },
 
@@ -100,7 +100,7 @@ LUX.registerGeneral({
     { type: 'rules', items: [
       { title: 'Soletrar sem errar: E, I, U, G, J', textPt: 'Ao soletrar, os brasileiros costumam trocar:\n- **E** ("ê" arredondado) por "é"\n- **I** ("i") por "e"\n- **U** ("ü") por "u"\n- **G** ("jê") com **J** ("ji")\n\n*Lucas* se soletra *L, U, C, A, S* (él, ü, cê, a, és); *Gilles* se soletra *G, I, deux L, E, S*.',
         examples: [{ fr: 'E', pt: 'letra E' }, { fr: 'I', pt: 'letra I' }, { fr: 'U', pt: 'letra U' }, { fr: 'G', pt: 'letra G' }, { fr: 'J', pt: 'letra J' }] },
-      { title: 'Letras dobradas e acentos ao soletrar', textPt: 'Diga *deux L*, *deux S* para letras repetidas e o nome do acento depois da letra: *E accent aigu* (é), *E accent grave* (è), *C cédille* (ç).',
+      { title: 'Letras dobradas e acentos ao soletrar', textPt: 'Diga *deux L*, *deux S* para letras repetidas e o nome do acento depois da letra:\n- ***E accent aigu*** (é)\n- ***E accent grave*** (è)\n- ***C cédille*** (ç)',
         examples: [{ fr: 'deux S', pt: 'ss' }, { fr: 'E accent aigu', pt: 'é' }, { fr: 'C cédille', pt: 'ç' }] }
     ] },
     { type: 'phrases', items: [
