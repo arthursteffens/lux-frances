@@ -11,6 +11,7 @@
       { id: 'treino', icon: '🎧', label: 'Treino de ouvido', href: '#/treino' }
     ] },
     { label: 'Consultar', items: [
+      { id: 'dicionario', icon: '📖', label: 'Dicionário', href: '#/dicionario' },
       { id: 'verbos', icon: '🔤', label: 'Verbos', href: '#/verbos' },
       { id: 'gramatica', icon: '📐', label: 'Gramática', href: '#/gramatica' },
       { id: 'gerais', icon: '🗂', label: 'Gerais', href: '#/gerais', children: true }

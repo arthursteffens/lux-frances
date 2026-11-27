@@ -34,7 +34,19 @@
         if (p && p.verbs.recent.length) main.appendChild(h('section', { class: 'card' }, [h('h2', null, '🕘 Vistos recentemente'), chipList(p.verbs.recent)]));
         var top = LUX.data.verbList.slice().sort(function (a, b) { return a.freq - b.freq; }).slice(0, 30).map(function (v) { return v.inf; });
         main.appendChild(h('section', { class: 'card' }, [h('h2', null, '🔝 Os 30 verbos mais usados'), chipList(top)]));
-        main.appendChild(h('p', { class: 'muted sm' }, LUX.data.verbList.length + ' verbos no dicionário. Qualquer verbo do léxico também pode ser conjugado.'));
+        var D = LUX.dict, count = h('p', { class: 'muted sm' });
+        function drawCount() {
+          if (!main.contains(count)) return false;
+          count.textContent = D && D.ready()
+            ? LUX.data.verbList.length + ' verbos com ficha completa e ' + D.verbs.length.toLocaleString('pt-BR') + ' do dicionário completo (tradução e conjugação).'
+            : LUX.data.verbList.length + ' verbos com ficha completa. Qualquer verbo do léxico também pode ser conjugado.';
+        }
+        main.appendChild(count); drawCount();
+        if (D && D.available()) {
+          D.onChange(drawCount);
+          D.autoLoad();
+          main.appendChild(D.statusBox({ hideWhenReady: true, prompt: 'Para buscar e conjugar todos os ' + D.info().verbs.toLocaleString('pt-BR') + ' verbos do francês, baixe o dicionário completo. É uma vez só (' + D.sizeLabel() + ') e depois funciona offline.' }));
+        }
       }
     };
   });
@@ -45,6 +57,14 @@
     return {
       title: params.inf, nav: 'verbos', crumbs: [['Consultar', null], ['Verbos', '#/verbos'], [params.inf, null]],
       render: function (main) {
+        var D = LUX.dict;
+        if (!v && D && D.available() && !D.ready()) {
+          // talvez seja um verbo do dicionário completo: carrega e tenta de novo
+          main.appendChild(D.statusBox({ prompt: '"' + params.inf + '" não é um dos verbos com ficha. Ele pode estar no dicionário completo (' + D.info().verbs.toLocaleString('pt-BR') + ' verbos).' }));
+          D.onChange(function (st) { if (!main.isConnected || LUX.router.current.params !== params) return false; if (st === 'ready') LUX.router.render(); });
+          D.autoLoad();
+          return;
+        }
         if (!v) {
           main.appendChild(UI.empty('🔎', 'Verbo não encontrado', 'Não encontramos "' + params.inf + '". Tente a busca.', h('a', { class: 'btn primary', href: '#/verbos' }, 'Voltar à busca')));
           return;
@@ -89,6 +109,7 @@
       h('div', { class: 'verb-facts' }, [
         fact('Grupo', groupNo + 'º grupo'), fact('Auxiliar', f.aux), fact('Particípio passado', f.pp), f.ppr ? fact('Particípio presente', f.ppr) : null,
         UI.levelTag(v.level), (f.pattern === 'irregular' || v.like) ? h('span', { class: 'tag irr' }, 'irregular') : null,
+        v.ext ? h('span', { class: 'tag', title: 'Verbo do dicionário completo (Wiktionary)' }, '📖 dicionário') : null,
         f.pronominal ? h('span', { class: 'tag' }, 'pronominal') : null, f.impersonal ? h('span', { class: 'tag' }, 'impessoal (só "il")') : null
       ]),
       h('div', { class: 'row gap' }, [favBtn, revBtn])
@@ -107,6 +128,11 @@
           v.defFr ? h('div', { class: 'def' }, [h('span', { class: 'tag' }, '🇫🇷 français'), h('div', { class: 'row gap' }, [UI.playBtn(v.defFr, { small: true }), UI.frText(v.defFr, { block: false })])]) : null
         ])
       ]));
+    } else if (v.ext) {
+      main.appendChild(h('div', { class: 'banner info' }, [h('span', null, 'Verbo do dicionário completo (Wiktionary): tradução e conjugação, sem explicação nem exemplos. A conjugação foi conferida com as tabelas do Wiktionary. '),
+        h('a', { href: '#/dicionario/' + encodeURIComponent(v.inf) + '?p=v' }, 'Ver no dicionário')]));
+      if (v.def) main.appendChild(h('section', { class: 'card' }, [h('h2', null, 'Definição'), h('div', { class: 'def' }, [h('span', { class: 'tag' }, '🇫🇷 français'), h('div', { class: 'row gap' }, [UI.playBtn(v.def, { small: true }), h('p', { lang: 'fr' }, v.def)])]),
+        h('p', { class: 'muted sm' }, 'Ainda sem tradução para o português no Wiktionary.')]));
     } else if (v.partial) {
       main.appendChild(h('div', { class: 'banner info' }, 'Este verbo está no léxico do curso, mas ainda não tem ficha completa (definição, exemplos e sinônimos). A conjugação abaixo é gerada automaticamente.'));
     }

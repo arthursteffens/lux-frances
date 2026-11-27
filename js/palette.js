@@ -27,6 +27,14 @@
       return { label: r.inf + ' – ' + r.pt, sub: r.formOf ? 'forma de ' + r.inf + ' (' + r.formOf + ')' : 'verbo', href: '#/verbos/' + encodeURIComponent(r.inf) };
     });
     if (verbs.length) groups.push({ title: 'Verbos', items: verbs });
+    // dicionário completo (se já foi baixado neste aparelho)
+    if (LUX.dict && LUX.dict.ready()) {
+      var dict = LUX.dict.search(query, 6).map(function (r) {
+        var tr = LUX.dict.translation(r.e);
+        return { label: LUX.dict.display(r.e) + (tr ? ' – ' + tr : ''), sub: 'dicionário · ' + (r.formOf || LUX.dict.POS[r.e.p] || r.e.p), href: LUX.dict.href(r.e) };
+      });
+      if (dict.length) groups.push({ title: 'Dicionário', items: dict });
+    }
     // gramática
     var gram = LUX.data.grammarList.map(function (t) { return { t: t, s: best([t.title, t.titleFr].concat(t.keywords || []), q) }; })
       .filter(function (x) { return x.s >= 0; }).sort(function (a, b) { return a.s - b.s; }).slice(0, 5)
@@ -72,7 +80,7 @@
   };
 
   P.open = function () {
-    var input = h('input', { class: 'input palette-input', type: 'search', placeholder: 'Buscar verbos, gramática, Gerais, caderno, lições…', 'aria-label': 'Buscar', autocomplete: 'off' });
+    var input = h('input', { class: 'input palette-input', type: 'search', placeholder: 'Buscar verbos, dicionário, gramática, Gerais, caderno, lições…', 'aria-label': 'Buscar', autocomplete: 'off' });
     var results = h('div', { class: 'palette-results', role: 'listbox' });
     var body = h('div', { class: 'palette' }, [input, results, h('p', { class: 'muted sm palette-hint' }, '↑ ↓ para navegar · Enter para abrir · Esc para fechar')]);
     var m = LUX.ui.modal({ body: body, wide: true });

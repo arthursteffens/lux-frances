@@ -35,6 +35,7 @@ LUX.manifest = {
     ] }
   ],
   files: [
+    'content/dict-index.js',
     'content/verbs/irregular.js',
     'content/verbs/verbs-a-c.js', 'content/verbs/verbs-d-l.js', 'content/verbs/verbs-m-r.js', 'content/verbs/verbs-s-z.js',
     'content/verbs/verbs-a2-extra.js', 'content/verbs/verbs-pro.js',

@@ -5,7 +5,7 @@
 'use strict';
 
 // <release>
-const BUILD = '20261127-1118-2496601';
+const BUILD = '20261127-1446-01e867a';
 const FILES = [
   './',
   'version.json',
@@ -15,6 +15,7 @@ const FILES = [
   'js/app.js',
   'js/core.js',
   'js/course.js',
+  'js/dict.js',
   'js/drills/ear-training.js',
   'js/drills/numbers.js',
   'js/drive.js',
@@ -82,6 +83,7 @@ const FILES = [
   'content/a2/u06/l05.js',
   'content/audio.js',
   'content/changelog.js',
+  'content/dict-index.js',
   'content/general/alfabeto.js',
   'content/general/anos-seculos.js',
   'content/general/clima.js',
@@ -252,6 +254,22 @@ async function audioResponse(req, url) {
     'Content-Range': 'bytes ' + start + '-' + end + '/' + size, 'Accept-Ranges': 'bytes' } });
 }
 
+/* dicionário completo (dict/fr-pt.<hash>.json): também fora da instalação. Guardado na primeira vez que é aberto;
+   o nome muda quando os dados mudam, e aí a versão antiga é apagada. */
+const DICT_CACHE = 'lux-dict';
+async function dictResponse(req, url) {
+  const key = url.origin + url.pathname;
+  const cache = await caches.open(DICT_CACHE);
+  const hit = await cache.match(key);
+  if (hit) return hit;
+  const res = await fetch(key);
+  if (res.ok) {
+    await cache.put(key, res.clone());
+    for (const r of await cache.keys()) if (r.url !== key) await cache.delete(r);
+  }
+  return res;
+}
+
 self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
@@ -260,6 +278,7 @@ self.addEventListener('fetch', event => {
   // pedidos explícitos de "sem cache" (verificação de versão) vão direto à rede
   if (url.searchParams.has('lux-network')) return;
   if (/\/audio\/[^/]+\/[^/]+\.mp3$/.test(url.pathname)) { event.respondWith(audioResponse(req, url)); return; }
+  if (/\/dict\/[^/]+\.json$/.test(url.pathname)) { event.respondWith(dictResponse(req, url)); return; }
   event.respondWith((async () => {
     const cache = await caches.open(await activeCacheName());
     const isNav = req.mode === 'navigate';

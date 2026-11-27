@@ -722,3 +722,28 @@ body.welcome-mode .app, body.welcome-mode .bottombar { display: none; }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 @media print { .sidebar, .topbar, .bottombar, .banners, .play { display: none !important; } .main-wrap { margin: 0 !important; } .card { box-shadow: none; break-inside: avoid; } }
+
+/* ---------- dicionário completo ---------- */
+.dict-status { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.dict-status[hidden] { display: none; }
+.spinner { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border); border-top-color: var(--primary); animation: spin .8s linear infinite; flex: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.dict-list { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.dict-list li + li { border-top: 1px solid var(--border); }
+.dict-r { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 11px 14px; color: var(--text); text-decoration: none; flex-wrap: wrap; }
+.dict-r:hover, .dict-r:focus-visible { background: var(--primary-soft); }
+.dict-r-main { min-width: 0; flex: 1 1 260px; }
+.dict-r-pt { display: block; color: var(--muted); font-size: .92rem; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.dict-r-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag.course { background: var(--primary-soft); color: var(--primary); }
+.dict-credit { margin-top: 14px; }
+.dict-head { display: flex; align-items: flex-start; gap: 12px; }
+.dict-head h1 { margin: 0; font-size: 1.6rem; }
+.dict-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 4px; }
+.ipa { font-family: var(--font-mono, ui-monospace, monospace); font-size: .9rem; }
+.dict-course { margin: 14px 0 4px; padding: 10px 14px; border-left: 3px solid var(--primary); background: var(--primary-soft); border-radius: 8px; }
+.dict-course-pt { font-weight: 600; }
+.dict-entry h2 { font-size: 1rem; margin: 16px 0 6px; }
+.dict-tr { margin: 0 0 14px; padding-left: 22px; }
+.dict-tr li { padding: 2px 0; }
+.dict-entry .row.gap.wrap { margin-top: 10px; }

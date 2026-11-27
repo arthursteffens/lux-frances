@@ -3,10 +3,11 @@
   'use strict';
   var LUX = g.LUX, U = LUX.util;
   var VS = LUX.verbSearch = {};
-  var index = null, forms = null;
+  var index = null, forms = null, all = null, byInf = null, extByNorm = null;
 
-  /* verbos do dicionário + verbos do léxico (ficha simplificada) */
+  /* verbos com ficha + verbos do léxico (ficha simplificada) + verbos do dicionário completo, se já foi baixado */
   VS.all = function () {
+    if (all) return all;
     var list = LUX.data.verbList.slice();
     var have = {};
     list.forEach(function (v) { have[v.inf] = 1; });
@@ -16,21 +17,32 @@
         have[e.w] = 1;
       }
     });
+    if (LUX.dict && LUX.dict.ready()) LUX.dict.verbs.forEach(function (v) { if (!have[v.inf]) { list.push(v); have[v.inf] = 1; } });
+    all = list;
+    byInf = {}; extByNorm = {};
+    list.forEach(function (v) {
+      byInf[v.inf] = v;
+      if (v.ext && !v.irr) (extByNorm[U.norm(LUX.conjugator.parseInf(v.inf).base)] = extByNorm[U.norm(LUX.conjugator.parseInf(v.inf).base)] || []).push(v);
+    });
     return list;
   };
   VS.get = function (inf) {
     if (LUX.data.verbs[inf]) return LUX.data.verbs[inf];
-    return VS.all().filter(function (v) { return v.inf === inf; })[0] || null;
+    VS.all();
+    return byInf[inf] || byInf[String(inf).replace(/’/g, "'")] || null;
   };
 
   function build() {
     index = []; forms = [];
     VS.all().forEach(function (v) {
       var keys = [{ k: U.norm(v.inf), fr: true }];
+      v._k = keys;
       var pi = LUX.conjugator.parseInf(v.inf);
       if (pi.pronominal) keys.push({ k: U.norm(pi.base), fr: true });
       v.pt.forEach(function (t) { keys.push({ k: U.norm(t), fr: false }); });
       index.push({ v: v, keys: keys });
+      // verbos regulares do dicionário completo (dezenas de milhares): formas achadas sob demanda (VS.formLookup)
+      if (v.ext && !v.irr) return;
       try {
         var fs = LUX.conjugator.allForms(v.inf, v);
         Object.keys(fs).forEach(function (f) {
@@ -40,7 +52,47 @@
       } catch (e) { console.warn('conjugação falhou', v.inf, e); }
     });
   }
-  VS.reset = function () { index = null; };
+  VS.reset = function () { index = null; all = null; };
+
+  /* forma conjugada -> verbo(s). Verbos regulares do dicionário completo: desfaz a terminação
+     (mangeons -> mang + er) e confere com o conjugador. */
+  var ENDINGS = null;
+  function endings() {
+    if (ENDINGS) return ENDINGS;
+    ENDINGS = [];
+    [['parler', 'parl', 'er'], ['finir', 'fin', 'ir'], ['vendre', 'vend', 're']].forEach(function (m) {
+      var fs = LUX.conjugator.allForms(m[0], {}), seen = {};
+      Object.keys(fs).forEach(function (f) {
+        var e = U.norm(f).slice(m[1].length);
+        if (!seen[e]) { seen[e] = 1; ENDINGS.push([e, m[2]]); }
+      });
+    });
+    return ENDINGS;
+  }
+  VS.formLookup = function (query) {
+    if (!index) build();
+    var q = U.norm(query).replace(/^(?:se |s')/, '');
+    if (!q) return [];
+    var out = [], seen = {};
+    forms.forEach(function (f) { if (f.k === q && !seen[f.v.inf]) { seen[f.v.inf] = 1; out.push({ v: f.v, form: f.form, tense: f.tense }); } });
+    endings().forEach(function (en) {
+      var end = en[0];
+      if (q.length <= end.length + 1 || q.slice(q.length - end.length) !== end) return;
+      var stem = q.slice(0, q.length - end.length), stems = [stem];
+      if (/ge$/.test(stem)) stems.push(stem.slice(0, -1));               // mangeons
+      if (/(ll|tt)$/.test(stem)) stems.push(stem.slice(0, -1));          // appelle, jette
+      if (/i$/.test(stem)) stems.push(stem.slice(0, -1) + 'y');          // paie, emploie
+      stems.forEach(function (st) {
+        (extByNorm[st + en[1]] || []).forEach(function (v) {
+          if (seen[v.inf]) return;
+          var fs = LUX.conjugator.allForms(v.inf, v);
+          var hit = Object.keys(fs).filter(function (f) { return U.norm(f) === q; })[0];
+          if (hit && fs[hit] !== 'inf') { seen[v.inf] = 1; out.push({ v: v, form: hit, tense: fs[hit] }); }
+        });
+      });
+    });
+    return out;
+  };
 
   function tier(key, q) {
     if (key.indexOf(q) === 0) return 0;
@@ -66,7 +118,10 @@
     });
     var seen = {};
     res.forEach(function (r) { seen[r.v.inf] = 1; });
-    // formas conjugadas (ex.: "cours" -> courir)
+    // formas conjugadas (ex.: "cours" -> courir); verbos regulares do dicionário completo: só a forma exata
+    if (q.length >= 3 && LUX.dict && LUX.dict.ready()) {
+      VS.formLookup(q).forEach(function (f) { if (!seen[f.v.inf]) { seen[f.v.inf] = 1; res.push({ v: f.v, tier: 0.5, form: f.form, tense: f.tense }); } });
+    }
     if (q.length >= 2) {
       var fm = {};
       forms.forEach(function (f) {
@@ -86,7 +141,7 @@
     return res.slice(0, limit).map(function (r) {
       var info = LUX.conjugator.simple(r.v.inf, r.v);
       return {
-        inf: r.v.inf, pt: r.v.pt.join(', '), level: r.v.level, irregular: info.pattern === 'irregular' || !!r.v.like || info.pattern === 'partir',
+        inf: r.v.inf, pt: r.v.pt.join(', ') || (r.v.def ? '(fr) ' + r.v.def : ''), level: r.v.level, ext: !!r.v.ext, irregular: info.pattern === 'irregular' || !!r.v.like || info.pattern === 'partir',
         formOf: r.form ? LUX.conjugator.FORM_LABEL[r.tense] : null, form: r.form || null, v: r.v
       };
     });
@@ -126,7 +181,7 @@
         var li = h('li', { role: 'option', id: id + '-' + i, class: 'suggest-item' });
         li.innerHTML = '<span class="s-main"><b lang="fr">' + VS.highlight(r.inf, q) + '</b> – ' + VS.highlight(r.pt, q) + '</span>' +
           '<span class="s-meta">' + (r.formOf ? '<span class="muted sm">forma de ' + U.esc(r.inf) + ': ' + U.esc(r.form) + ' (' + U.esc(r.formOf) + ')</span>' : '') +
-          (r.irregular ? '<span class="tag irr">irregular</span>' : '') + '<span class="tag level">' + U.esc(r.level || '') + '</span></span>';
+          (r.irregular ? '<span class="tag irr">irregular</span>' : '') + (r.level ? '<span class="tag level">' + U.esc(r.level) + '</span>' : '') + '</span>';
         li.addEventListener('mousedown', function (e) { e.preventDefault(); choose(i); });
         list.appendChild(li);
       });

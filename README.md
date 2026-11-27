@@ -20,7 +20,8 @@ Aplicação web estática (HTML + CSS + JavaScript puro).
 | 📘 **Curso** | Painel (sequência de dias, tempo estudado, revisões, recorde) e mapa A2/B1/B2. Cada lição tem 8 etapas: objetivos, vocabulário, leitura, audição, gramática, prática, dica e resumo. A próxima lição abre com 70% ou mais. Ao concluir todas as lições de um nível, libera-se o **teste de nível** (leitura, audição e gramática, sem glossário; aprovação com 70% no total e 50% em cada parte), que gera um **certificado** para imprimir ou salvar em PDF. |
 | 🔁 **Revisar** | Revisão espaçada (SM-2 simplificado). Usa os cartões de vocabulário das lições, do caderno, dos verbos e de Gerais. |
 | 🎧 **Treino de ouvido** | Números (por faixa, com as variantes belga e suíça), horas, datas, preços, telefones e modo misto. Rodadas de 10 itens, recordes por perfil e aquecimento de 2 minutos. |
-| 🔤 **Verbos** | 328 verbos. Busca em português ou francês desde a 1ª letra, sem diferenciar acentos, inclusive por forma conjugada ("cours" → courir). A ficha mostra definição pt/fr, 3 exemplos, sinônimos e os 18 grupos de tempos, com ▶ por linha e "tocar todos". Embaixo de cada forma (menos no presente) aparece a tradução em português (*j'ai couru* → eu corri). |
+| 📖 **Dicionário** | Dicionário completo francês ↔ português: cerca de 70 mil palavras e 35 mil verbos, do Wiktionary. Busca nos dois sentidos e por palavra flexionada ("chevaux" → cheval, "mangeons" → manger). As palavras do curso aparecem primeiro, com a tradução e as notas revisadas (📘 curso). É baixado na primeira vez que a aba é aberta (≈1,3 MB) e depois funciona offline. |
+| 🔤 **Verbos** | 328 verbos. Busca em português ou francês desde a 1ª letra, sem diferenciar acentos, inclusive por forma conjugada ("cours" → courir). A ficha mostra definição pt/fr, 3 exemplos, sinônimos e os 18 grupos de tempos, com ▶ por linha e "tocar todos". Embaixo de cada forma (menos no presente) aparece a tradução em português (*j'ai couru* → eu corri). Com o dicionário completo baixado, aparecem também os ~35 mil verbos dele (tradução e conjugação, sem ficha). |
 | 📐 **Gramática** | 32 tópicos. Gramática de bolso com busca, dúvidas frequentes, comparação com o português, erros típicos e teste rápido. |
 | 🗂 **Gerais** | 29 páginas do dia a dia em 5 grupos: números e quantidades (cardinais, ordinais, frações, dinheiro, medidas), tempo e calendário, comunicação básica (saudações, cortesia, perguntas, tu/vous, alfabeto), pessoas e mundo (família, países, profissões, cores, clima) e situações práticas (saúde, emergências, direções, restaurante, transporte, telefone e e-mail). Inclui conversor, relógio interativo e soletrador. |
 | 📓 **Caderno** | Clique em **qualquer palavra** de um texto e salve. Também dá para selecionar várias palavras e salvar uma expressão. Tem filtros, anotações e exportação em CSV (para o Anki). |
@@ -75,6 +76,17 @@ O resto (palavras, frases soltas, verbos, leituras) usa a **Web Speech API** (a 
 
 - Se não houver voz francesa instalada, o app mostra como instalar uma (Windows, macOS, Android e iOS). As transcrições continuam disponíveis.
 - Toda a fala passa por `LUX.tts.speak()` em [js/tts.js](js/tts.js); um segmento com `audio` toca o MP3.
+
+## Dicionário completo
+
+Dados do **Wiktionary** em francês e em português (licença CC BY-SA 4.0), extraídos pelo projeto wiktextract (kaikki.org).
+
+- O app usa `dict/fr-pt.<hash>.json` (fora da instalação offline; o service worker guarda no cache `lux-dict` na primeira vez) e `content/dict-index.js` (nome do arquivo e tamanhos).
+- **Conjugação:** os verbos não trazem tabelas prontas. O motor do app calcula as formas; o gerador compara o motor com a tabela do Wiktionary, verbo por verbo, e guarda só o mínimo para acertar: nada (regular), um modelo (`l`: *prévenir* como *venir*), um padrão (`pt`) ou uma tabela de formas-chave (`t`, mesmo formato de `content/verbs/irregular.js`). O relatório lista os verbos do curso que diferem do Wiktionary (hoje só variantes aceitas, como *veuille*/*veux*).
+- Para regenerar:
+  1. Baixe numa pasta **fora do projeto** (~800 MB): `https://kaikki.org/frwiktionary/raw-wiktextract-data.jsonl.gz` como `fr.jsonl.gz` e `https://kaikki.org/ptwiktionary/raw-wiktextract-data.jsonl.gz` como `pt.jsonl.gz`.
+  2. `python tools/dict-extract.py <pasta>`
+  3. `node --max-old-space-size=8192 tools/build-dict.js <pasta>` (apaga o arquivo antigo de `dict/` e grava o relatório em `<pasta>/dict-report.txt`).
 
 ## Estrutura
 

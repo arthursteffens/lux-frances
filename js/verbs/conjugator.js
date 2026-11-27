@@ -203,6 +203,10 @@
       var tu = pres[1].replace(/es$/, 'e');
       res.imperatif = [tu, pres[3], pres[4]];
     }
+    // listas completas (tabelas do dicionário completo, quando a regra não basta)
+    if (t.imparfaitList) res.imparfait = split6(t.imparfaitList);
+    if (t.psList) res.passe_simple = split6(t.psList);
+    if (t.siList) res.subjonctif_imparfait = split6(t.siList);
     if (t.impersonal) {
       ['subjonctif', 'passe_simple', 'subjonctif_imparfait'].forEach(function (k) {
         if (res[k]) res[k] = [null, null, res[k][2], null, null, null];
@@ -234,11 +238,12 @@
   }
 
   var cache = {};
+  C._resetCache = function () { cache = {}; };
 
   /* Formas simples de um verbo. entry = entrada do dicionário (ou só {inf}) */
   C.simple = function (inf, entry) {
     entry = entry || LUX.data.verbs[inf] || {};
-    var key = inf + '|' + (entry.like || '') + '|' + (entry.pattern || '');
+    var key = inf + '|' + (entry.like || '') + '|' + (entry.pattern || '') + '|' + (entry.aux || '');
     if (cache[key]) return cache[key];
     var pi = C.parseInf(inf), base = pi.base;
     var irr = LUX.data.irregular;
@@ -269,7 +274,9 @@
     f.pattern = table ? (entry.pattern || 'irregular') : pattern;
     f.futur = f.futurStem ? FUT.map(function (e) { return f.futurStem + e; }) : null;
     f.conditionnel = f.futurStem ? IMPF.map(function (e) { return f.futurStem + e; }) : null;
-    if (f.impersonal) {
+    if (table && table.futurList) f.futur = split6(table.futurList);
+    if (table && table.condList) f.conditionnel = split6(table.condList);
+    if (f.impersonal && f.futur) {
       f.futur = [null, null, f.futur[2], null, null, null];
       f.conditionnel = [null, null, f.conditionnel[2], null, null, null];
     }

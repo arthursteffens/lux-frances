@@ -246,6 +246,7 @@
     if (info.sentence) actions.appendChild(UI.playBtn(info.sentence, { small: true, label: 'frase', title: 'Ouvir a frase inteira' }));
     var verbInf = main.inf || (list.filter(function (d) { return d.isVerb; })[0] || {}).inf;
     if (verbInf) actions.appendChild(h('a', { class: 'btn sm ghost', href: '#/verbos/' + encodeURIComponent(verbInf), onclick: UI.closePopup }, 'ver conjugação'));
+    if (LUX.dict && LUX.dict.available()) actions.appendChild(h('a', { class: 'btn sm ghost', href: '#/dicionario?q=' + encodeURIComponent(main.lemma || info.word), onclick: UI.closePopup, title: 'Procurar no dicionário completo' }, '📖 dicionário'));
     if (p) {
       var key = U.norm(main.lemma || info.word);
       var saved = !!p.notebook[key];
