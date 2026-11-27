@@ -283,12 +283,13 @@
     if (hidden && !force) return;
     if (hidden && force && !link.dirty) return;
     var btn = h('button', { class: 'btn sm primary', onclick: function () { D.syncNow(p).then(function (r) { if (r === 'ok') LUX.ui.toast('☁️ Sincronizado com o Google Drive.', 'ok'); }); } }, 'Sincronizar');
-    box.appendChild(h('div', { class: 'banner info app-notice', id: 'drive-notice' }, [
-      h('div', { class: 'grow' }, [h('b', null, '☁️ Google Drive: '), h('span', null, 'toque para sincronizar o progresso de ' + p.name + '.')]),
-      h('div', { class: 'row gap wrap' }, [btn, h('button', { class: 'btn sm ghost', onclick: function () {
+    box.appendChild(h('div', { class: 'app-notice slim', id: 'drive-notice', title: 'Progresso de ' + p.name + ' no Google Drive' }, [
+      h('span', { class: 'grow' }, '☁️ Google Drive'),
+      btn,
+      h('button', { class: 'notice-x', 'aria-label': 'Agora não', title: 'Agora não', onclick: function () {
         try { sessionStorage.setItem(HIDE_KEY, p.id); } catch (e) { }
         var el = document.getElementById('drive-notice'); if (el) el.remove();
-      } }, 'Agora não')])
+      } }, '×')
     ]));
   }
 

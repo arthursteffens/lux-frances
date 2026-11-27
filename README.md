@@ -54,7 +54,7 @@ A busca global abre com **Ctrl+K** ou **/**.
 
 ```
 node tools/validate-content.js && node tools/test-conjugator.js && node tools/test-numbers.js
-node tools/release.js "O que mudou nesta versão"   # gera version.json e a lista offline do sw.js
+node tools/release.js "O que mudou nesta versão"   # gera version.json, a lista offline do sw.js e uma entrada em content/changelog.js (página Novidades)
 git add -A && git commit -m "..." && git push        # o GitHub Pages publica em 1–2 minutos
 ```
 

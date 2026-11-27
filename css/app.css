@@ -247,6 +247,19 @@ label.btn { position: relative; }
 .banners .banner.fixed { padding: 12px 20px; }
 .app-notices { top: auto; }
 .app-notice { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+/* avisos discretos (atualização, Google Drive): pílula no canto, sem cobrir o conteúdo */
+#app-notices { position: fixed; top: auto; left: auto; right: 16px; bottom: 16px; z-index: 60; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; max-width: calc(100vw - 32px); pointer-events: none; }
+#app-notices > * { pointer-events: auto; }
+#app-notices .banner { border-radius: 12px; box-shadow: var(--shadow-lg); max-width: 520px; }
+.app-notice.slim { flex-wrap: nowrap; gap: 8px; padding: 5px 6px 5px 14px; font-size: .85rem; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 999px; box-shadow: var(--shadow-lg); }
+.app-notice.slim .btn.sm { min-height: 28px; padding: 3px 10px; font-size: .8rem; }
+.notice-x { border: 0; background: none; color: var(--muted); font-size: 1.2rem; line-height: 1; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; }
+.notice-x:hover { background: var(--surface-2); color: var(--text); }
+@media (max-width: 639px) { #app-notices { right: 12px; bottom: calc(72px + env(safe-area-inset-bottom)); } }
+.news-list { list-style: none; padding: 0; margin: 6px 0 10px; }
+.news-list li { padding: 10px 0; border-top: 1px solid var(--border); }
+.news-list li:first-child { border-top: 0; }
+.news-list li.new { border-left: 3px solid var(--primary); padding-left: 12px; }
 .version-list li { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid var(--border); padding: 10px 0; }
 .version-list li.current b { color: var(--primary); }
 .version-list .chip { margin-left: 8px; cursor: default; }

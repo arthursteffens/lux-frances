@@ -2,7 +2,7 @@
    e permite voltar a uma versão anterior guardada no aparelho. Só funciona por http(s), não em file://. */
 (function (g) {
   'use strict';
-  var LUX = g.LUX, U = LUX.util, h = U.h;
+  var LUX = g.LUX, U = LUX.util, h = U.h, UI = LUX.ui;
   var W = LUX.pwa = {
     PUBLIC_URL: 'https://arthursteffens.github.io/lux-frances/',
     supported: 'serviceWorker' in navigator && /^https?:$/.test(location.protocol),
@@ -10,7 +10,8 @@
     reg: null,
     pendingReload: false
   };
-  var UPDATED_KEY = 'lux-fr:updated-from';
+  var SEEN_KEY = 'lux-fr:seen-build';   // última versão que a pessoa viu neste aparelho
+  var NEWS_KEY = 'lux-fr:news-from';    // versão vista antes da última atualização (início das "novidades")
   var CHECK_EVERY = 30 * 60 * 1000;
   var lastCheck = 0;
 
@@ -40,7 +41,6 @@
   W.info = function () { return W.ask({ type: 'info' }); };
   W.pin = function (build) {
     return W.ask({ type: 'pin', build: build }).then(function () {
-      try { sessionStorage.removeItem(UPDATED_KEY); } catch (e) { }
       location.reload();
     });
   };
@@ -59,24 +59,39 @@
       W.pendingReload = true;
       return;
     }
-    try { if (W.running) sessionStorage.setItem(UPDATED_KEY, W.running.build); } catch (e) { }
     if (LUX.store) LUX.store.save(true);
     location.reload();
   }
 
-  /* depois de atualizar: aviso com as novidades e a opção de voltar */
-  function showUpdatedNotice(info) {
-    var from = null;
-    try { from = sessionStorage.getItem(UPDATED_KEY); sessionStorage.removeItem(UPDATED_KEY); } catch (e) { }
-    if (!from || !W.running || from === W.running.build) return;
-    var prevAvailable = info.builds.some(function (b) { return b.build === from; });
+  /* ---------- novidades ---------- */
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) { } }
+  function changelog() { return LUX.changelog || []; }
+  function indexOf(build) { var cl = changelog(); for (var i = 0; i < cl.length; i++) if (cl[i].build === build) return i; return -1; }
+  /* versões novas desde a última que a pessoa viu: { from, entries } (entries: mais recente primeiro) */
+  W.news = function () {
+    var from = lsGet(NEWS_KEY), i = from ? indexOf(from) : -1;
+    return { from: from, entries: i > 0 ? changelog().slice(0, i) : [] };
+  };
+  /* ao abrir: compara a versão desta página com a última vista. Primeira visita: só registra. */
+  function checkNews() {
+    var cl = changelog(); if (!cl.length) return;
+    var cur = cl[0].build, seen = lsGet(SEEN_KEY);
+    if (!seen) { lsSet(SEEN_KEY, cur); return; }
+    if (seen === cur) return;
+    if (indexOf(seen) < 0) return; // a versão vista é mais nova que esta (ex.: versão anterior fixada)
+    lsSet(NEWS_KEY, seen);
+    lsSet(SEEN_KEY, cur);
+    showUpdatedNotice();
+  }
+  /* aviso discreto; o que mudou fica na página Novidades */
+  function showUpdatedNotice() {
     var box = notices(); if (!box) return;
-    var el = h('div', { class: 'banner ok app-notice', role: 'status' }, [
-      h('div', { class: 'grow' }, [h('b', null, '✨ Curso atualizado. '), h('span', null, W.running.notes || '')]),
-      h('div', { class: 'row gap wrap' }, [
-        prevAvailable ? h('button', { class: 'btn sm', onclick: function () { W.pin(from); } }, '↩ Algo deu errado? Voltar à versão anterior') : null,
-        h('button', { class: 'btn sm ghost', onclick: function () { el.remove(); } }, 'Fechar')
-      ])
+    var n = W.news().entries.length;
+    var el = h('div', { class: 'app-notice slim', role: 'status', id: 'update-notice' }, [
+      h('span', { class: 'grow' }, '✨ Curso atualizado' + (n > 1 ? ' (' + n + ' versões)' : '')),
+      h('a', { class: 'btn sm', href: '#/novidades', onclick: function () { el.remove(); } }, 'Novidades'),
+      h('button', { class: 'notice-x', 'aria-label': 'Fechar', title: 'Fechar', onclick: function () { el.remove(); } }, '×')
     ]);
     box.appendChild(el);
   }
@@ -94,6 +109,7 @@
   }
 
   W.init = function () {
+    checkNews();
     if (!W.supported) return;
     // versão em uso (servida pelo próprio cache ativo)
     fetch('version.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (v) { W.running = v; }).catch(function () { })
@@ -107,7 +123,7 @@
       })
       .then(function (reg) {
         W.reg = reg; lastCheck = Date.now();
-        return W.info().then(function (info) { showUpdatedNotice(info); showPinnedNotice(info); });
+        return W.info().then(function (info) { showPinnedNotice(info); });
       })
       .catch(function (e) { console.warn('PWA indisponível:', e); });
 
@@ -160,4 +176,39 @@
     });
     return c;
   };
+
+  /* ---------- página Novidades ---------- */
+  LUX.router.add('/novidades', function () {
+    return {
+      title: 'Novidades', nav: null, crumbs: [['Novidades', null]],
+      render: function (main) {
+        var news = W.news(), cl = changelog();
+        var isNew = {}; news.entries.forEach(function (e) { isNew[e.build] = true; });
+        main.appendChild(UI.pageHead('✨ Novidades', news.entries.length
+          ? 'O que mudou desde a última vez que você usou o curso neste aparelho.'
+          : 'Você já está em dia. Abaixo, o histórico de todas as versões.'));
+        function item(e) {
+          return h('li', { class: isNew[e.build] ? 'new' : '' }, [
+            h('div', { class: 'muted sm' }, fmtBuild({ date: e.date, build: e.build })),
+            h('div', null, e.notes)
+          ]);
+        }
+        if (news.entries.length) {
+          main.appendChild(h('section', { class: 'card' }, [h('h2', null, 'Desde a sua última visita'),
+            h('ul', { class: 'news-list' }, news.entries.map(item))]));
+          // voltar à versão anterior, se ela ainda estiver guardada no aparelho
+          if (W.supported && news.from) W.info().then(function (info) {
+            if (!info.builds.some(function (b) { return b.build === news.from; })) return;
+            main.querySelector('.card').appendChild(h('div', { class: 'row gap wrap' }, [
+              h('span', { class: 'muted sm' }, 'Algo deu errado com a atualização?'),
+              h('button', { class: 'btn sm', onclick: function () { W.pin(news.from); } }, '↩ Voltar à versão anterior')
+            ]));
+          }).catch(function () { });
+        }
+        var older = cl.filter(function (e) { return !isNew[e.build]; });
+        if (older.length) main.appendChild(h('section', { class: 'card' }, [h('h2', null, news.entries.length ? 'Versões anteriores' : 'Histórico de versões'),
+          h('ul', { class: 'news-list' }, older.map(item))]));
+      }
+    };
+  });
 })(window);

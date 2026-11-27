@@ -111,7 +111,7 @@
       nav.appendChild(ul);
     });
     el.appendChild(nav);
-    el.appendChild(h('div', { class: 'sb-foot sb-text muted sm' }, 'Lux · francês A2 → B2'));
+    el.appendChild(h('div', { class: 'sb-foot sb-text muted sm' }, ['Lux · francês A2 → B2 · ', h('a', { href: '#/novidades' }, 'Novidades')]));
     // navegação por setas dentro da barra
     nav.addEventListener('keydown', function (e) {
       if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;

@@ -5,7 +5,7 @@
 'use strict';
 
 // <release>
-const BUILD = '20261127-1009-5311700';
+const BUILD = '20261127-1118-2496601';
 const FILES = [
   './',
   'version.json',
@@ -81,6 +81,7 @@ const FILES = [
   'content/a2/u06/l04.js',
   'content/a2/u06/l05.js',
   'content/audio.js',
+  'content/changelog.js',
   'content/general/alfabeto.js',
   'content/general/anos-seculos.js',
   'content/general/clima.js',
