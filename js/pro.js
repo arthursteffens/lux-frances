@@ -128,6 +128,29 @@
           main.appendChild(cg);
         }
 
+        // cursos presenciais de outras instituições
+        var ext = car.external || [];
+        if (ext.length) {
+          main.appendChild(h('h2', { class: 'section-title' }, '🎓 Cursos presenciais recomendados'));
+          main.appendChild(h('p', { class: 'muted' }, 'Em Luxemburgo, com certificado. As turmas mudam a cada semestre: abra o link para ver as próximas datas e se inscrever.'));
+          var ul = h('ul', { class: 'pro-ext' });
+          ext.forEach(function (x) {
+            ul.appendChild(h('li', { class: 'card pro-ext-item' }, [
+              h('div', { class: 'row between wrap' }, [
+                h('div', null, [h('b', { lang: 'fr' }, x.title), x.code ? h('span', { class: 'muted sm' }, ' · ' + x.code) : null]),
+                x.tag ? h('span', { class: 'chip sm on' }, x.tag) : null
+              ]),
+              h('div', { class: 'muted sm' }, x.provider + ' · ' + x.info),
+              h('p', { class: 'sm' }, x.desc),
+              h('div', { class: 'row between wrap' }, [
+                h('span', { class: 'muted sm' }, 'Pré-requisito: ' + x.prereq),
+                h('a', { class: 'btn sm', href: x.url, target: '_blank', rel: 'noopener' }, 'Ver turmas e inscrição ↗')
+              ])
+            ]));
+          });
+          main.appendChild(ul);
+        }
+
         // língua para o trabalho: idiomas
         if (car.languages.length) main.appendChild(h('h2', { class: 'section-title' }, '🗣️ Língua para o trabalho'));
         var chips = h('div', { class: 'chips pro-langs', role: 'tablist', 'aria-label': 'Idioma' });

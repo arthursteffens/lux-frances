@@ -15,6 +15,30 @@ LUX.proManifest = {
     courses: [
       { id: 'droit-travail-lu', icon: '⚖️', title: 'Direito do trabalho em Luxemburgo: o essencial', desc: 'Fontes e atores, contrato e período de experiência, tempo de trabalho, férias e salário, doença, fim do contrato.' }
     ],
+    /* cursos presenciais de outras instituições (sem datas: as turmas mudam a cada semestre; o link mostra as atuais).
+       Preços conferidos em novembro de 2026 em lifelong-learning.lu. */
+    external: [
+      { title: 'Les fondamentaux du droit du travail pour les professionnels RH', code: 'C3059', provider: 'LLLC — Chambre des salariés',
+        info: '23 h · 10 semanas, 1 aula de 2h15 por semana · em francês', prereq: 'Nenhum',
+        desc: 'O básico para RH: fontes do direito e convenção coletiva, tipos de contrato, tempo de trabalho e férias, ausências, procedimento disciplinar, fim do contrato e representação do pessoal. É a base do curso do app.',
+        url: 'https://www.lifelong-learning.lu/formation/les-fondamentaux-du-droit-du-travail-pour-les-p/fr', tag: 'Comece por aqui' },
+      { title: 'Approfondissement du droit du travail pour les professionnels RH', code: 'C3060', provider: 'LLLC — Chambre des salariés',
+        info: '23 h · 10 semanas · em francês · €210', prereq: 'C3059 ou conhecimento equivalente',
+        desc: 'Tribunais e riscos jurídicos (requalificação de contratos, RGPD), regulamento interno, tempo parcial, teletrabalho, assédio e riscos psicossociais, condução de uma dispensa, proteção na doença e na gravidez.',
+        url: 'https://www.lifelong-learning.lu/formation/approfondissement-du-droit-du-travail-pour-les-/fr' },
+      { title: 'Le droit du travail : le contrat de travail', code: 'C3003', provider: 'LLLC — Chambre des salariés',
+        info: '23 h · 10 semanas · em francês · €210', prereq: 'Nenhum',
+        desc: 'Redigir CDI e CDD, trabalho temporário, período de experiência, mudanças no contrato, doença, dispensa e pedido de demissão (motivos, contestação, seguro-desemprego).',
+        url: 'https://www.lifelong-learning.lu/formation/le-droit-du-travail-le-contrat-de-travail-c3003/fr' },
+      { title: 'Le droit du travail : les conditions de travail', code: 'C3004', provider: 'LLLC — Chambre des salariés',
+        info: '23 h · 10 semanas · em francês · €210', prereq: 'Nenhum (recomendado: C3003)',
+        desc: 'Salário mínimo, indexação, 13º e benefícios em espécie; horas extras, plano de organização do trabalho, trabalho noturno e aos domingos; feriados; todos os tipos de licença; vigilância no trabalho.',
+        url: 'https://www.lifelong-learning.lu/formation/le-droit-du-travail-les-conditions-de-travail-c/fr' },
+      { title: 'Clé RH 2 : Appliquer le droit du travail luxembourgeois', provider: 'RH Expert (Differdange)',
+        info: '15 h · 5 módulos de 3 h · FR, EN, DE ou LU · listado a €0 · certificado com prova', prereq: 'Para quem está há menos de 1 ano na função de RH',
+        desc: 'Gestão do tempo de trabalho, folha de pagamento, saúde e segurança, trabalho com a delegação do pessoal, teletrabalho e destacamento. Formato para empresas: confirme se aceita inscrição individual.',
+        url: 'https://www.lifelong-learning.lu/formation/cle-rh-2-appliquer-le-droit-du-travail-luxembou/fr' }
+    ],
     languages: [
       { id: 'fr', label: 'Français', flag: '🇫🇷', status: 'active', desc: 'Luxemburgo, França, Bélgica, Suíça e Québec.' },
       { id: 'en', label: 'English', flag: '🇬🇧', status: 'active', desc: 'Inglês de negócios para HR Business Partner (B2–C1): stakeholders, entrevistas, desenho organizacional, dados, coaching e planejamento.' },

@@ -272,6 +272,9 @@ label.btn { position: relative; }
 .pro-career.on { color: var(--primary); border-bottom-color: var(--primary); }
 .pro-career.soon { opacity: .6; cursor: default; font-weight: 600; }
 .pro-course-meta { margin-top: 4px; }
+.pro-ext { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 10px; }
+.pro-ext-item { display: flex; flex-direction: column; gap: 4px; }
+.pro-ext-item p { margin: 4px 0; }
 /* curso: índice de módulos */
 .course-toc { list-style: none; padding: 0; margin: 10px 0 16px; display: grid; gap: 6px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
 .course-toc a { display: flex; gap: 8px; align-items: center; padding: 9px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); text-decoration: none; font-size: .92rem; }

@@ -214,6 +214,10 @@ else PMroot.careers.forEach(PM => {
       (m.exercises || []).forEach((ex, i) => checkExercise(`${wm} ex #${i + 1}`, ex));
     });
   });
+  (PM.external || []).forEach((x, i) => {
+    ['title', 'provider', 'info', 'prereq', 'desc', 'url'].forEach(f => { if (!x[f]) err(`pro curso externo #${i + 1}`, `campo ausente: ${f}`); });
+    if (x.url && !/^https:\/\//.test(x.url)) err(`pro curso externo #${i + 1}`, 'url deve começar com https://');
+  });
   (PM.languages || []).forEach(lg => { if (!PM.tracks[lg.id]) err('profissional', `idioma sem trilha: ${lg.id}`); });
   Object.keys(PM.tracks).forEach(lang => {
     const tr = PM.tracks[lang];
