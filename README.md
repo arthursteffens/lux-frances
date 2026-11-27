@@ -25,7 +25,7 @@ Aplicação web estática (HTML + CSS + JavaScript puro).
 | 🗂 **Gerais** | 29 páginas do dia a dia em 5 grupos: números e quantidades (cardinais, ordinais, frações, dinheiro, medidas), tempo e calendário, comunicação básica (saudações, cortesia, perguntas, tu/vous, alfabeto), pessoas e mundo (família, países, profissões, cores, clima) e situações práticas (saúde, emergências, direções, restaurante, transporte, telefone e e-mail). Inclui conversor, relógio interativo e soletrador. |
 | 📓 **Caderno** | Clique em **qualquer palavra** de um texto e salve. Também dá para selecionar várias palavras e salvar uma expressão. Tem filtros, anotações e exportação em CSV (para o Anki). |
 | 👤 **Perfil** | Perfis, voz, velocidade, nível, tema, backup e testes de armazenamento. |
-| 💼 **Profissional** | Francês para o trabalho: RH em empresas de tecnologia (e um pouco de fintech), em Luxemburgo e outros países francófonos. Lições no mesmo formato do curso, que liberam conforme as unidades do curso (A2: 6 lições), e 7 guias de consulta (trabalhar em Luxemburgo, outros países, glossário de RH, tech e fintech, reuniões, e-mails, entrevista). Também tem trilhas em **inglês** (6 lições B2–C1) e **italiano** (6 lições B1) para a mesma vaga, todas liberadas. |
+| 💼 **Profissional** | Sub-abas por **carreira** (por enquanto **HRBP**). Na HRBP: **cursos** de legislação e prática em português com os termos em francês (1º: *Direito do trabalho em Luxemburgo: o essencial*, 5 módulos com exercícios e progresso) e língua para o trabalho. Francês para o trabalho: RH em empresas de tecnologia (e um pouco de fintech), em Luxemburgo e outros países francófonos. Lições no mesmo formato do curso, que liberam conforme as unidades do curso (A2: 6 lições), e 7 guias de consulta (trabalhar em Luxemburgo, outros países, glossário de RH, tech e fintech, reuniões, e-mails, entrevista). Também tem trilhas em **inglês** (6 lições B2–C1) e **italiano** (6 lições B1) para a mesma vaga, todas liberadas. |
 
 A busca global abre com **Ctrl+K** ou **/**.
 
@@ -224,7 +224,8 @@ Para criar uma página: crie o arquivo, liste-o em `content/manifest.js` e confi
 
 ### Aba Profissional (`content/pro/`)
 
-- [content/pro/manifest.js](content/pro/manifest.js): idiomas (`languages`, com `status: 'active' | 'soon'`) e, por idioma, níveis com a lista de lições e os guias.
+- [content/pro/manifest.js](content/pro/manifest.js): `careers` (sub-abas: `{ id, label, title, desc, status, courses, languages, tracks }`). Em cada carreira: cursos, idiomas (`languages`, com `status: 'active' | 'soon'`) e, por idioma, níveis com a lista de lições e os guias.
+- **Curso:** `content/pro/<carreira>/cursos/<id>.js` com `LUX.registerProCourse({ id, title, titleFr, hours, note, modules: [{ id, title, titleFr, blocks, exercises }] })`. Os blocos são os de Gerais (o francês precisa de cobertura no léxico); os exercícios contam para o módulo (70% = concluído). Progresso em `perfil.proCourses`.
 - **Lição:** `content/pro/<lang>/<nível>/lNN.js` com `LUX.registerProLesson({ id, lang, level, order, sector, ...mesmo formato das lições do curso })`. No manifesto, `unit: N` libera a lição quando a unidade N do curso (mesmo nível) estiver concluída; `0` ou ausente = liberada.
 - **Guia:** `content/pro/<lang>/guias/<id>.js` com `LUX.registerProGuide({ id, lang, title, titleFr, blocks })`, usando os mesmos blocos das páginas de Gerais (o bloco `tip` aceita `title`; links externos abrem em nova aba).
 - **Outros idiomas (inglês e italiano já ativos):** o motor trata `lang`:

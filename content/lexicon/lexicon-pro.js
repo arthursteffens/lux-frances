@@ -1,6 +1,6 @@
 /* Léxico da aba Profissional (RH, empresas de tecnologia, fintech). Personagens e empresas são fictícios.
    d: true = gênero diferente do português. */
-LUX.registerNames(['Marina', 'Costa', 'Nuvio', 'Laura', 'Schmit', 'Nadia', 'Haddad', 'Antoine', 'Klein', 'Kevin', 'Weber', 'Muller', 'Kirchberg', 'Belval', 'Lausanne', 'Neuchâtel', 'Vaud', 'CSSF', 'CNS', 'ADEM', 'CODIR', 'DRH', 'CSE', 'RTT', 'CDI', 'CDD', 'RH', 'CV', 'Berlin', 'Lisbonne', 'Slack', 'Teams']);
+LUX.registerNames(['Marina', 'Costa', 'Nuvio', 'Laura', 'Schmit', 'Nadia', 'Haddad', 'Antoine', 'Klein', 'Kevin', 'Weber', 'Muller', 'Kirchberg', 'Belval', 'Lausanne', 'Neuchâtel', 'Vaud', 'CSSF', 'CNS', 'ADEM', 'CODIR', 'DRH', 'CSE', 'RTT', 'CDI', 'CDD', 'RH', 'CV', 'Berlin', 'Lisbonne', 'Slack', 'Teams', 'ITM', 'CCSS']);
 LUX.registerLexicon([
   /* --- trabalho e RH --- */
   { w: 'absentéisme', p: 'n', g: 'm', t: 'absenteísmo' },
@@ -204,5 +204,36 @@ LUX.registerLexicon([
   { w: 'space', p: 'n', g: 'm', t: '(em "open space") escritório aberto' },
   { w: 'business', p: 'n', g: 'm', t: 'negócio (anglicismo)', pl: 'business' },
   { w: 'partner', p: 'n', t: 'partner, parceiro(a) (em "HR Business Partner")' },
-  { w: 'hr', p: 'n', t: 'HR = RH (em inglês)' }
+  { w: 'hr', p: 'n', t: 'HR = RH (em inglês)' },
+  /* --- direito do trabalho (curso HRBP) --- */
+  { w: 'absence', p: 'n', g: 'f', t: 'ausência, falta', d: true },
+  { w: 'abusif', p: 'adj', t: 'abusivo', fem: 'abusive', n: '"le licenciement abusif" = a dispensa abusiva (sem motivo válido)' },
+  { w: 'ancienneté', p: 'n', g: 'f', t: 'tempo de casa, antiguidade', d: true },
+  { w: 'avenant', p: 'n', g: 'm', t: 'aditivo (ao contrato)' },
+  { w: 'certificat', p: 'n', g: 'm', t: 'certificado; "certificat médical" = atestado médico' },
+  { w: 'compensatoire', p: 'adj', t: 'compensatório(a)' },
+  { w: 'contacter', p: 'v', t: 'contatar' },
+  { w: 'délégué', p: 'n', g: 'm', t: 'delegado (representante do pessoal)', fem: 'déléguée' },
+  { w: 'employeur', p: 'n', g: 'm', t: 'empregador' },
+  { w: 'faute', p: 'n', g: 'f', t: 'falta, erro; "faute grave" = falta grave (justa causa)' },
+  { w: 'incapacité', p: 'n', g: 'f', t: 'incapacidade' },
+  { w: 'indemnité', p: 'n', g: 'f', t: 'indenização', d: true },
+  { w: 'indexation', p: 'n', g: 'f', t: 'indexação (correção dos salários pela inflação)' },
+  { w: 'informer', p: 'v', t: 'informar' },
+  { w: 'intérieur', p: 'adj', t: 'interno, interior', fem: 'intérieure', n: '"le règlement intérieur" = o regulamento interno' },
+  { w: 'invoquer', p: 'v', t: 'invocar, alegar' },
+  { w: 'loi', p: 'n', g: 'f', t: 'lei' },
+  { w: 'médical', p: 'adj', t: 'médico(a)', fem: 'médicale', f: ['médicaux', 'médicales'] },
+  { w: 'minimum', p: 'adj', t: 'mínimo', n: '"le salaire social minimum" = o salário mínimo legal' },
+  { w: 'motif', p: 'n', g: 'm', t: 'motivo' },
+  { w: 'national', p: 'adj', t: 'nacional', fem: 'nationale', f: ['nationaux', 'nationales'] },
+  { w: 'ouvrable', p: 'adj', t: 'útil (dia)', n: '"le jour ouvrable" = o dia útil' },
+  { w: 'préalable', p: 'adj', t: 'prévio(a)', n: '"l\'entretien préalable" = a entrevista prévia, antes da dispensa' },
+  { w: 'protection', p: 'n', g: 'f', t: 'proteção' },
+  { w: 'recommandé', p: 'adj', t: 'recomendado; registrado (carta)', fem: 'recommandée', n: '"la lettre recommandée" = a carta registrada' },
+  { w: 'règlement', p: 'n', g: 'm', t: 'regulamento; pagamento' },
+  { w: 'renouvellement', p: 'n', g: 'm', t: 'renovação' },
+  { w: 'repos', p: 'n', g: 'm', t: 'descanso', pl: 'repos' },
+  { w: 'selon', p: 'prep', t: 'segundo, de acordo com' },
+  { w: 'tribunal', p: 'n', g: 'm', t: 'tribunal', pl: 'tribunaux' }
 ]);

@@ -17,6 +17,7 @@
   P.normalize = function (p) {
     p.settings = Object.assign(P.defaultSettings(), p.settings || {});
     p.progress = p.progress || {};
+    p.proCourses = p.proCourses || {}; // cursos do Profissional: { id: { modules: { mId: {best, last, attempts, updatedAt} } } }
     p.srs = p.srs || {};
     p.streak = p.streak || { current: 0, best: 0, lastDay: null };
     p.studySeconds = p.studySeconds || 0;
@@ -206,6 +207,16 @@
         completedAt: later(x.completedAt, y.completedAt), updatedAt: later(x.updatedAt, y.updatedAt),
         answers: (x.updatedAt || '') >= (y.updatedAt || '') ? x.answers : y.answers
       };
+    });
+    // cursos do Profissional: melhor nota de cada módulo
+    Object.keys(b.proCourses || {}).forEach(function (cid) {
+      var ca = a.proCourses[cid] = a.proCourses[cid] || { modules: {} }, mb = (b.proCourses[cid] || {}).modules || {};
+      Object.keys(mb).forEach(function (m) {
+        var x = ca.modules[m], y = mb[m];
+        if (!x) { ca.modules[m] = y; return; }
+        ca.modules[m] = { attempts: Math.max(x.attempts || 0, y.attempts || 0), best: Math.max(x.best || 0, y.best || 0),
+          last: (x.updatedAt || '') >= (y.updatedAt || '') ? x.last : y.last, updatedAt: later(x.updatedAt, y.updatedAt) };
+      });
     });
     // testes de nível: melhor resultado
     Object.keys(b.levelTests || {}).forEach(function (lv) {

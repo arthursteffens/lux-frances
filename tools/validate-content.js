@@ -190,10 +190,30 @@ function checkBlocks(w, p, ex0) {
 }
 
 /* ---------- aba Profissional ---------- */
-const PM = LUX.proManifest;
-const proLessonIds = new Set(), proGuideIds = new Set();
-if (!PM) err('profissional', 'content/pro/manifest.js não carregado');
-else {
+const PMroot = LUX.proManifest;
+const proLessonIds = new Set(), proGuideIds = new Set(), proCourseIds = new Set();
+if (!PMroot || !PMroot.careers) err('profissional', 'content/pro/manifest.js não carregado (ou sem careers)');
+else PMroot.careers.forEach(PM => {
+  if (!PM.id || !PM.label) err('profissional', 'carreira sem id/label');
+  PM.languages = PM.languages || []; PM.tracks = PM.tracks || {};
+  (PM.courses || []).forEach(it => {
+    const w = 'pro curso ' + it.id;
+    if (proCourseIds.has(it.id)) err(w, 'curso repetido');
+    proCourseIds.add(it.id);
+    const c = LUX.data.pro.courses[it.id];
+    if (!c) return; // anunciado como "em breve"
+    if (!c.title || !Array.isArray(c.modules) || !c.modules.length) { err(w, 'curso sem título ou sem módulos'); return; }
+    const mids = new Set();
+    c.modules.forEach((m, mi) => {
+      const wm = `${w} módulo ${mi + 1}`;
+      if (!m.id || mids.has(m.id)) err(wm, 'id de módulo ausente ou repetido');
+      mids.add(m.id);
+      if (!m.title) err(wm, 'módulo sem título');
+      checkBlocks(wm, { lang: c.lang, blocks: m.blocks || [] });
+      if (!(m.exercises || []).length) err(wm, 'módulo sem exercícios');
+      (m.exercises || []).forEach((ex, i) => checkExercise(`${wm} ex #${i + 1}`, ex));
+    });
+  });
   (PM.languages || []).forEach(lg => { if (!PM.tracks[lg.id]) err('profissional', `idioma sem trilha: ${lg.id}`); });
   Object.keys(PM.tracks).forEach(lang => {
     const tr = PM.tracks[lang];
@@ -219,6 +239,9 @@ else {
       checkBlocks('pro guia ' + gd.id, p);
     });
   });
+});
+if (PMroot && PMroot.careers) {
+  Object.keys(LUX.data.pro.courses).forEach(id => { if (!proCourseIds.has(id)) err('pro curso ' + id, 'curso fora do manifesto profissional'); });
   Object.keys(LUX.data.pro.lessons).forEach(id => { if (!proLessonIds.has(id)) warn(id, 'lição profissional fora do manifesto'); });
   Object.keys(LUX.data.pro.guides).forEach(id => { if (!proGuideIds.has(id)) err('pro guia ' + id, 'guia fora do manifesto profissional'); });
 }
@@ -239,7 +262,7 @@ console.log('\nResumo:');
 L.forEach(l => console.log(`  ${l.id}  leitura: ${l._readingWords || 0} palavras · áudio: ${l._listeningWords || 0} palavras · exercícios: ${(l.reading.exercises.length + l.listening.exercises.length + l.grammarPractice.length)}`));
 Object.values(LUX.data.levelTests).forEach(t => console.log(`  teste ${t.level}: ${t._n || 0} questões`));
 console.log(`  ${L.length} lições · ${LUX.data.verbList.length} verbos · ${LUX.data.grammarList.length} tópicos de gramática · ${Object.keys(LUX.data.general).length} páginas de Gerais · ${LUX.data.lexicon.length} entradas no léxico`);
-console.log(`  Profissional: ${Object.keys(LUX.data.pro.lessons).length} lições · ${Object.keys(LUX.data.pro.guides).length} guias`);
+console.log(`  Profissional: ${Object.keys(LUX.data.pro.lessons).length} lições · ${Object.keys(LUX.data.pro.guides).length} guias · ${Object.keys(LUX.data.pro.courses).length} curso(s)`);
 console.log(`  Cobertura do léxico: ${missing.size ? missing.size + ' palavra(s) faltando' : '100%'}`);
 console.log(errors.length ? `\n${errors.length} erro(s).` : '\nTudo certo ✔');
 process.exit(errors.length ? 1 : 0);
