@@ -76,9 +76,9 @@ LUX.registerProLesson({
   grammar: {
     topicId: 'imparfait',
     title: 'Imparfait: como era antes',
-    explanationPt: 'O **imparfait** descreve **como as coisas eram** e **o que se fazia habitualmente** no passado — perfeito para falar da empresa "antes".\n\n' +
-      'Formação: radical do **nous** no presente (*nous **parl**ons*) + **-ais, -ais, -ait, -ions, -iez, -aient**. Única exceção: **être → ét-** (*c\'était, nous étions*).\n\n' +
-      'Expressões que pedem imparfait: **avant, au début, à l\'époque, tous les jours, d\'habitude**. Para o contraste, use o presente: ***Avant**, on décidait vite. **Maintenant**, on attend.*',
+    explanationPt: 'O ***imparfait*** descreve **como as coisas eram** e **o que se fazia habitualmente** no passado — perfeito para falar da empresa "antes".\n\n' +
+      'Formação: radical do ***nous*** no presente (*nous **parl**ons*) + **-ais, -ais, -ait, -ions, -iez, -aient**. Única exceção: **être → ét-** (*c\'était, nous étions*).\n\n' +
+      'Expressões que pedem imparfait: ***avant, au début, à l\'époque, tous les jours, d\'habitude***. Para o contraste, use o presente: ***Avant**, on décidait vite. **Maintenant**, on attend.*',
     table: { head: ['', 'être', 'avoir', 'décider', 'connaître'], rows: [
       ["je / j'", 'étais', 'avais', 'décidais', 'connaissais'], ['tu', 'étais', 'avais', 'décidais', 'connaissais'], ['il / elle / on', 'était', 'avait', 'décidait', 'connaissait'],
       ['nous', 'étions', 'avions', 'décidions', 'connaissions'], ['vous', 'étiez', 'aviez', 'décidiez', 'connaissiez'], ['ils / elles', 'étaient', 'avaient', 'décidaient', 'connaissaient']
@@ -89,8 +89,8 @@ LUX.registerProLesson({
       { fr: 'Le fondateur décidait tout.', pt: 'O fundador decidia tudo.' },
       { fr: 'Au début, on mangeait ensemble tous les midis.', pt: 'No começo, a gente almoçava junto todo dia.' }
     ],
-    ptComparison: 'O imparfait corresponde ao nosso **pretérito imperfeito**: *éramos, havia, decidia*. A lógica é a mesma do português — use-o para **descrever** e para **hábitos**.\n\n' +
-      '**Il y avait** = "havia/tinha" (descrição). **Il y a eu** = "houve" (fato pontual): *Il y avait trente personnes* × *Il y a eu trois départs*.'
+    ptComparison: 'O imparfait corresponde ao nosso **pretérito imperfeito**: _éramos, havia, decidia_. A lógica é a mesma do português — use-o para **descrever** e para **hábitos**.\n\n' +
+      '***Il y avait*** = "havia/tinha" (descrição). ***Il y a eu*** = "houve" (fato pontual): *Il y avait trente personnes* × *Il y a eu trois départs*.'
   },
   grammarPractice: [
     { type: 'fill_blank', prompt: 'Conjugue no imparfait.', items: [

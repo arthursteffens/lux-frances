@@ -171,12 +171,13 @@ Object.keys(LUX.data.general).forEach(id => {
 function checkBlocks(w, p, ex0) {
   const fr = (p.lang || 'fr') === 'fr';
   (p.blocks || []).forEach((b, bi) => {
-    if (!['intro', 'table', 'rules', 'phrases', 'tip', 'tool', 'quiz', 'links'].includes(b.type)) err(w, `bloco desconhecido: ${b.type}`);
+    if (!['intro', 'table', 'rules', 'phrases', 'tip', 'case', 'tool', 'quiz', 'links'].includes(b.type)) err(w, `bloco desconhecido: ${b.type}`);
     const ex = ex0 || {};
     const cover = (wh, t, n, e) => { if (fr) coverFn(wh, t, n, e); };
     if (b.type === 'table') (b.sections || []).forEach(s => { if (!s.letters) (s.items || []).forEach(it => cover(w, it.fr, {}, ex)); });
     if (b.type === 'phrases') (b.items || []).forEach(it => cover(w, it.fr, {}, ex));
     if (b.type === 'rules') (b.items || []).forEach(r => (r.examples || []).forEach(e => cover(w, e.fr, {}, ex)));
+    if (b.type === 'case' && (!b.textPt || !b.answerPt)) err(w, 'estudo de caso sem textPt/answerPt');
     if (b.type === 'quiz') (b.items || []).forEach((ex, i) => checkExercise(`${w} quiz #${i + 1}`, ex));
     if (b.type === 'links') (b.items || []).forEach(l => {
       const m = l.to.match(/^#\/(gramatica|gerais)\/(.+)$/);

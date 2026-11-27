@@ -34,7 +34,9 @@
   /* enunciado (frases em francês viram texto clicável) */
   X.prompt = function (text, source) {
     if (!text) return null;
-    var looksFr = /[àâçéèêëîïôûùœ]|\b(le|la|les|est|une|des|du|qui|que|quoi|où|vous|tu|il|elle)\b/i.test(text) && !/\b(você|não|é|o que|qual|ouça|complete|escolha|ligue|monte|coloque|traduza|como)\b/i.test(text);
+    var looksFr = /[àâçéèêëîïôûùœ]|\b(le|la|les|est|une|des|du|qui|que|quoi|où|vous|tu|il|elle)\b/i.test(text) && !/\b(você|não|é|o que|qual|ouça|complete|escolha|ligue|monte|coloque|traduza|como)\b/i.test(text)
+      && !/\*[^*\s][^*]*\*/.test(text); // texto em português com termos em *itálico* (aba Profissional) usa o markdown
+
     if (looksFr) return h('div', { class: 'ex-prompt' }, LUX.ui.frText(text, { source: source, block: false, gloss: false }));
     return h('div', { class: 'ex-prompt', html: U.mdInline(text) });
   };

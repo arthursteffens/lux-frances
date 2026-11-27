@@ -81,9 +81,9 @@ LUX.registerProLesson({
   grammar: {
     topicId: 'passe-compose',
     title: 'Contar a trajetória: passé composé com avoir e être',
-    explanationPt: 'Na entrevista, a trajetória é contada no **passé composé**: ações concluídas, com datas.\n\n' +
-      '- A maioria dos verbos usa **avoir**: *j\'ai travaillé, j\'ai géré, nous avons recruté, j\'ai quitté*.\n' +
-      '- Verbos de **movimento/mudança de estado** usam **être** e **concordam** com o sujeito: *je suis arrivé**e***, *elle est devenu**e***, *ils sont parti**s***.\n' +
+    explanationPt: 'Na entrevista, a trajetória é contada no ***passé composé***: ações concluídas, com datas.\n\n' +
+      '- A maioria dos verbos usa ***avoir***: *j\'ai travaillé, j\'ai géré, nous avons recruté, j\'ai quitté*.\n' +
+      '- Verbos de **movimento/mudança de estado** usam ***être*** e **concordam** com o sujeito: *je suis arrivé**e***, *elle est devenu**e***, *ils sont parti**s***.\n' +
       '- Os mais úteis numa trajetória: **arriver, partir, venir, devenir, rester, entrer, sortir, passer (de… à…)**.',
     table: { head: ['', 'avoir: gérer', 'être: devenir'], rows: [
       ["je / j'", 'ai géré', 'suis devenu(e)'], ['tu', 'as géré', 'es devenu(e)'], ['il / elle', 'a géré', 'est devenu / devenue'],
@@ -95,7 +95,7 @@ LUX.registerProLesson({
       { fr: 'Nous avons recruté quarante ingénieurs.', pt: 'Contratamos quarenta engenheiros.' },
       { fr: 'Je suis arrivée au Luxembourg en septembre.', pt: 'Cheguei a Luxemburgo em setembro.' }
     ],
-    ptComparison: '**Devenir** = "tornar-se, virar": *je suis devenue manager* = "virei gerente". Não traduza ao pé da letra com ~~j\'ai tourné~~.\n\n' +
+    ptComparison: '***Devenir*** = "tornar-se, virar": *je suis devenue manager* = "virei gerente". Não traduza ao pé da letra com ~~j\'ai tourné~~.\n\n' +
       '**Concordância com être:** uma mulher escreve *je suis arrivé**e***, *je suis parti**e***. Na fala, quase sempre soa igual — mas no CV e no e-mail, conta!'
   },
   grammarPractice: [
@@ -113,6 +113,6 @@ LUX.registerProLesson({
       ['Quel a été votre plus grand défi ?', 'Qual foi o seu maior desafio?'], ['Quels résultats avez-vous obtenus ?', 'Que resultados você obteve?'] ] },
     { type: 'order_sentence', prompt: 'Monte a frase.', answer: "J'ai accompagné trois directeurs pendant une réorganisation.", translation: 'Acompanhei três diretores durante uma reorganização.' }
   ],
-  tipForBrazilians: '**Resultados com números.** Em entrevistas na Europa, diga o que *você* fez e com que resultado: *"J\'ai recruté quarante personnes en un an"*, *"Nous avons réduit les départs de 20 %"*. Prefira **je** para o que foi seu e **nous** para o que foi do time — e não exagere: a cultura de trabalho em Luxemburgo valoriza a precisão mais do que a autopromoção.\n\n' +
-    '**Prepare 3 histórias** (um desafio, um conflito, um sucesso) em passé composé. Elas respondem a quase todas as perguntas de entrevista.'
+  tipForBrazilians: '**Resultados com números.** Em entrevistas na Europa, diga o que _você_ fez e com que resultado: *"J\'ai recruté quarante personnes en un an"*, *"Nous avons réduit les départs de 20 %"*. Prefira ***je*** para o que foi seu e ***nous*** para o que foi do time — e não exagere: a cultura de trabalho em Luxemburgo valoriza a precisão mais do que a autopromoção.\n\n' +
+    '**Prepare 3 histórias** (um desafio, um conflito, um sucesso) em *passé composé*. Elas respondem a quase todas as perguntas de entrevista.'
 });

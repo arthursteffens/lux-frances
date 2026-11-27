@@ -187,8 +187,11 @@
 
   function describeToken(word, ctxGloss) {
     if (!LUX.lexicon.ready()) LUX.lexicon.build();
-    var res = LUX.lexicon.lookup(word, { fuzzy: true, letters: true });
+    // 1) léxico do curso (forma exata); 2) dicionário completo, se baixado; 3) léxico sem acentos
+    var res = LUX.lexicon.lookup(word, { letters: true });
     var list = res.map(LUX.lexicon.describe);
+    if (!list.length && LUX.dict && LUX.dict.ready()) list = LUX.dict.describeWord(word);
+    if (!list.length) list = LUX.lexicon.lookup(word, { fuzzy: true, letters: true }).map(LUX.lexicon.describe);
     if (ctxGloss) list.unshift({ lemma: ctxGloss.text, display: ctxGloss.text, pt: ctxGloss.pt, note: ctxGloss.note, pos: 'no contexto', fromGloss: true });
     return list;
   }
@@ -212,7 +215,23 @@
     box.appendChild(head);
 
     if (!list.length) {
-      box.appendChild(h('p', { class: 'muted' }, 'Palavra não encontrada no léxico.'));
+      var D = LUX.dict;
+      if (D && D.available() && !D.ready() && !info.expression) {
+        // procura no dicionário completo: baixa (1ª vez, com o toque da pessoa) ou carrega do aparelho e reabre o balão
+        var retry = function () {
+          if (popup !== box) return;
+          var l2 = describeToken(info.word, null);
+          UI.openWordPopup(anchor, Object.assign({}, info, { list: l2, triedDict: true }));
+        };
+        var wait = h('p', { class: 'muted' });
+        var go = function () { wait.innerHTML = ''; wait.appendChild(h('span', { class: 'spinner', 'aria-hidden': 'true' })); wait.appendChild(document.createTextNode(' Procurando no dicionário completo…')); D.load().then(retry, function () { wait.textContent = '⚠️ Não foi possível baixar o dicionário agora.'; }); };
+        box.appendChild(wait);
+        if (D.downloaded() || D.state === 'loading') go();
+        else {
+          wait.textContent = 'Esta palavra não está no vocabulário do curso.';
+          box.appendChild(h('button', { class: 'btn sm primary', onclick: go }, '📖 Procurar no dicionário completo (baixa ' + D.sizeLabel() + ' uma vez)'));
+        }
+      } else box.appendChild(h('p', { class: 'muted' }, info.triedDict ? 'Palavra não encontrada no dicionário.' : 'Palavra não encontrada no léxico.'));
     }
     var transl = h('div', { class: 'popup-pt' }, main.pt || '');
     box.appendChild(transl);

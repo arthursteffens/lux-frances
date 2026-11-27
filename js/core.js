@@ -114,10 +114,26 @@
       return '<p>' + lines.map(U.mdInline).join('<br>') + '</p>';
     }).join('');
   };
+  /* *itálico* = termo em francês. Com U.frEm ligado (páginas da aba Profissional em francês), cada palavra
+     do itálico vira clicável (mesmo balão de tradução das lições). _itálico_ = itálico comum (inglês etc.). */
+  U.frEm = false;
+  function unesc(s) { return s.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&'); }
+  U.frWordsHtml = function (text) {
+    return U.tokenize(text).map(function (t) { return t.w ? '<span class="w">' + U.esc(t.text) + '</span>' : U.esc(t.text); }).join('');
+  };
+  function em(inner) {
+    if (!U.frEm || /<(?!\/?strong>)/.test(inner)) return '<em>' + inner + '</em>';
+    // negrito dentro do itálico (*je m'occupe **du** recrutement*): mantém o <strong>, palavras clicáveis
+    return '<em class="fr-text fr-in" lang="fr">' + inner.split(/(<\/?strong>)/).map(function (part) {
+      return /^<\/?strong>$/.test(part) ? part : U.frWordsHtml(unesc(part));
+    }).join('') + '</em>';
+  }
   U.mdInline = function (s) {
     return U.esc(s)
+      .replace(/\*\*\*([^*]+)\*\*\*/g, function (m, x) { return '<strong>' + em(x) + '</strong>'; })
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/\*(.+?)\*/g, function (m, x) { return em(x); })
+      .replace(/(^|[\s(“"])_([^_\s][^_]*?)_(?=$|[\s.,;:!?)”"])/g, '$1<em>$2</em>')
       .replace(/`(.+?)`/g, '<code>$1</code>');
   };
 

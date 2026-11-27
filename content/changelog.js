@@ -1,6 +1,7 @@
 /* Histórico de versões (mais recente primeiro). Gerado por tools/release.js — não edite à mão.
    Usado na página Novidades: mostra o que mudou desde a última versão que a pessoa viu neste aparelho. */
 LUX.changelog = [
+  {"build":"20261127-1646-eebe6ef","date":"2026-11-27T19:46:25.351Z","notes":"Profissional: Parte 2 do curso de direito do trabalho em Luxemburgo (11 módulos de aprofundamento para HRBP, com estudos de caso). Em toda a aba Profissional, termos em francês nos textos em português ficam clicáveis para ver a tradução; siglas sempre com o nome completo em francês."},
   {"build":"20261127-1446-01e867a","date":"2026-11-27T17:46:26.316Z","notes":"Nova aba Dicionário: francês ↔ português com cerca de 70 mil palavras, busca nos dois sentidos e por palavra flexionada. A aba Verbos passa a ter todos os ~35 mil verbos do francês, com conjugação. O dicionário é baixado na primeira vez que for aberto (1,3 MB) e depois funciona offline."},
   {"build":"20261127-1118-2496601","date":"2026-11-27T14:18:47.930Z","notes":"Avisos discretos no canto da tela; botão Novidades mostra tudo o que mudou desde a sua última visita"},
   {"build":"20261127-1009-5311700","date":"2026-11-27T13:09:39.126Z","notes":"HRBP: lista de cursos presenciais recomendados (Chambre des salariés e outros), com link para turmas e inscrição"},

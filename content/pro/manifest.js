@@ -13,7 +13,8 @@ LUX.proManifest = {
     { id: 'hrbp', label: 'HRBP', icon: '🤝', status: 'active', title: 'HR Business Partner',
     desc: 'Recursos Humanos em empresas de tecnologia (e um pouco de fintech), para quem vai trabalhar em Luxemburgo ou em outro país francófono.',
     courses: [
-      { id: 'droit-travail-lu', icon: '⚖️', title: 'Direito do trabalho em Luxemburgo: o essencial', desc: 'Fontes e atores, contrato e período de experiência, tempo de trabalho, férias e salário, doença, fim do contrato.' }
+      { id: 'droit-travail-lu', icon: '⚖️', title: 'Direito do trabalho em Luxemburgo — Parte 1: o essencial', desc: 'Fontes e atores, contrato e período de experiência, tempo de trabalho, férias e salário, doença, fim do contrato.' },
+      { id: 'droit-travail-lu-2', icon: '📚', title: 'Direito do trabalho em Luxemburgo — Parte 2: aprofundamento', desc: 'Cláusulas e mudanças no contrato, teletrabalho e fronteiriços, horários, licenças, remuneração, assédio, saúde, dispensa (individual e coletiva), delegação do pessoal, estrangeiros e dados. Com estudos de caso.' }
     ],
     /* cursos presenciais de outras instituições (sem datas: as turmas mudam a cada semestre; o link mostra as atuais).
        Preços conferidos em novembro de 2026 em lifelong-learning.lu. */

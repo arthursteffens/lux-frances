@@ -3,8 +3,8 @@
    Roteiro inspirado no programa "Les fondamentaux du droit du travail pour les professionnels RH" (LLLC / Chambre des salariés).
    Valores em euros mudam com a indexação: ao atualizar, confira em guichet.public.lu → Paramètres sociaux. */
 LUX.registerProCourse({
-  id: 'droit-travail-lu', lang: 'fr', hours: 3,
-  title: 'Direito do trabalho em Luxemburgo: o essencial',
+  id: 'droit-travail-lu', lang: 'fr', hours: 1,
+  title: 'Direito do trabalho em Luxemburgo — Parte 1: o essencial',
   titleFr: 'Les fondamentaux du droit du travail luxembourgeois',
   note: '**Material de estudo**, baseado no *Code du travail* e no portal oficial **guichet.lu** (consultados em novembro de 2026). Não substitui o texto da lei nem a convenção coletiva da empresa, que pode dar mais direitos. Valores em euros mudam com a indexação dos salários.',
   modules: [
@@ -14,11 +14,11 @@ LUX.registerProCourse({
       blocks: [
         { type: 'intro', textPt: 'Antes de responder a qualquer dúvida de um gestor, o HRBP precisa saber **onde está a regra**. Em Luxemburgo, o direito do trabalho fica quase todo num só lugar: o ***Code du travail***, publicado no **Legilux** (o diário oficial). A língua oficial das leis é o **francês**.\n\nAs regras se somam em camadas: **lei** → **convenção coletiva** (*convention collective*) → **regulamento interno** (*règlement intérieur*) → **contrato de trabalho**. Vale o **princípio da regra mais favorável**: um nível de baixo só pode **melhorar** o que o de cima garante, nunca piorar. Um contrato que dá 22 dias de férias, por exemplo, não vale nesse ponto: a lei garante 26.' },
         { type: 'rules', items: [
-          { title: 'A lei: o Code du travail', textPt: 'Organizado em **livros** (*livres*): o Livro I trata das relações individuais (contrato, tempo de trabalho, férias, salário, fim do contrato); o Livro IV, da representação do pessoal. Os artigos têm a forma **L.121-1** (L = parte legislativa).',
+          { title: 'A lei: o *Code du travail*',textPt: 'Organizado em **livros** (*livres*): o Livro I trata das relações individuais (contrato, tempo de trabalho, férias, salário, fim do contrato); o Livro IV, da representação do pessoal. Os artigos têm a forma **L.121-1** (L = parte legislativa).',
             examples: [{ fr: "Selon le Code du travail, le contrat doit être écrit.", pt: 'Segundo o Code du travail, o contrato deve ser escrito.' }] },
           { title: 'A convenção coletiva', textPt: 'Negociada entre sindicatos e empregadores, para um setor (ex.: bancos, seguros) ou uma empresa. Pode dar **mais** férias, salários mínimos por função, 13º salário etc. Sempre pergunte: **a empresa tem convenção coletiva?**',
             examples: [{ fr: "Est-ce qu'il y a une convention collective dans l'entreprise ?", pt: 'Existe uma convenção coletiva na empresa?' }] },
-          { title: 'Os órgãos que o RH encontra', textPt: '**ITM** (*Inspection du travail et des mines*): fiscaliza e responde dúvidas sobre a lei. **CCSS** (*Centre commun de la sécurité sociale*): o empregador **declara** a entrada e a saída de cada empregado e os salários. **CNS** (*Caisse nationale de santé*): seguro-saúde; paga a licença médica longa. **ADEM**: agência de emprego (vagas, desemprego). **Chambre des salariés (CSL)**: representa os empregados e oferece cursos. **Tribunal du travail**: julga os conflitos.',
+          { title: 'Os órgãos que o RH encontra', textPt: '**ITM** (*Inspection du travail et des mines*): fiscaliza e responde dúvidas sobre a lei. **CCSS** (*Centre commun de la sécurité sociale*): o empregador **declara** a entrada e a saída de cada empregado e os salários. **CNS** (*Caisse nationale de santé*): seguro-saúde; paga a licença médica longa. **ADEM** (*Agence pour le développement de l\'emploi*): agência pública de emprego (vagas, desemprego). **CSL** (*Chambre des salariés*): representa os empregados e oferece cursos. ***Tribunal du travail*** (tribunal do trabalho): julga os conflitos.\n\n*Mines* = **minas**: o nome vem da época em que a inspeção também fiscalizava as minas de ferro do sul de Luxemburgo.',
             examples: [{ fr: "Pour une question sur la loi, on peut contacter l'ITM.", pt: 'Para uma dúvida sobre a lei, dá para contatar a ITM.' }] },
           { title: 'A delegação do pessoal', textPt: 'Empresas com **pelo menos 15 empregados** têm uma ***délégation du personnel***, eleita **a cada 5 anos** (as últimas eleições foram em março de 2024). Ela é informada e consultada sobre organização, saúde e segurança, igualdade. Os delegados têm **proteção especial contra a dispensa** durante o mandato e por alguns meses depois.',
             examples: [{ fr: 'Nous devons informer la délégation du personnel.', pt: 'Precisamos informar a delegação do pessoal.' }] }
@@ -41,12 +41,12 @@ LUX.registerProCourse({
       ],
       exercises: [
         { type: 'multiple_choice', prompt: 'Onde está, em Luxemburgo, a maior parte das regras do direito do trabalho?', options: ['No Code du travail.', 'No Código Civil.', 'Só nas convenções coletivas.', 'Nos contratos de cada empresa.'], answer: 0,
-          explanationPt: 'O Code du travail reúne quase todas as regras; convenções e contratos só podem melhorá-las.' },
+          explanationPt: 'O *Code du travail* reúne quase todas as regras; convenções e contratos só podem melhorá-las.' },
         { type: 'multiple_choice', prompt: 'Um contrato prevê 22 dias de férias por ano. O que vale?', options: ['Os 26 dias da lei: o contrato não pode dar menos.', 'Os 22 dias, porque o empregado assinou.', 'A média: 24 dias.', 'Depende da ITM.'], answer: 0,
           explanationPt: 'Princípio da regra mais favorável: o contrato só pode melhorar o mínimo legal.' },
         { type: 'multiple_choice', prompt: 'A quem o empregador declara a entrada de um novo empregado e os salários?', options: ['À CCSS.', 'À ADEM.', 'À Chambre des salariés.', 'Ao Tribunal du travail.'], answer: 0,
-          explanationPt: 'A CCSS (Centre commun de la sécurité sociale) recebe as declarações de entrada, saída e salários.' },
-        { type: 'multiple_choice', prompt: 'A partir de quantos empregados a empresa precisa de uma délégation du personnel?', options: ['15', '50', '150', '5'], answer: 0,
+          explanationPt: 'A **CCSS** (*Centre commun de la sécurité sociale*) recebe as declarações de entrada, saída e salários.' },
+        { type: 'multiple_choice', prompt: 'A partir de quantos empregados a empresa precisa de uma *délégation du personnel*?', options: ['15', '50', '150', '5'], answer: 0,
           explanationPt: 'Com pelo menos 15 empregados, há eleições a cada 5 anos.' },
         { type: 'match', prompt: 'Associe cada sigla ao seu papel.', pairs: [['ITM', 'fiscaliza a lei do trabalho'], ['CNS', 'seguro-saúde, paga a licença longa'], ['ADEM', 'agência de emprego'], ['CCSS', 'recebe as declarações do empregador']] }
       ]
@@ -60,7 +60,7 @@ LUX.registerProCourse({
         { type: 'rules', items: [
           { title: 'CDD: limites', textPt: 'Duração máxima de **24 meses, renovações incluídas**, e no máximo **2 renovações** (previstas no contrato ou num aditivo assinado). Passou disso, vira **CDI**. O contrato deve dizer o **motivo**, a **data de fim** (ou a duração mínima) e, se for uma substituição, **quem** é substituído. Entre dois CDD para o **mesmo posto**, há uma carência de **1/3 da duração** do contrato anterior.',
             examples: [{ fr: 'Le CDD ne peut pas dépasser vingt-quatre mois.', pt: 'O CDD não pode passar de vinte e quatro meses.' }] },
-          { title: 'Período de experiência: duração', textPt: 'A *période d\'essai* também precisa estar **por escrito** até a entrada em serviço; senão, o contrato já é definitivo. **Mínimo: 2 semanas.** **Máximo: 3 meses** se a formação é inferior ao nível **DAP/CATP** (formação profissional); **6 meses** nos demais casos; **12 meses** se o salário bruto mensal for de pelo menos **5.188,69 €** (valor de 2026). Só **um** período de experiência por relação de trabalho: não se renova.',
+          { title: 'Período de experiência: duração', textPt: 'A *période d\'essai* também precisa estar **por escrito** até a entrada em serviço; senão, o contrato já é definitivo. **Mínimo: 2 semanas.** **Máximo: 3 meses** se a formação é inferior ao nível **DAP** (*diplôme d\'aptitude professionnelle*): diploma de formação profissional, antigo **CATP** (*certificat d\'aptitude technique et professionnelle*); **6 meses** nos demais casos; **12 meses** se o salário bruto mensal for de pelo menos **5.188,69 €** (valor de 2026). Só **um** período de experiência por relação de trabalho: não se renova.',
             examples: [{ fr: "La période d'essai est de six mois.", pt: 'O período de experiência é de seis meses.' }] },
           { title: 'Período de experiência: como terminar', textPt: 'Qualquer um dos lados pode encerrar, **por escrito** (carta registrada ou entregue em mãos contra assinatura), **sem precisar dar motivo**. Mas há **aviso prévio**: **4 dias por mês** de experiência previsto, com mínimo de **15 dias** e máximo de **1 mês** (ex.: 6 meses → 24 dias). Nas **2 primeiras semanas**, só é possível encerrar por **falta grave**. Se o empregado ficar **doente**, o período é suspenso e prolongado (até 1 mês) e o empregador não pode encerrá-lo durante a doença.',
             examples: [{ fr: "Nous mettons fin au contrat pendant la période d'essai.", pt: 'Encerramos o contrato durante o período de experiência.' }] }
@@ -100,13 +100,13 @@ LUX.registerProCourse({
       blocks: [
         { type: 'intro', textPt: 'Três perguntas que o HRBP ouve toda semana: **quantas horas** posso pedir, **quantos dias de férias** a pessoa tem e **quanto** é o mínimo que a empresa pode pagar.' },
         { type: 'rules', items: [
-          { title: 'Horas de trabalho', textPt: 'Duração normal: **8 horas por dia** e **40 horas por semana**. Com horas extras, o limite absoluto é de **10 horas por dia** e **48 horas por semana**. As horas extras (*heures supplémentaires*) são, em regra, compensadas com **descanso de 1h30 por hora extra**; se não for possível, são **pagas com acréscimo de 40%**. Muitas empresas usam um **plano de organização do trabalho** (*POT*) ou horário flexível, que distribuem as horas num período de referência.',
+          { title: 'Horas de trabalho', textPt: 'Duração normal: **8 horas por dia** e **40 horas por semana**. Com horas extras, o limite absoluto é de **10 horas por dia** e **48 horas por semana**. As horas extras (*heures supplémentaires*) são, em regra, compensadas com **descanso de 1h30 por hora extra**; se não for possível, são **pagas com acréscimo de 40%**. Muitas empresas usam um **plano de organização do trabalho** (**POT**, *plan d\'organisation du travail*) ou horário flexível, que distribuem as horas num período de referência.',
             examples: [{ fr: 'La durée normale de travail est de quarante heures par semaine.', pt: 'A duração normal do trabalho é de quarenta horas por semana.' }] },
           { title: 'Férias: 26 dias úteis', textPt: 'Todo empregado tem **26 dias úteis** (*jours ouvrables*) de férias pagas por ano, ou seja, **2,17 dias por mês** de trabalho. Pode começar a tirá-las depois de **3 meses** sem interrupção (antes, só se o empregador aceitar). Em regra, são tiradas **no mesmo ano**; podem passar para **até 31 de março** do ano seguinte quando o serviço impediu (ou depois de licença maternidade, parental ou doença). Ficar **doente nas férias**: com atestado (em até 3 dias úteis, se estiver em Luxemburgo), os dias de doença **não contam** como férias.',
             examples: [{ fr: 'Chaque salarié a vingt-six jours de congé par an.', pt: 'Cada empregado tem vinte e seis dias de férias por ano.' }] },
           { title: '11 feriados legais', textPt: 'Ano-Novo, segunda-feira de Páscoa, 1º de maio, **Dia da Europa (9 de maio)**, Ascensão, segunda-feira de Pentecostes, **festa nacional (23 de junho)**, Assunção (15 de agosto), Todos os Santos (1º de novembro), Natal (25 de dezembro) e Santo Estêvão (26 de dezembro). Se um feriado cai num **domingo**, o empregado ganha um dia de folga compensatória.',
             examples: [{ fr: 'Le vingt-trois juin est la fête nationale.', pt: 'O dia vinte e três de junho é a festa nacional.' }] },
-          { title: 'Salário social mínimo e indexação', textPt: 'O ***salaire social minimum* (SSM)** é o piso legal. Desde **1º de junho de 2026**: **2.771,33 €** brutos por mês para quem tem 18 anos ou mais; **3.325,59 €** (+20%) para o empregado **qualificado** (*qualifié*: diploma profissional reconhecido ou experiência equivalente). Jovens de 17 a 18 anos: 80%; de 15 a 17: 75%. Além disso, todos os salários são **indexados**: quando a inflação acumula **2,5%**, eles sobem na mesma proporção. O **13º salário não é obrigatório** por lei: só existe se o contrato ou a convenção coletiva prevê.',
+          { title: 'Salário social mínimo e indexação', textPt: 'O **SSM** (*salaire social minimum*): salário mínimo legal, é o piso. Desde **1º de junho de 2026**: **2.771,33 €** brutos por mês para quem tem 18 anos ou mais; **3.325,59 €** (+20%) para o empregado **qualificado** (*qualifié*: diploma profissional reconhecido ou experiência equivalente). Jovens de 17 a 18 anos: 80%; de 15 a 17: 75%. Além disso, todos os salários são **indexados**: quando a inflação acumula **2,5%**, eles sobem na mesma proporção. O **13º salário não é obrigatório** por lei: só existe se o contrato ou a convenção coletiva prevê.',
             examples: [{ fr: 'Les salaires augmentent avec l\'indexation.', pt: 'Os salários aumentam com a indexação.' }] }
         ] },
         { type: 'table', sections: [
@@ -172,7 +172,7 @@ LUX.registerProCourse({
         { type: 'multiple_choice', prompt: 'Um empregado avisou e mandou o atestado em dia. Por quanto tempo, no máximo, ele está protegido contra a dispensa?', options: ['Até 26 semanas desde o início da incapacidade.', '77 dias.', '12 meses.', 'Não há proteção.'], answer: 0,
           explanationPt: 'A proteção vale durante a incapacidade, até 26 semanas.' },
         { type: 'multiple_choice', prompt: 'Até quando o empregador continua pagando o salário durante a doença?', options: ['Até o fim do mês em que cai o 77º dia de incapacidade.', 'Até o 3º dia.', 'Sempre, sem limite.', 'Até o fim do ano.'], answer: 0,
-          explanationPt: 'Depois disso, quem paga é a CNS. A Mutualité reembolsa 80% ao empregador.' },
+          explanationPt: 'Depois disso, quem paga é a **CNS** (*Caisse nationale de santé*). A *Mutualité des employeurs* reembolsa 80% ao empregador.' },
         { type: 'multiple_choice', prompt: 'O gestor quer saber "qual é a doença" de um empregado. O que o HRBP responde?', options: ['O atestado traz as datas; o diagnóstico é confidencial e não deve ser pedido.', 'O RH pode ligar para o médico.', 'O empregado é obrigado a contar.', 'A CNS informa se a empresa pedir.'], answer: 0,
           explanationPt: 'A empresa recebe a via com as datas da incapacidade, não o diagnóstico.' }
       ]
@@ -209,10 +209,10 @@ LUX.registerProCourse({
         ] }
       ],
       exercises: [
-        { type: 'multiple_choice', prompt: 'Em francês, "la démission" é…', options: ['…quando o empregado pede para sair.', '…quando a empresa dispensa o empregado.', '…a indenização de saída.', '…o aviso prévio.'], answer: 0,
-          explanationPt: 'Falso amigo! A dispensa pelo empregador é "le licenciement".' },
+        { type: 'multiple_choice', prompt: 'Em francês, *la démission* é…', options: ['…quando o empregado pede para sair.', '…quando a empresa dispensa o empregado.', '…a indenização de saída.', '…o aviso prévio.'], answer: 0,
+          explanationPt: 'Falso amigo! A dispensa pelo empregador é *le licenciement*.' },
         { type: 'multiple_choice', prompt: 'Uma empregada com 7 anos de casa é dispensada com aviso prévio. Qual o aviso e a indenização?', options: ['4 meses de aviso e 1 mês de indenização.', '2 meses de aviso e nenhuma indenização.', '6 meses de aviso e 2 meses de indenização.', '1 mês de aviso e 1 mês de indenização.'], answer: 0,
-          explanationPt: 'De 5 a 10 anos: aviso de 4 meses e indemnité de départ de 1 mês.' },
+          explanationPt: 'De 5 a 10 anos: aviso de 4 meses e *indemnité de départ* de 1 mês.' },
         { type: 'multiple_choice', prompt: 'Um empregado com 3 anos de casa pede demissão. Qual o aviso prévio dele?', options: ['1 mês', '2 meses', '3 meses', 'Nenhum'], answer: 0,
           explanationPt: 'Pedido de demissão: 1 mês (menos de 5 anos), 2 meses (5 a 10), 3 meses (10 ou mais).' },
         { type: 'multiple_choice', prompt: 'A carta de dispensa foi enviada em 20 de março. Quando começa o aviso prévio?', options: ['1º de abril.', '15 de março.', '20 de março.', '15 de abril.'], answer: 0,

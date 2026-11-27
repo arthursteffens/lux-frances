@@ -190,6 +190,28 @@
   };
   D.entries = function (w) { return D.state === 'ready' ? (byKey[U.norm(w)] || []).filter(function (e) { return U.lowerFr(e.w) === U.lowerFr(w); }).concat((byKey[U.norm(w)] || []).filter(function (e) { return U.lowerFr(e.w) !== U.lowerFr(w); })) : []; };
 
+  /* balão de palavra (lições, aba Profissional): entradas do dicionário para uma palavra do texto,
+     no mesmo formato de LUX.lexicon.describe. Palavra exata primeiro; senão, plural/feminino/forma verbal. */
+  D.describeWord = function (word) {
+    if (D.state !== 'ready' || !word) return [];
+    var lw = U.lowerFr(word).replace(/’/g, "'"), q = U.norm(word);
+    var all = byKey[q] || [];
+    var res = all.filter(function (e) { return U.lowerFr(e.w) === lw; });
+    if (!res.length && /^[A-ZÀ-Ý]/.test(word)) res = all.filter(function (e) { return U.lowerFr(e.w) === lw.toLowerCase(); });
+    res = res.map(function (e) { return { e: e, s: 0 }; });
+    if (!res.length) res = D.formsOf(word).map(function (f) { return { e: f.e, s: 0.5, formOf: f.label }; });
+    if (!res.length) res = all.map(function (e) { return { e: e, s: 1 }; });
+    res.sort(rank);
+    return res.slice(0, 6).map(function (r) {
+      var e = r.e, x = e.x || {}, pt = D.translation(e);
+      return {
+        lemma: e.w, display: D.display(e), pt: pt || (x.d ? '(definição em francês) ' + x.d : ''), pos: POS[e.p] || e.p || '',
+        gender: e.p === 'n' && e.g ? e.g : null, isVerb: e.p === 'v', inf: e.p === 'v' ? e.w : null,
+        formOf: r.formOf || null, fromDict: true
+      };
+    });
+  };
+
   /* ---------- exibição ---------- */
   var POS = { n: 'substantivo', adj: 'adjetivo', adv: 'advérbio', prep: 'preposição', conj: 'conjunção', pron: 'pronome', det: 'determinante',
     art: 'artigo', interj: 'interjeição', expr: 'expressão', num: 'numeral', v: 'verbo', np: 'nome próprio' };

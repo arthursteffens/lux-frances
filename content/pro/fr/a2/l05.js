@@ -84,8 +84,8 @@ LUX.registerProLesson({
     topicId: 'imperatif',
     title: 'Imperativo para instruções (vous e tu) + y',
     explanationPt: 'Em guias, e-mails de onboarding e mensagens rápidas, as instruções vêm no **imperativo** — o verbo **sem o sujeito**:\n\n' +
-      '- **vous** (formal, documentos): *Signez, Venez, Remplissez, N\'hésitez pas.*\n' +
-      '- **tu** (colegas, chat): *Prends, Viens, Va, Remplis.* Nos verbos em **-er**, o *tu* perde o **-s**: *tu passes → **Passe** !*, *tu vas → **Va** !*\n' +
+      '- ***vous*** (formal, documentos): *Signez, Venez, Remplissez, N\'hésitez pas.*\n' +
+      '- ***tu*** (colegas, chat): *Prends, Viens, Va, Remplis.* Nos verbos em **-er**, o *tu* perde o **-s**: *tu passes → **Passe** !*, *tu vas → **Va** !*\n' +
       '- Com pronome no afirmativo, ele vem **depois**, com hífen: *Remplis**-le***, *Envoyez**-nous***. No negativo, volta para antes: *Ne **l\'**oublie pas.*\n\n' +
       '**Y** substitui um lugar: *Au service informatique ? Tu **y** reçois ton ordinateur.* / *On **y** va !*',
     table: { head: ['Verbo', 'tu', 'vous'], rows: [
@@ -97,7 +97,7 @@ LUX.registerProLesson({
       { fr: "N'oubliez pas votre badge.", pt: 'Não esqueça seu crachá.' },
       { fr: 'La cafétéria ? On y déjeune le jeudi.', pt: 'A cafeteria? A gente almoça lá na quinta.' }
     ],
-    ptComparison: 'Em português falado, usamos o imperativo com "você" de forma bem livre (*vem cá, pega o crachá*). Em francês, escolha **um** registro e mantenha: **tu** com *viens, prends*; **vous** com *venez, prenez*. Misturar soa estranho.\n\n' +
+    ptComparison: 'Em português falado, usamos o imperativo com "você" de forma bem livre (_vem cá, pega o crachá_). Em francês, escolha **um** registro e mantenha: ***tu*** com *viens, prends*; ***vous*** com *venez, prenez*. Misturar soa estranho.\n\n' +
       '**Andares:** *le rez-de-chaussée* é o térreo; *le premier étage* é o primeiro andar acima dele — igual ao Brasil.'
   },
   grammarPractice: [
@@ -114,6 +114,6 @@ LUX.registerProLesson({
       explanationPt: 'Y substitui o lugar (à la cafétéria) e vem antes do verbo.' },
     { type: 'order_sentence', prompt: 'Monte a frase.', answer: "N'hésitez pas à poser des questions.", translation: 'Fique à vontade para fazer perguntas.' }
   ],
-  tipForBrazilians: '**Onboarding é a primeira impressão.** Um bom parcours d\'intégration tem três momentos: *avant l\'arrivée* (contrato, equipamento), *la première semaine* (pessoas, ferramentas) e *les trois premiers mois* (objetivos, feedback). Em muitas empresas em Luxemburgo, o novo funcionário ganha um **parrain/marraine** (buddy).\n\n' +
-    '**Mutuelle × CNS:** na França, *la mutuelle* é o plano de saúde complementar oferecido pela empresa. Em Luxemburgo, a saúde básica é coberta pela **CNS** (Caisse nationale de santé), e algumas empresas oferecem um seguro complementar.'
+  tipForBrazilians: '**Onboarding é a primeira impressão.** Um bom parcours d\'intégration tem três momentos: *avant l\'arrivée* (contrato, equipamento), *la première semaine* (pessoas, ferramentas) e *les trois premiers mois* (objetivos, feedback). Em muitas empresas em Luxemburgo, o novo funcionário ganha um ***parrain/marraine*** (buddy).\n\n' +
+    '**Mutuelle × CNS:** na França, *la mutuelle* é o plano de saúde complementar oferecido pela empresa. Em Luxemburgo, a saúde básica é coberta pela **CNS** (*Caisse nationale de santé*): o seguro-saúde público, e algumas empresas oferecem um seguro complementar.'
 });

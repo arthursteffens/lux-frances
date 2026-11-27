@@ -25,7 +25,7 @@ LUX.registerProGuide({
       ] }
     ] },
     { type: 'rules', items: [
-      { title: 'Madame / Monsieur + sobrenome', textPt: 'No formal, use **Madame** ou **Monsieur** + **sobrenome** (*Bonjour Madame Muller*), nunca o primeiro nome (~~Madame Sophie~~). Entre colegas, o primeiro nome basta: *Bonjour Sophie*.',
+      { title: 'Madame / Monsieur + sobrenome', textPt: 'No formal, use ***Madame*** ou ***Monsieur*** + **sobrenome** (*Bonjour Madame Muller*), nunca o primeiro nome (~~Madame Sophie~~). Entre colegas, o primeiro nome basta: *Bonjour Sophie*.',
         examples: [{ fr: 'Bonjour Monsieur Weber, je vous écris au sujet du contrat.', pt: 'Prezado Sr. Weber, escrevo a respeito do contrato.' }] },
       { title: 'Um e-mail completo', textPt: 'Estrutura: **saudação → contexto → pedido → próximo passo → encerramento**.',
         examples: [{ fr: 'Bonjour Laura, suite à notre réunion, vous trouverez ci-joint le plan de recrutement. Pourriez-vous me confirmer les priorités avant jeudi ? Bien cordialement, Marina', pt: 'Olá, Laura, em seguida à nossa reunião, segue em anexo o plano de contratações. Poderia me confirmar as prioridades até quinta? Cordialmente, Marina' }] }

@@ -67,6 +67,18 @@
     return (cur && LUX.data.lessons[cur] && LUX.data.lessons[cur].level) || 'A2';
   };
 
+  /* páginas em francês: termos em itálico nos textos em português ficam clicáveis (U.mdInline) e o
+     dicionário completo carrega sozinho se já foi baixado, para o balão achar qualquer palavra */
+  function frPage(lang) {
+    U.frEm = (lang || 'fr') === 'fr';
+    if (U.frEm && LUX.dict) LUX.dict.autoLoad();
+  }
+  /* subtítulo em francês, com palavras clicáveis */
+  function frLine(text, lang, source) {
+    if (lang !== 'fr') return h('p', { class: 'muted', lang: lang }, text);
+    return h('p', { class: 'muted fr-sub' }, UI.frText(text, { inline: true, block: false, gloss: false, sentences: false, source: source }));
+  }
+
   function langOf(params, cid) {
     var q = params.query.lang;
     var info = q && PRO.langInfo(q, cid);
@@ -84,6 +96,14 @@
   PRO.courseDone = function (p, c) {
     var st = PRO.courseState(p, c.id);
     return c.modules.filter(function (m) { var r = st.modules[m.id]; return r && r.best >= 0.7; }).length;
+  };
+
+  /* curso com pré-requisito (ex.: Parte 2 só depois da Parte 1 concluída) */
+  PRO.courseLock = function (p, c) {
+    var req = c && c.requires && LUX.data.pro.courses[c.requires];
+    if (!req || (p && p.unlockedAll)) return null;
+    if (PRO.courseDone(p, req) >= req.modules.length) return null;
+    return req;
   };
 
   /* ---------- página principal ---------- */
@@ -118,10 +138,11 @@
           courses.forEach(function (it) {
             var c = LUX.data.pro.courses[it.id];
             var n = c ? c.modules.length : 0, done = c ? PRO.courseDone(p, c) : 0;
-            cg.appendChild(h(c ? 'a' : 'div', { class: 'gen-card pro-course' + (c ? '' : ' soon'), href: c ? '#/pro/curso/' + it.id : null }, [
-              h('span', { class: 'gen-ico', 'aria-hidden': 'true' }, it.icon || '📘'),
+            var lockBy = c && PRO.courseLock(p, c);
+            cg.appendChild(h(c ? 'a' : 'div', { class: 'gen-card pro-course' + (c ? '' : ' soon') + (lockBy ? ' locked' : ''), href: c ? '#/pro/curso/' + it.id : null }, [
+              h('span', { class: 'gen-ico', 'aria-hidden': 'true' }, lockBy ? '🔒' : (it.icon || '📘')),
               h('span', null, [h('b', null, it.title), h('span', { class: 'muted sm' }, it.desc),
-                c ? h('span', { class: 'muted sm pro-course-meta' }, (done ? (done === n ? '✅ ' : '') + done + ' de ' + n + ' módulos concluídos' : n + ' módulos') + (c.hours ? ' · cerca de ' + c.hours + ' h' : '')) : null]),
+                c ? h('span', { class: 'muted sm pro-course-meta' }, (lockBy ? '🔒 Libera ao concluir a Parte 1 · ' : '') + (done ? (done === n ? '✅ ' : '') + done + ' de ' + n + ' módulos concluídos' : n + ' módulos') + (c.hours ? ' · cerca de ' + c.hours + ' h' : '')) : null]),
               c ? null : h('span', { class: 'soon-tag' }, 'em breve')
             ]));
           });
@@ -137,7 +158,7 @@
           ext.forEach(function (x) {
             ul.appendChild(h('li', { class: 'card pro-ext-item' }, [
               h('div', { class: 'row between wrap' }, [
-                h('div', null, [h('b', { lang: 'fr' }, x.title), x.code ? h('span', { class: 'muted sm' }, ' · ' + x.code) : null]),
+                h('div', null, [h('b', null, UI.frText(x.title, { inline: true, block: false, gloss: false, sentences: false })), x.code ? h('span', { class: 'muted sm' }, ' · ' + x.code) : null]),
                 x.tag ? h('span', { class: 'chip sm on' }, x.tag) : null
               ]),
               h('div', { class: 'muted sm' }, x.provider + ' · ' + x.info),
@@ -229,6 +250,7 @@
     var p = LUX.profiles.current();
     var m = PRO.meta(params.id);
     var home = PRO.href(m ? m.career : '', l ? l.lang : '');
+    frPage(l && l.lang);
     return LUX.lessons.view(l, p, params, {
       route: '#/pro/licao/' + params.id, nav: 'pro', back: [home, 'Voltar ao Profissional'],
       crumbs: l ? [['Profissional', home], [l.level, home], [l.title, null]] : [['Profissional', '#/pro']],
@@ -260,6 +282,7 @@
     var co = gd && PRO.careerOf('guide', gd.id);
     var meta = co ? co.item : null;
     var home = PRO.href(co ? co.career.id : '', gd ? gd.lang : '');
+    frPage(gd && gd.lang);
     return {
       title: gd ? gd.title : 'Guia', nav: 'pro',
       crumbs: [['Profissional', home], [gd ? gd.title : 'Guia', null]],
@@ -279,7 +302,7 @@
         }
         main.appendChild(h('div', { class: 'page-head' }, [h('div', null, [
           h('div', { class: 'row gap' }, [gd.level ? UI.levelTag(gd.level) : null, h('span', { class: 'muted sm' }, '💼 Profissional')]),
-          h('h1', null, ((meta && meta.icon) || '🧭') + ' ' + gd.title), gd.titleFr ? h('p', { class: 'muted', lang: gd.lang }, gd.titleFr) : null
+          h('h1', null, ((meta && meta.icon) || '🧭') + ' ' + gd.title), gd.titleFr ? frLine(gd.titleFr, gd.lang, source) : null
         ]), head]));
         LUX.general.renderBlocks(main, gd, source);
         main.appendChild(h('div', { class: 'row gap' }, [h('a', { class: 'btn', href: home }, '← Voltar ao Profissional')]));
@@ -294,6 +317,7 @@
     var home = PRO.href(co ? co.career.id : '');
     var mi = c ? Math.max(0, Math.min(c.modules.length - 1, (parseInt(params.query.m, 10) || 1) - 1)) : 0;
     var mod = c && c.modules[mi];
+    frPage(c && c.lang);
     return {
       title: c ? c.title : 'Curso', nav: 'pro',
       crumbs: c ? [['Profissional', home], [c.title, '#/pro/curso/' + c.id], ['Módulo ' + (mi + 1), null]] : [['Profissional', '#/pro']],
@@ -301,12 +325,19 @@
         if (!c) { main.appendChild(UI.empty('📭', 'Curso não encontrado', null, h('a', { class: 'btn primary', href: '#/pro' }, 'Voltar ao Profissional'))); return; }
         LUX.tts.contentLang = c.lang;
         var p = LUX.profiles.current();
+        var lockBy = PRO.courseLock(p, c);
+        if (lockBy) {
+          var dn = PRO.courseDone(p, lockBy);
+          main.appendChild(UI.empty('🔒', c.title, 'Este curso libera quando você concluir a "' + lockBy.title + '" (' + dn + ' de ' + lockBy.modules.length + ' módulos com 70% ou mais). Você também pode desbloquear tudo em Perfil e configurações.',
+            h('a', { class: 'btn primary', href: '#/pro/curso/' + lockBy.id }, 'Ir para a Parte 1')));
+          return;
+        }
         var st = PRO.courseState(p, c.id);
         var source = { title: c.title + ' · ' + mod.title, route: '#/pro/curso/' + c.id + '?m=' + (mi + 1) };
 
         main.appendChild(h('div', { class: 'page-head' }, [h('div', null, [
           h('div', { class: 'muted sm' }, '💼 ' + (co ? co.career.label : 'Profissional') + ' · Curso · ' + c.modules.length + ' módulos' + (c.hours ? ' · cerca de ' + c.hours + ' h' : '')),
-          h('h1', null, ((co && co.item.icon) || '📘') + ' ' + c.title), c.titleFr ? h('p', { class: 'muted', lang: c.lang }, c.titleFr) : null
+          h('h1', null, ((co && co.item.icon) || '📘') + ' ' + c.title), c.titleFr ? frLine(c.titleFr, c.lang, source) : null
         ]), h('div', { class: 'row gap wrap' }, [UI.speedSelect()])]));
         if (c.note && mi === 0) main.appendChild(h('div', { class: 'banner info' }, UI.md(c.note)));
 
@@ -323,7 +354,7 @@
         main.appendChild(toc);
 
         main.appendChild(h('h2', { class: 'module-title' }, 'Módulo ' + (mi + 1) + ' · ' + mod.title));
-        if (mod.titleFr) main.appendChild(h('p', { class: 'muted', lang: c.lang }, mod.titleFr));
+        if (mod.titleFr) main.appendChild(frLine(mod.titleFr, c.lang, source));
         LUX.general.renderBlocks(main, { id: c.id + '-' + mod.id, lang: c.lang, blocks: mod.blocks }, source);
 
         // exercícios do módulo

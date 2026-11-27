@@ -77,7 +77,7 @@ LUX.registerProLesson({
   grammar: {
     topicId: 'pronoun-en',
     title: 'Quantidades e o pronome en para falar de números',
-    explanationPt: 'Para falar de indicadores, você precisa de **quantidades**: **beaucoup de, peu de, assez de, trop de, plus de, moins de** + substantivo, sempre com **de** (sem artigo): *beaucoup **de** départs, pas assez **de** seniors*.\n\n' +
+    explanationPt: 'Para falar de indicadores, você precisa de **quantidades**: ***beaucoup de, peu de, assez de, trop de, plus de, moins de*** + substantivo, sempre com **de** (sem artigo): *beaucoup **de** départs, pas assez **de** seniors*.\n\n' +
       'O pronome **en** substitui a coisa contada, para não repetir: *Combien de départs ? — Il **y en a eu** quatre.* / *Des seniors, on **en** a assez ?* / *Il **en** manque deux.*\n\n' +
       'Com número ou quantidade, o número fica no fim: *J\'**en** ai recruté **dix***.',
     table: { head: ['Pergunta', 'Resposta com en'], rows: [
@@ -105,6 +105,6 @@ LUX.registerProLesson({
     { type: 'multiple_choice', prompt: 'Como se lê "12 %" numa apresentação?', options: ['douze pour cent', 'douze par cent', 'douze sur cent pour', 'douze cents'], answer: 0 },
     { type: 'order_sentence', prompt: 'Monte a frase.', answer: "Nous n'avons pas assez de développeurs seniors.", translation: 'Não temos desenvolvedores seniores suficientes.' }
   ],
-  tipForBrazilians: '**Dados sem jargão.** A vaga de HRBP pede "people analytics" que *influenciem* decisões. Em francês, uma estrutura simples funciona muito bem: **le chiffre → ce que ça veut dire → ce que je propose**. *"Le taux de départ est de 12 %. Ça veut dire que nous perdons un ingénieur par mois. Je propose deux actions."*\n\n' +
+  tipForBrazilians: '**Dados sem jargão.** A vaga de HRBP pede "people analytics" que _influenciem_ decisões. Em francês, uma estrutura simples funciona muito bem: ***le chiffre → ce que ça veut dire → ce que je propose***. *"Le taux de départ est de 12 %. Ça veut dire que nous perdons un ingénieur par mois. Je propose deux actions."*\n\n' +
     '**Números em Luxemburgo:** usa-se o francês da França (*soixante-dix, quatre-vingt-dix*), não o *septante/nonante* da Bélgica e da Suíça — mas você vai ouvir os dois, porque muitos colegas são belgas.'
 });

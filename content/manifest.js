@@ -87,6 +87,7 @@ LUX.manifest = {
     'content/pro/it/b1/l01.js', 'content/pro/it/b1/l02.js', 'content/pro/it/b1/l03.js',
     'content/pro/it/b1/l04.js', 'content/pro/it/b1/l05.js', 'content/pro/it/b1/l06.js',
     'content/pro/hrbp/cursos/droit-travail-lu.js',
+    'content/pro/hrbp/cursos/droit-travail-lu-2.js',
     'content/audio.js' // gerado por tools/gen-audio.js: falas dos diálogos com áudio pré-gravado
   ]
 };

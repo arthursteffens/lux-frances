@@ -747,3 +747,13 @@ body.welcome-mode .app, body.welcome-mode .bottombar { display: none; }
 .dict-tr { margin: 0 0 14px; padding-left: 22px; }
 .dict-tr li { padding: 2px 0; }
 .dict-entry .row.gap.wrap { margin-top: 10px; }
+
+/* termos em francês dentro de textos em português (aba Profissional): itálico com palavras clicáveis */
+em.fr-in.fr-text { font: inherit; font-style: italic; line-height: inherit; }
+em.fr-in .w { border-bottom: 1px dotted color-mix(in srgb, var(--primary) 55%, transparent); }
+em.fr-in .w:hover, em.fr-in .w:focus { background: var(--primary-soft); }
+.fr-sub .fr-text { font-family: inherit; font-size: inherit; }
+.rule h3 em.fr-in { font-weight: inherit; }
+.case-card .case-answer { margin-top: .5rem; border-top: 1px solid var(--border, #ddd); padding-top: .5rem; }
+.case-card .case-answer summary { cursor: pointer; font-weight: 600; color: var(--primary); }
+.case-card .case-answer[open] summary { margin-bottom: .4rem; }

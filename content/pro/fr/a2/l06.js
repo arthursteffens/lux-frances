@@ -82,9 +82,9 @@ LUX.registerProLesson({
   grammar: {
     topicId: 'futur-simple',
     title: 'Futuro para planos e pronomes para não repetir',
-    explanationPt: 'Num **plano**, use o **futur simple** para compromissos (*nous recruterons, ce sera*) e o **futur proche** para o que já está combinado e próximo (*je vais le présenter lundi*).\n\n' +
-      '- **Futur simple** = infinitivo + **-ai, -as, -a, -ons, -ez, -ont**: *lancer → je lancer**ai***. Irregulares úteis: **être → ser-**, **avoir → aur-**, **faire → fer-**, **aller → ir-**, **venir → viendr-**, **envoyer → enverr-**.\n' +
-      '- **Pronomes**: *le, la, les* substituem a coisa/pessoa (*le plan → je **le** présente*); *lui, leur* substituem **à + pessoa** (*à Thomas → je **lui** enverrai*; *aux développeurs → je **leur** parlerai*). Eles vêm **antes** do verbo conjugado — ou antes do infinitivo no futur proche: *je vais **le** présenter*.',
+    explanationPt: 'Num **plano**, use o ***futur simple*** para compromissos (*nous recruterons, ce sera*) e o ***futur proche*** para o que já está combinado e próximo (*je vais le présenter lundi*).\n\n' +
+      '- ***Futur simple*** = infinitivo + **-ai, -as, -a, -ons, -ez, -ont**: *lancer → je lancer**ai***. Irregulares úteis: **être → ser-**, **avoir → aur-**, **faire → fer-**, **aller → ir-**, **venir → viendr-**, **envoyer → enverr-**.\n' +
+      '- **Pronomes**: *le, la, les* substituem a coisa/pessoa (*le plan → je **le** présente*); *lui, leur* substituem **à + pessoa** (*à Thomas → je **lui** enverrai*; *aux développeurs → je **leur** parlerai*). Eles vêm **antes** do verbo conjugado — ou antes do infinitivo no *futur proche*: *je vais **le** présenter*.',
     table: { head: ['', 'être', 'avoir', 'envoyer', 'recruter'], rows: [
       ["je / j'", 'serai', 'aurai', 'enverrai', 'recruterai'], ['tu', 'seras', 'auras', 'enverras', 'recruteras'], ['il / elle / on', 'sera', 'aura', 'enverra', 'recrutera'],
       ['nous', 'serons', 'aurons', 'enverrons', 'recruterons'], ['vous', 'serez', 'aurez', 'enverrez', 'recruterez'], ['ils / elles', 'seront', 'auront', 'enverront', 'recruteront']
@@ -95,8 +95,8 @@ LUX.registerProLesson({
       { fr: 'Thomas veut les chiffres : je lui enverrai le détail demain.', pt: 'O Thomas quer os números: mando o detalhe para ele amanhã.' },
       { fr: 'Les développeurs ? Je leur parlerai après le comité.', pt: 'Os desenvolvedores? Falo com eles depois do comitê.' }
     ],
-    ptComparison: 'No Brasil, quase sempre usamos "vou + infinitivo" para o futuro. Em francês falado também (*je vais présenter*), mas **em planos escritos e e-mails formais**, o futur simple soa mais firme e profissional: *nous recruterons, le budget sera*.\n\n' +
-      '**Lui/leur** não têm gênero: *je **lui** parle* = falo com ele **ou** com ela. E não confunda *leur* pronome (*je **leur** parle*) com *leur* possessivo (***leur** équipe*).'
+    ptComparison: 'No Brasil, quase sempre usamos "vou + infinitivo" para o futuro. Em francês falado também (*je vais présenter*), mas **em planos escritos e e-mails formais**, o *futur simple* soa mais firme e profissional: *nous recruterons, le budget sera*.\n\n' +
+      '***Lui/leur*** não têm gênero: *je **lui** parle* = falo com ele **ou** com ela. E não confunda *leur* pronome (*je **leur** parle*) com *leur* possessivo (***leur** équipe*).'
   },
   grammarPractice: [
     { type: 'fill_blank', prompt: 'Conjugue no futur simple.', items: [

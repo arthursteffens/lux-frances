@@ -3,7 +3,7 @@ LUX.registerProGuide({
   blocks: [
     { type: 'intro', textPt: 'O francês do trabalho é o mesmo em todo lugar, mas **cada país tem seus costumes, palavras e regras**. Aqui está o essencial para não se perder numa entrevista ou num primeiro dia. Regras trabalhistas mudam: confirme sempre nos sites oficiais de cada país.' },
     { type: 'rules', items: [
-      { title: '🇫🇷 França', textPt: 'Jornada legal de **35 horas** por semana (com dias de folga extras, os *RTT*, em muitas empresas). Contratos **CDI** e **CDD**, como em Luxemburgo. Benefícios comuns: *la mutuelle* (plano de saúde complementar) e *les tickets-restaurant* (vale-refeição). Nas empresas maiores, os funcionários elegem o **CSE**, que representa o pessoal.',
+      { title: '🇫🇷 França', textPt: 'Jornada legal de **35 horas** por semana (com dias de folga extras, os **RTT** (*réduction du temps de travail*), em muitas empresas). Contratos **CDI** (*contrat à durée indéterminée*) e **CDD** (*contrat à durée déterminée*), como em Luxemburgo. Benefícios comuns: *la mutuelle* (plano de saúde complementar) e *les tickets-restaurant* (vale-refeição). Nas empresas maiores, os funcionários elegem o **CSE** (*comité social et économique*): o comitê que representa o pessoal.',
         examples: [{ fr: 'Nous avons une mutuelle et des tickets-restaurant.', pt: 'Temos plano de saúde complementar e vale-refeição.' }] },
       { title: '🇧🇪 Bélgica', textPt: 'Bruxelas é **bilíngue** (francês e neerlandês); a Valônia fala francês. Números: ***septante*** (70) e ***nonante*** (90). Muitas empresas internacionais e instituições europeias: o inglês é comum, mas o francês (e às vezes o neerlandês) pesa muito.',
         examples: [{ fr: 'Nous sommes septante dans l\'équipe.', pt: 'Somos setenta na equipe. (Bélgica)' }] },
@@ -20,7 +20,7 @@ LUX.registerProGuide({
         { fr: 'le dîner / le souper', pt: 'o jantar (França / Bélgica, Suíça, Québec)' }
       ] }
     ] },
-    { type: 'tip', title: '💼 Dica para RH', textPt: '**Cuidado com convites para "déjeuner"**: em Paris é almoço; em Bruxelas, Genebra ou Montreal pode ser café da manhã. Na dúvida, confirme o horário: *"On se voit à quelle heure ?"*' },
+    { type: 'tip', title: '💼 Dica para RH', textPt: '**Cuidado com convites para** ***déjeuner***: em Paris é almoço; em Bruxelas, Genebra ou Montreal pode ser café da manhã. Na dúvida, confirme o horário: *"On se voit à quelle heure ?"*' },
     { type: 'quiz', items: [
       { type: 'multiple_choice', prompt: 'Em Bruxelas, "nonante-cinq" é…', options: ['95', '75', '85', '59'], answer: 0 },
       { type: 'multiple_choice', prompt: 'No Québec, "un courriel" é…', options: ['um e-mail', 'um correio de papel', 'um curso', 'uma reunião'], answer: 0 }

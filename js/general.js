@@ -91,6 +91,12 @@
   var BLOCKS = {
     intro: function (b) { return h('div', { class: 'card intro' }, UI.md(b.textPt)); },
     tip: function (b) { return h('div', { class: 'card tip-card' }, [h('h2', null, b.title || '💡 Dica para brasileiros'), UI.md(b.textPt)]); },
+    /* estudo de caso: situação + resposta escondida (pense antes de abrir) */
+    case: function (b) {
+      var ans = h('details', { class: 'case-answer' }, [h('summary', null, 'Ver a resposta comentada'), UI.md(b.answerPt)]);
+      return h('section', { class: 'card case-card' }, [h('h2', null, b.title || '🧩 Estudo de caso'), UI.md(b.textPt),
+        h('p', { class: 'muted sm' }, 'Pense na sua resposta antes de abrir.'), ans]);
+    },
     table: function (b, page, source) {
       var wrap = h('div', { class: 'gen-tables' });
       b.sections.forEach(function (s) {
@@ -124,7 +130,7 @@
     rules: function (b, page, source) {
       var c = h('section', { class: 'card' }, [h('h2', null, 'Regras e usos')]);
       b.items.forEach(function (r) {
-        var box = h('div', { class: 'rule' }, [h('h3', null, r.title), h('p', { html: U.mdInline(r.textPt) })]);
+        var box = h('div', { class: 'rule' }, [h('h3', { html: U.mdInline(r.title) }), h('p', { html: U.mdInline(r.textPt) })]);
         if (r.examples) {
           var exs = h('div', { class: 'examples compact' });
           r.examples.forEach(function (e) { exs.appendChild(UI.example(e.fr, e.pt, source)); });
