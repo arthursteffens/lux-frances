@@ -49,7 +49,7 @@
       html ? h('div', { class: 'fb-body', html: html }) : null
     ]);
   };
-  X.explain = function (ex) { return ex.explanationPt ? '<p>' + U.mdInline(ex.explanationPt) + '</p>' : ''; };
+  X.explain = function (ex) { return ex.explanationPt ? U.md(ex.explanationPt) : ''; };
 
   X.checkBtn = function (label, onClick) {
     return h('button', { type: 'button', class: 'btn primary check-btn', onclick: onClick }, label || 'Verificar');

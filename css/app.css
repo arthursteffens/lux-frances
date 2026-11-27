@@ -311,6 +311,9 @@ label.btn { position: relative; }
 .empty .row { justify-content: center; }
 .md p:last-child { margin-bottom: 0; }
 .md ul { padding-left: 20px; margin: 0 0 .75em; }
+.md li + li { margin-top: .3em; }
+/* lista do tipo "**é** = ê fechado": o item principal de cada linha ganha cor */
+.md li.key-item > strong:first-child { color: var(--primary-2); font-size: 1.05em; }
 .tbl-wrap { overflow-x: auto; margin: 12px 0; }
 .tbl { border-collapse: collapse; width: 100%; font-size: .93rem; }
 .tbl caption { text-align: left; font-weight: 650; padding-bottom: 6px; color: var(--muted); }

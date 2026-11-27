@@ -79,7 +79,7 @@ LUX.registerLesson({
   grammar: {
     topicId: 'partitive',
     title: 'Revisão: artigos, quantidades e en',
-    explanationPt: '**Um mapa para não errar mais** (veja a tabela abaixo): gosto → *le, la, les*; quantidade indefinida → *du, de la, des*; negação e quantidade → *de*; para não repetir a coisa → *en*.\n\n' +
+    explanationPt: '**Um mapa para não errar mais** (veja a tabela abaixo):\n- **gosto** → *le, la, les*\n- **quantidade indefinida** → *du, de la, des*\n- **negação e quantidade** → *de*\n- **para não repetir a coisa** → *en*\n\n' +
       '**Exceção na negação:** com *être*, o artigo não muda: *Ce n\'est pas **du** beurre, c\'est de la margarine.*\n\n' +
       '**ne… que** = só, apenas (não é negação!): *Je n\'ai **que** des tartes pour six* = só tenho tortas para seis.',
     table: { head: ['situação', 'use', 'exemplo'], rows: [

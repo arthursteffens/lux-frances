@@ -22,7 +22,7 @@ LUX.registerGeneral({
       ] }
     ] },
     { type: 'rules', items: [
-      { title: 'Medir e pesar', textPt: '*Je mesure un mètre soixante-dix* = tenho 1,70 m. *Je pèse soixante kilos* = peso 60 kg. *Ça mesure combien ?* = quanto mede?',
+      { title: 'Medir e pesar', textPt: '- ***Je mesure un mètre soixante-dix*** = tenho 1,70 m.\n- ***Je pèse soixante kilos*** = peso 60 kg.\n- ***Ça mesure combien ?*** = quanto mede?',
         examples: [{ fr: 'Il mesure un mètre quatre-vingt-cinq.', pt: 'Ele tem 1,85 m.' }, { fr: 'La valise pèse vingt kilos.', pt: 'A mala pesa 20 kg.' }] },
       { title: 'Quantidade + de', textPt: 'Depois de uma medida, só **de**: *un kilo de pommes, deux litres d\'eau, cent grammes de jambon*.',
         examples: [{ fr: 'deux cents grammes de beurre', pt: '200 g de manteiga' }] },

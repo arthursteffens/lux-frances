@@ -107,5 +107,5 @@ LUX.registerLesson({
     { type: 'multiple_choice', prompt: 'Qual pergunta corresponde a "Depuis trois ans."?', options: ['Depuis combien de temps tu habites ici ?', 'Quand est-ce que tu es arrivé ?', 'Pendant combien de temps tu as travaillé là-bas ?', 'À quelle heure tu pars ?'], answer: 0 },
     { type: 'order_sentence', prompt: 'Monte a frase.', answer: "J'apprends le français depuis un an.", translation: 'Aprendo francês há um ano.' }
   ],
-  tipForBrazilians: '**O sistema escolar francês em 4 palavras:** *l\'école (primaire)* (6–11 anos) → *le collège* (11–15) → *le lycée* (15–18, termina com **le bac**) → *l\'université* / *la fac*. Cuidado: *collège* **não** é "colégio" no sentido de escola particular, nem faculdade! E as séries contam ao contrário: *la sixième* é o 1º ano do collège, e *la terminale* é o último ano do lycée.'
+  tipForBrazilians: '**O sistema escolar francês em 4 palavras:**\n- ***l\'école (primaire)*** = 6 a 11 anos\n- ***le collège*** = 11 a 15 anos\n- ***le lycée*** = 15 a 18 anos, termina com *le bac*\n- ***l\'université***, ***la fac*** = faculdade\n\nCuidado: *collège* **não** é "colégio" no sentido de escola particular, nem faculdade! E as séries contam ao contrário: *la sixième* é o 1º ano do collège, e *la terminale* é o último ano do lycée.'
 });

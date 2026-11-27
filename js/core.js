@@ -107,11 +107,16 @@
     if (!text) return '';
     var blocks = String(text).split(/\n{2,}/);
     return blocks.map(function (b) {
-      var lines = b.split('\n');
-      if (lines.every(function (l) { return /^\s*[-•]\s+/.test(l); })) {
-        return '<ul>' + lines.map(function (l) { return '<li>' + U.mdInline(l.replace(/^\s*[-•]\s+/, '')) + '</li>'; }).join('') + '</ul>';
-      }
-      return '<p>' + lines.map(U.mdInline).join('<br>') + '</p>';
+      // linhas "- " viram lista; linhas comuns no mesmo bloco viram parágrafo (ex.: "Introdução:\n- a\n- b")
+      var out = '', para = [], items = [];
+      function flushP() { if (para.length) out += '<p>' + para.map(U.mdInline).join('<br>') + '</p>'; para = []; }
+      function flushL() { if (items.length) out += '<ul>' + items.map(function (l) { var x = U.mdInline(l); return (/^<strong>/.test(x) ? '<li class="key-item">' : '<li>') + x + '</li>'; }).join('') + '</ul>'; items = []; }
+      b.split('\n').forEach(function (l) {
+        if (/^\s*[-•]\s+/.test(l)) { flushP(); items.push(l.replace(/^\s*[-•]\s+/, '')); }
+        else { flushL(); para.push(l); }
+      });
+      flushP(); flushL();
+      return out;
     }).join('');
   };
   /* *itálico* = termo em francês. Com U.frEm ligado (páginas da aba Profissional em francês), cada palavra

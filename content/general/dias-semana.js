@@ -15,7 +15,7 @@ LUX.registerGeneral({
       ] }
     ] },
     { type: 'rules', items: [
-      { title: 'Lundi × le lundi (a dica-chave!)', textPt: '**Sem artigo** = um dia específico (nesta segunda, na segunda que vem ou que passou). **Com artigo "le"** = hábito, toda semana.',
+      { title: 'Lundi × le lundi (a dica-chave!)', textPt: '- **Sem artigo** = um dia específico (nesta segunda, na segunda que vem ou que passou).\n- **Com artigo "le"** = hábito, toda semana.',
         examples: [{ fr: 'Lundi, je vais chez le médecin.', pt: 'Na segunda (desta semana) vou ao médico.' }, { fr: 'Le lundi, je vais à la piscine.', pt: 'Às segundas, vou à piscina.' }] },
       { title: 'Próximo e passado', textPt: '*lundi prochain* (segunda que vem), *lundi dernier* (segunda passada), *la semaine prochaine / dernière*, *ce week-end* (neste fim de semana).',
         examples: [{ fr: 'samedi prochain', pt: 'sábado que vem' }, { fr: 'la semaine dernière', pt: 'semana passada' }, { fr: 'ce week-end', pt: 'neste fim de semana' }] },

@@ -101,7 +101,7 @@ LUX.registerLesson({
       { fr: "Pendant un an, ils se sont écrit des lettres.", pt: 'Durante um ano, eles trocaram cartas.' },
       { fr: "Quand j'étais petite, je faisais beaucoup de bêtises.", pt: 'Quando eu era pequena, fazia muita travessura.' }
     ],
-    ptComparison: '**"Manquer" ao contrário:** "Sinto sua falta" = *Tu me manques* (o sujeito é quem faz falta!). "Sinto falta do Brasil" = *Le Brésil me manque*. "Ela sente falta dos filhos" = *Ses enfants lui manquent*. Pense em "faltar": "você me falta" → *tu me manques*.'
+    ptComparison: '**"Manquer" ao contrário** (o sujeito é quem faz falta!):\n- **"Sinto sua falta"** = *Tu me manques*\n- **"Sinto falta do Brasil"** = *Le Brésil me manque*\n- **"Ela sente falta dos filhos"** = *Ses enfants lui manquent*\n\nPense em "faltar": "você me falta" → *tu me manques*.'
   },
   grammarPractice: [
     { type: 'fill_blank', prompt: 'Conjugue no imparfait ou no passé composé.', items: [

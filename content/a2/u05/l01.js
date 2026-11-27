@@ -85,7 +85,7 @@ LUX.registerLesson({
       '- **tu**: *Tourne à droite !*\n- **nous** (= vamos…): *Prenons le bus !*\n- **vous**: *Continuez tout droit.*\n\n' +
       '**Formação:** é o presente sem o pronome. **Atenção:** verbos em **-er** (e *aller*) perdem o **-s** no *tu*: *tu tournes* → ***tourne*** ; *tu vas* → ***va***.\n\n' +
       '**Negativa:** *ne* + verbo + *pas*: *Ne prenez pas la voiture ! Ne tourne pas ici !*\n\n' +
-      '**Irregulares:** *être* → sois, soyons, soyez · *avoir* → aie, ayons, ayez · *savoir* → sache, sachons, sachez.\n\n' +
+      '**Irregulares:**\n- ***être*** → sois, soyons, soyez\n- ***avoir*** → aie, ayons, ayez\n- ***savoir*** → sache, sachons, sachez\n\n' +
       '**Pronominais:** o pronome vem depois, com hífen: *Dépêche-**toi** ! Asseyez-**vous**.* Na negativa, volta para antes: *Ne **te** dépêche pas.*',
     table: { head: ['', 'tourner', 'prendre', 'aller', 'être'], rows: [
       ['tu', 'tourne', 'prends', 'va', 'sois'], ['nous', 'tournons', 'prenons', 'allons', 'soyons'], ['vous', 'tournez', 'prenez', 'allez', 'soyez']

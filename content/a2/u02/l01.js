@@ -112,7 +112,7 @@ LUX.registerLesson({
       { text: 'Il ___ avec sa mère au téléphone. (parler)', answers: ['a parlé'] }
     ] },
     { type: 'multiple_choice', prompt: 'Qual é o particípio passado de "vendre"?', options: ['vendu', 'vendé', 'vendi', 'vendre'], answer: 0,
-      explanationPt: 'Verbos em -re formam o particípio em -u: vendre → vendu, attendre → attendu, répondre → répondu.' },
+      explanationPt: 'Verbos em -re formam o particípio em -u:\n- **vendre** → vendu\n- **attendre** → attendu\n- **répondre** → répondu' },
     { type: 'match', prompt: 'Ligue o infinitivo ao particípio.', pairs: [['manger', 'mangé'], ['grandir', 'grandi'], ['perdre', 'perdu'], ['écouter', 'écouté'], ['réussir', 'réussi']] },
     { type: 'order_sentence', prompt: 'Monte a frase.', answer: 'Samedi dernier, nous avons visité un musée.', translation: 'Sábado passado, visitamos um museu.' },
     { type: 'multiple_choice', prompt: 'Como se diz "Ontem eu almocei com a Léa"?', options: ["Hier, j'ai déjeuné avec Léa.", 'Hier, je déjeuné avec Léa.', "Hier, j'ai déjeuner avec Léa.", 'Hier, je suis déjeuné avec Léa.'], answer: 0,

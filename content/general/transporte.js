@@ -20,7 +20,7 @@ LUX.registerGeneral({
       ] }
     ] },
     { type: 'rules', items: [
-      { title: 'Prendre', textPt: '"Pegar" um transporte = *prendre*: *je prends le métro, le bus, le train de 8 h*. "Descer" = *descendre*, "subir/embarcar" = *monter dans*.',
+      { title: 'Prendre', textPt: '- **"Pegar"** um transporte = *prendre*: *je prends le métro, le bus, le train de 8 h*.\n- **"Descer"** = *descendre*.\n- **"Subir", "embarcar"** = *monter dans*.',
         examples: [{ fr: 'Je prends le bus à huit heures.', pt: 'Pego o ônibus às oito.' }, { fr: 'Descendez à la prochaine station.', pt: 'Desçam na próxima estação.' }] },
       { title: 'Car × bus', textPt: '*le bus* circula na cidade; *le car* (autocarro) faz viagens entre cidades. E *la voiture* também é o **vagão** do trem!',
         examples: [{ fr: 'Votre place est dans la voiture 12.', pt: 'Seu lugar é no vagão 12.' }] }

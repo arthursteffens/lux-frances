@@ -23,7 +23,7 @@ LUX.registerGeneral({
       ] }
     ] },
     { type: 'rules', items: [
-      { title: 'Femme e fille', textPt: '*la femme* = a mulher **ou** a esposa (*ma femme* = minha esposa). *la fille* = a filha **ou** a menina (*ma fille* = minha filha).',
+      { title: 'Femme e fille', textPt: '- ***la femme*** = a mulher ou a esposa (*ma femme* = minha esposa).\n- ***la fille*** = a filha ou a menina (*ma fille* = minha filha).',
         examples: [{ fr: 'Je vous présente ma femme.', pt: 'Apresento-lhe minha esposa.' }, { fr: 'Ma fille a six ans.', pt: 'Minha filha tem seis anos.' }] },
       { title: 'Beau- / belle-', textPt: 'O prefixo *beau-/belle-* forma os parentes por casamento: *beau-père* (sogro ou padrasto), *belle-fille* (nora ou enteada).',
         examples: [{ fr: 'Ma belle-mère est brésilienne.', pt: 'Minha sogra é brasileira.' }] }

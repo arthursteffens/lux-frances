@@ -41,7 +41,7 @@ LUX.registerProGuide({
       { title: 'Entretien: duas coisas', textPt: '*L\'entretien d\'embauche* é a entrevista de emprego; *l\'entretien annuel* é a conversa anual de avaliação entre gestor e colaborador. Em RH, o contexto resolve.',
         examples: [{ fr: "Les entretiens annuels commencent en janvier.", pt: 'As avaliações anuais começam em janeiro.' }] }
     ] },
-    { type: 'tip', title: '💼 Dica para a vaga de HRBP', textPt: 'Leia a descrição da vaga em inglês e **faça a sua própria lista em francês**: _org design_ → *conception de l\'organisation*; _workforce planning_ → *planification des effectifs*; _succession planning_ → *plan de succession*; _people analytics_ → *analyse des données RH*; _change management_ → *conduite du changement*. Assim você consegue falar das suas experiências nos dois idiomas.' },
+    { type: 'tip', title: '💼 Dica para a vaga de HRBP', textPt: 'Leia a descrição da vaga em inglês e **faça a sua própria lista em francês**:\n- **org design** → *conception de l\'organisation*\n- **workforce planning** → *planification des effectifs*\n- **succession planning** → *plan de succession*\n- **people analytics** → *analyse des données RH*\n- **change management** → *conduite du changement*\n\nAssim você consegue falar das suas experiências nos dois idiomas.' },
     { type: 'quiz', items: [
       { type: 'multiple_choice', prompt: '"Le taux de départ" é…', options: ['a taxa de rotatividade', 'a taxa de partida do avião', 'o custo por contratação', 'o aviso prévio'], answer: 0 },
       { type: 'multiple_choice', prompt: 'Como dizer "O cargo se reporta ao CPO"?', options: ['Le poste est rattaché au DRH.', 'Le poste rapporte le DRH.', 'Le poste est attaché du DRH.', 'Le poste reporte au DRH.'], answer: 0 }

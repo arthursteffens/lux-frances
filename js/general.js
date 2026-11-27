@@ -130,7 +130,7 @@
     rules: function (b, page, source) {
       var c = h('section', { class: 'card' }, [h('h2', null, 'Regras e usos')]);
       b.items.forEach(function (r) {
-        var box = h('div', { class: 'rule' }, [h('h3', { html: U.mdInline(r.title) }), h('p', { html: U.mdInline(r.textPt) })]);
+        var box = h('div', { class: 'rule' }, [h('h3', { html: U.mdInline(r.title) }), UI.md(r.textPt)]);
         if (r.examples) {
           var exs = h('div', { class: 'examples compact' });
           r.examples.forEach(function (e) { exs.appendChild(UI.example(e.fr, e.pt, source)); });

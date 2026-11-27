@@ -5,7 +5,7 @@
 'use strict';
 
 // <release>
-const BUILD = '20261127-1646-eebe6ef';
+const BUILD = '20261127-1934-e0df6d8';
 const FILES = [
   './',
   'version.json',

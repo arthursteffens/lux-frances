@@ -81,7 +81,7 @@ LUX.registerLesson({
     title: 'O futur simple',
     explanationPt: 'O **futur simple** corresponde ao nosso futuro "falarei, farei". É usado para **projetos mais distantes**, **previsões** (meteorologia, horóscopo), **promessas** e em textos mais formais.\n\n' +
       '**Formação:** infinitivo + **-ai, -as, -a, -ons, -ez, -ont** (são as terminações de *avoir*!).\n- *parler → je parler**ai***\n- *finir → je finir**ai***\n- verbos em **-re** perdem o *e*: *prendre → je prendr**ai***\n\n' +
-      '**Irregulares mais comuns** (radical especial, mesmas terminações):\n*être → **ser**ai · avoir → **aur**ai · aller → **ir**ai · faire → **fer**ai · venir → **viendr**ai · pouvoir → **pourr**ai · vouloir → **voudr**ai · voir → **verr**ai · savoir → **saur**ai · devoir → **devr**ai · falloir → il **faudr**a · pleuvoir → il **pleuvr**a*\n\n' +
+      '**Irregulares mais comuns** (radical especial, mesmas terminações):\n- ***être*** → *serai*\n- ***avoir*** → *aurai*\n- ***aller*** → *irai*\n- ***faire*** → *ferai*\n- ***venir*** → *viendrai*\n- ***pouvoir*** → *pourrai*\n- ***vouloir*** → *voudrai*\n- ***voir*** → *verrai*\n- ***savoir*** → *saurai*\n- ***devoir*** → *devrai*\n- ***falloir*** → *il faudra*\n- ***pleuvoir*** → *il pleuvra*\n\n' +
       '**Atenção:** depois de *quand* com sentido de futuro, o francês usa o **futur** (o português usa o futuro do subjuntivo): *Quand je **serai** vieux…* = Quando eu **for** velho…',
     table: { head: ['', 'parler', 'être', 'avoir', 'faire'], rows: [
       ['je', 'parlerai', 'serai', 'aurai', 'ferai'], ['tu', 'parleras', 'seras', 'auras', 'feras'], ['il / elle / on', 'parlera', 'sera', 'aura', 'fera'],

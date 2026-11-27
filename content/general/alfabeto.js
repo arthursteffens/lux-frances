@@ -39,11 +39,11 @@ LUX.registerGeneral({
 
     /* ---------- 2. vogais e combinações ---------- */
     { type: 'rules', items: [
-      { title: '2. Vogais com acento: é, è, ê', textPt: '**é** = "ê" fechado (*café*, *été*). **è** e **ê** = "é" aberto (*père*, *fête*). Sem acento, o **e** é fraco e às vezes nem soa (*samedi* soa "samdí"). Na escrita, as terminações **-er**, **-ez** e **-et** também soam "ê".',
+      { title: '2. Vogais com acento: é, è, ê', textPt: '- **é** = "ê" fechado: *café*, *été*.\n- **è, ê** = "é" aberto: *père*, *fête*.\n- **e** sem acento = som fraco, que às vezes nem soa: *samedi* soa "samdí".\n- **-er, -ez, -et** no fim da palavra = "ê": *parler*, *chez*, *et*.',
         examples: [{ fr: 'café', pt: 'é fechado' }, { fr: 'père', pt: 'è aberto' }, { fr: 'fête', pt: 'ê aberto' }, { fr: 'parler', pt: '-er soa "ê"' }] },
-      { title: 'U × OU: o par mais importante', textPt: '**u** = "i" com biquinho (/y/). **ou** = o nosso "u". Trocar muda o sentido: *tu* (você) × *tout* (tudo), *rue* (rua) × *roue* (roda), *dessus* (em cima) × *dessous* (embaixo).',
+      { title: 'U × OU: o par mais importante', textPt: '- **u** = "i" com biquinho (/y/): *tu*, *rue*.\n- **ou** = o nosso "u": *tout*, *roue*.\n\nTrocar um pelo outro muda o sentido:\n- *tu* (você) × *tout* (tudo)\n- *rue* (rua) × *roue* (roda)\n- *dessus* (em cima) × *dessous* (embaixo)',
         examples: [{ fr: 'tu', pt: 'você' }, { fr: 'tout', pt: 'tudo' }, { fr: 'rue', pt: 'rua' }, { fr: 'roue', pt: 'roda' }] },
-      { title: 'Duas ou três letras, um som só', textPt: '**ai / ei** = "é" (*maison*, *neige*). **au / eau** = "ô" (*chaud*, *beau*). **oi** = "uá" (*moi*, *trois*). **eu / œu** = "ö", som entre "ê" e "ô" com biquinho (*deux*, *sœur*). **ui** = "üi" rápido (*huit*, *nuit*). **ill** = "i" (*fille*); **ail / eil** = "ái" / "éi" (*travail*, *soleil*).',
+      { title: 'Duas ou três letras, um som só', textPt: '- **ai, ei** = "é": *maison*, *neige*.\n- **au, eau** = "ô": *chaud*, *beau*.\n- **oi** = "uá": *moi*, *trois*.\n- **eu, œu** = "ö", som entre "ê" e "ô" com biquinho: *deux*, *sœur*.\n- **ui** = "üi" rápido: *huit*, *nuit*.\n- **ill** = "i": *fille*.\n- **ail, eil** = "ái", "éi": *travail*, *soleil*.',
         examples: [{ fr: 'maison', pt: 'ai = é' }, { fr: 'beau', pt: 'eau = ô' }, { fr: 'trois', pt: 'oi = uá' }, { fr: 'deux', pt: 'eu = ö' }, { fr: 'nuit', pt: 'ui = üi' }, { fr: 'travail', pt: 'ail = ái' }] }
     ] },
 
@@ -76,7 +76,7 @@ LUX.registerGeneral({
     { type: 'rules', items: [
       { title: '3. Letras finais mudas', textPt: 'Em geral, **a consoante final não se pronuncia**: *petit*, *grand*, *trop*, *deux*, *vous*. O **e final** também fica mudo, mas faz soar a consoante antes dele: *petit* ("ptí") × *petite* ("ptít").\n\n**Exceções úteis:** as consoantes de **C, R, F, L** (lembre de *CaReFuL*) costumam soar no fim: *avec*, *bonjour*, *neuf*, *sel*. (Mas **-er** nos verbos soa "ê": *parler*.)\n\nNos verbos, **-ent** de *ils/elles* é mudo: *ils parlent* soa igual a *il parle*.',
         examples: [{ fr: 'petit', pt: 't mudo' }, { fr: 'petite', pt: 't soa' }, { fr: 'avec', pt: 'c soa' }, { fr: 'ils parlent', pt: '-ent mudo' }] },
-      { title: 'Liaison: a ligação entre palavras', textPt: 'Quando a palavra seguinte começa com vogal (ou h mudo), a consoante final "acorda" e se liga a ela: *les amis* = "lezamí", *vous avez* = "vuzavê", *un enfant* = "ãnãfã". O **s** e o **x** ligam com som de **"z"**. A ligação é obrigatória depois de artigos e pronomes (*les, des, vous, nous, ils, un*) e proibida depois de *et* (e).',
+      { title: 'Liaison: a ligação entre palavras', textPt: 'Quando a palavra seguinte começa com vogal (ou h mudo), a consoante final "acorda" e se liga a ela:\n- ***les amis*** = "lezamí"\n- ***vous avez*** = "vuzavê"\n- ***un enfant*** = "ãnãfã"\n\nO **s** e o **x** ligam com som de **"z"**. A ligação é obrigatória depois de artigos e pronomes (*les, des, vous, nous, ils, un*) e proibida depois de *et* (e).',
         examples: [{ fr: 'les amis', pt: 's liga com som de "z"' }, { fr: 'vous avez', pt: 'vuzavê' }, { fr: 'un enfant', pt: 'ãnãfã' }, { fr: 'deux heures', pt: 'x liga com "z"' }] },
       { title: 'Elisão: o apóstrofo', textPt: 'Antes de vogal ou h mudo, **le, la, je, me, te, se, de, ne, que** perdem a vogal e ganham apóstrofo: *l\'ami*, *j\'aime*, *d\'accord*, *c\'est*, *qu\'il*. Na fala, tudo vira uma palavra só: *l\'hôtel* = "lotél".',
         examples: [{ fr: "l'ami", pt: 'le + ami' }, { fr: "j'aime", pt: 'je + aime' }, { fr: "c'est", pt: 'ce + est' }, { fr: "l'hôtel", pt: 'h mudo' }] }
@@ -98,7 +98,7 @@ LUX.registerGeneral({
       ] }
     ] },
     { type: 'rules', items: [
-      { title: 'Soletrar sem errar: E, I, U, G, J', textPt: 'Ao soletrar, os brasileiros costumam trocar **E** ("ê" arredondado) por "é", **I** ("i") por "e", **U** ("ü") por "u", e trocar **G** ("jê") com **J** ("ji"). *Lucas* se soletra *L, U, C, A, S* (él, ü, cê, a, és); *Gilles* se soletra *G, I, deux L, E, S*.',
+      { title: 'Soletrar sem errar: E, I, U, G, J', textPt: 'Ao soletrar, os brasileiros costumam trocar:\n- **E** ("ê" arredondado) por "é"\n- **I** ("i") por "e"\n- **U** ("ü") por "u"\n- **G** ("jê") com **J** ("ji")\n\n*Lucas* se soletra *L, U, C, A, S* (él, ü, cê, a, és); *Gilles* se soletra *G, I, deux L, E, S*.',
         examples: [{ fr: 'E', pt: 'letra E' }, { fr: 'I', pt: 'letra I' }, { fr: 'U', pt: 'letra U' }, { fr: 'G', pt: 'letra G' }, { fr: 'J', pt: 'letra J' }] },
       { title: 'Letras dobradas e acentos ao soletrar', textPt: 'Diga *deux L*, *deux S* para letras repetidas e o nome do acento depois da letra: *E accent aigu* (é), *E accent grave* (è), *C cédille* (ç).',
         examples: [{ fr: 'deux S', pt: 'ss' }, { fr: 'E accent aigu', pt: 'é' }, { fr: 'C cédille', pt: 'ç' }] }
@@ -111,7 +111,7 @@ LUX.registerGeneral({
       { fr: 'Avec deux L.', pt: 'Com dois L.' },
       { fr: 'Tout en minuscules.', pt: 'Tudo em minúsculas.' }
     ] },
-    { type: 'tip', textPt: '**Cinco hábitos de brasileiro para corrigir primeiro:**\n1. **"tch" e "dj":** em francês, *petit* e *dîner* têm t e d "secos", nunca "petchí" e "djinê".\n2. **L final:** *Brésil*, *hôtel* e *sel* terminam com L de verdade, não com "u".\n3. **U × OU:** *tu* (biquinho) × *tout* (nosso "u").\n4. **Vogal no fim:** não acrescente "i" nem "e" depois de consoante: *chef* soa "xéf", não "xéfi".\n5. **Letras mudas:** não pronuncie o s de *vous* nem o t de *petit* — só na liaison.' },
+    { type: 'tip', textPt: '**Cinco hábitos de brasileiro para corrigir primeiro:**\n- **"tch" e "dj":** em francês, *petit* e *dîner* têm t e d "secos", nunca "petchí" e "djinê".\n- **L final:** *Brésil*, *hôtel* e *sel* terminam com L de verdade, não com "u".\n- **U × OU:** *tu* (biquinho) × *tout* (nosso "u").\n- **Vogal no fim:** não acrescente "i" nem "e" depois de consoante: *chef* soa "xéf", não "xéfi".\n- **Letras mudas:** não pronuncie o s de *vous* nem o t de *petit* — só na liaison.' },
     { type: 'quiz', items: [
       { type: 'listen_choose', audio: 'G', prompt: 'Ouça e escolha a letra.', options: ['G', 'J', 'E', 'I'], answer: 0 },
       { type: 'listen_choose', audio: 'U', prompt: 'Ouça e escolha a letra.', options: ['U', 'O', 'I', 'E'], answer: 0 },

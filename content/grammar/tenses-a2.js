@@ -171,7 +171,7 @@
     summaryPt: 'Infinitivo + -ai, -as, -a, -ons, -ez, -ont (parlerai). Irregulares: ser-, aur-, ir-, fer-, pourr-, viendr-...',
     explanationPt: '**Formação:** infinitivo (sem o -e final dos verbos em -re) + **-ai, -as, -a, -ons, -ez, -ont**.\n\n' +
       '*parler → je parlerai; finir → je finirai; prendre → je prendrai*.\n\n' +
-      'Radicais irregulares: *être → ser-, avoir → aur-, aller → ir-, faire → fer-, pouvoir → pourr-, venir → viendr-, voir → verr-, vouloir → voudr-, devoir → devr-, savoir → saur-, falloir → faudr-*.\n\n' +
+      'Radicais irregulares:\n- ***être*** → *ser-*\n- ***avoir*** → *aur-*\n- ***aller*** → *ir-*\n- ***faire*** → *fer-*\n- ***pouvoir*** → *pourr-*\n- ***venir*** → *viendr-*\n- ***voir*** → *verr-*\n- ***vouloir*** → *voudr-*\n- ***devoir*** → *devr-*\n- ***savoir*** → *saur-*\n- ***falloir*** → *faudr-*\n\n' +
       'Uso: previsões, promessas, planos mais distantes ou formais.',
     tables: [{ caption: 'Exemplos', head: ['verbo', 'futur'], rows: [['être', 'je serai'], ['avoir', "j'aurai"], ['aller', "j'irai"], ['faire', 'je ferai'], ['venir', 'je viendrai']] }],
     examples: [{ fr: 'Demain, il fera beau.', pt: 'Amanhã vai fazer tempo bom.' }, { fr: "Je t'appellerai ce soir.", pt: 'Te ligo hoje à noite.' }],

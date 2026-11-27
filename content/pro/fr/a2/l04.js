@@ -91,7 +91,7 @@ LUX.registerProLesson({
       { fr: 'Un manager sur trois a trop de personnes.', pt: 'Um em cada três gestores tem gente demais.' }
     ],
     ptComparison: 'Em português dizemos "houve seis" sem pronome; em francês o **en é obrigatório** quando o substantivo some: *Il **y en a eu** six* (nunca ~~il y a eu six~~ sozinho como resposta).\n\n' +
-      '**"Um em cada três"** = *un **sur** trois*. **"Doze por cento"** = *douze **pour cent***. Decimais usam vírgula, como no Brasil: *3,5 %* = *trois virgule cinq pour cent*.'
+      '- **"Um em cada três"** = *un **sur** trois*.\n- **"Doze por cento"** = *douze **pour cent***.\n- **Decimais** usam vírgula, como no Brasil: *3,5 %* = *trois virgule cinq pour cent*.'
   },
   grammarPractice: [
     { type: 'fill_blank', prompt: 'Complete com de, en ou un sur.', bank: ['de', 'en', 'sur'], items: [
