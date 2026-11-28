@@ -6,7 +6,7 @@
 
   SB.GROUPS = [
     { label: 'Estudar', items: [
-      { id: 'curso', icon: '📘', label: 'Curso', href: '#/curso' },
+      { id: 'curso', icon: '📘', label: 'Curso', href: '#/curso', children: 'curso' },
       { id: 'revisar', icon: '🔁', label: 'Revisar', href: '#/revisar', badge: function () { return LUX.srs.dueCount(LUX.profiles.current()); } },
       { id: 'treino', icon: '🎧', label: 'Treino de ouvido', href: '#/treino' }
     ] },
@@ -14,7 +14,7 @@
       { id: 'dicionario', icon: '📖', label: 'Dicionário', href: '#/dicionario' },
       { id: 'verbos', icon: '🔤', label: 'Verbos', href: '#/verbos' },
       { id: 'gramatica', icon: '📐', label: 'Gramática', href: '#/gramatica' },
-      { id: 'gerais', icon: '🗂', label: 'Gerais', href: '#/gerais', children: true }
+      { id: 'gerais', icon: '🗂', label: 'Gerais', href: '#/gerais', children: 'gerais' }
     ] },
     { label: 'Meu espaço', items: [
       { id: 'caderno', icon: '📓', label: 'Caderno', href: '#/caderno', badge: function () { var p = LUX.profiles.current(); return p ? Object.keys(p.notebook).length : 0; }, badgeMuted: true },
@@ -94,18 +94,18 @@
         a.addEventListener('click', function () { SB.closeDrawer(); });
         li.appendChild(a);
         if (it.children) {
-          var open = navState().gerais === true;
-          var tog = h('button', { class: 'sb-toggle sb-text', 'aria-expanded': open ? 'true' : 'false', 'aria-controls': 'sb-gerais', 'aria-label': 'Expandir Gerais' }, '▸');
+          var key = it.children, open = navState()[key] === true;
+          var tog = h('button', { class: 'sb-toggle sb-text', 'aria-expanded': open ? 'true' : 'false', 'aria-controls': 'sb-' + key, 'aria-label': 'Expandir ' + it.label }, '▸');
           a.classList.add('has-children');
           tog.addEventListener('click', function (e) {
             e.preventDefault(); e.stopPropagation();
-            var st = navState(); st.gerais = tog.getAttribute('aria-expanded') !== 'true'; saveNav(); SB.render();
+            var st = navState(); st[key] = tog.getAttribute('aria-expanded') !== 'true'; saveNav(); SB.render();
           });
           a.addEventListener('click', function (e) {
-            if (document.body.classList.contains('sb-collapsed')) { e.preventDefault(); openFlyout(a); }
+            if (document.body.classList.contains('sb-collapsed')) { e.preventDefault(); openFlyout(a, key); }
           });
           li.appendChild(tog);
-          if (open) li.appendChild(generalSub());
+          if (open) li.appendChild(key === 'curso' ? courseSub() : generalSub());
         }
         ul.appendChild(li);
       });
@@ -154,9 +154,77 @@
     return wrap;
   }
 
-  function openFlyout(anchor) {
+  /* Curso → níveis (A1 a C2) → unidades → lições. Só a lição atual e as já estudadas ficam clicáveis,
+     com a nota ao lado; as seguintes aparecem bloqueadas. Por padrão abre o nível e a unidade da lição atual. */
+  var EXTRA_LEVELS = [{ id: 'C1', title: 'C1 — Domínio' }, { id: 'C2', title: 'C2 — Proficiência' }];
+  function courseSub(isFlyout) {
+    var st = navState(), p = LUX.profiles.current(), L = LUX.lessons;
+    st.cLv = st.cLv || {}; st.cUn = st.cUn || {};
+    var wrap = h('div', { class: 'sb-sub sb-course', id: isFlyout ? null : 'sb-curso' });
+    if (!p || !L) return wrap;
+    var focus = active && /^curso\/./.test(active) ? active.slice(6) : null;
+    var focusId = LUX.data.lessons[focus] ? focus : L.current(p);
+    var fl = LUX.data.lessons[focusId] || {};
+    var testLv = focus && /^teste-/.test(focus) ? focus.slice(6) : null;
+    function done(id) { return p.progress[id] && p.progress[id].status === 'done'; }
+    var levels = LUX.manifest.levels.concat(EXTRA_LEVELS.filter(function (x) { return !LUX.manifest.levels.some(function (y) { return y.id === x.id; }); }));
+    levels.forEach(function (lv) {
+      var units = lv.units || [];
+      var ids = []; units.forEach(function (u) { ids = ids.concat(u.lessons.filter(function (id) { return LUX.data.lessons[id]; })); });
+      if (!ids.length) {
+        wrap.appendChild(h('div', { class: 'sb-subgroup-btn sb-course-lv soon', title: lv.title + ' (em breve)' }, [h('span', null, lv.title), h('span', { class: 'soon-tag' }, 'em breve')]));
+        return;
+      }
+      var lvOpen = isFlyout ? lv.id === fl.level : (st.cLv[lv.id] === true || (st.cLv[lv.id] !== false && (lv.id === fl.level || lv.id === testLv)));
+      var nDone = ids.filter(done).length;
+      var lb = h('button', { class: 'sb-subgroup-btn sb-course-lv', 'aria-expanded': lvOpen ? 'true' : 'false' }, [
+        h('span', null, lv.title), h('span', { class: 'sb-count' }, nDone + '/' + ids.length + ' ' + (lvOpen ? '▾' : '▸'))]);
+      lb.addEventListener('click', function (e) { e.stopPropagation(); st.cLv[lv.id] = !lvOpen; saveNav(); if (isFlyout) closeFlyout(); SB.render(); });
+      wrap.appendChild(lb);
+      if (!lvOpen) return;
+      var lvBox = h('div', { class: 'sb-course-units' });
+      units.forEach(function (u) {
+        var uids = u.lessons.filter(function (id) { return LUX.data.lessons[id]; });
+        var key = lv.id + '-' + u.n;
+        if (!uids.length) { lvBox.appendChild(h('div', { class: 'sb-unit soon' }, [h('span', null, 'U' + u.n + ' · ' + u.title), h('span', { class: 'soon-tag' }, 'em breve')])); return; }
+        var uOpen = isFlyout ? uids.indexOf(focusId) >= 0 : (st.cUn[key] === true || (st.cUn[key] !== false && uids.indexOf(focusId) >= 0));
+        var ub = h('button', { class: 'sb-unit', 'aria-expanded': uOpen ? 'true' : 'false', title: u.title }, [
+          h('span', { class: 'sb-unit-t' }, 'U' + u.n + ' · ' + u.title), h('span', { class: 'sb-count' }, uids.filter(done).length + '/' + uids.length + ' ' + (uOpen ? '▾' : '▸'))]);
+        ub.addEventListener('click', function (e) { e.stopPropagation(); st.cUn[key] = !uOpen; saveNav(); if (isFlyout) closeFlyout(); SB.render(); });
+        lvBox.appendChild(ub);
+        if (!uOpen) return;
+        var ul = h('ul', { class: 'sb-sublist sb-lessons' });
+        uids.forEach(function (id) {
+          var l = LUX.data.lessons[id], pr = p.progress[id], ok = L.isUnlocked(p, id);
+          var label = [h('span', { class: 'sb-l-ico', 'aria-hidden': 'true' }, done(id) ? '✅' : ok ? (id === L.current(p) ? '▶️' : '⭕') : '🔒'),
+            h('span', { class: 'sb-l-t', lang: 'fr' }, l.order + '. ' + l.title),
+            pr ? h('span', { class: 'sb-score ' + (pr.best >= 0.7 ? 'ok' : 'low') }, Math.round(pr.best * 100) + '%') : null];
+          var node = ok
+            ? h('a', { class: 'sb-subitem sb-lesson', href: '#/licao/' + id, 'data-nav': 'curso/' + id, title: l.title + ' · ' + l.titlePt }, label)
+            : h('span', { class: 'sb-subitem sb-lesson locked', title: 'Conclua a lição anterior com 70% para desbloquear' }, label);
+          if (ok) node.addEventListener('click', function () { SB.closeDrawer(); closeFlyout(); });
+          ul.appendChild(h('li', null, node));
+        });
+        lvBox.appendChild(ul);
+      });
+      // teste de nível, quando liberado
+      if (LUX.levelTests && LUX.levelTests.isUnlocked(p, lv.id)) {
+        var rec = p.levelTests[lv.id];
+        var ta = h('a', { class: 'sb-subitem sb-lesson', href: '#/teste/' + lv.id, 'data-nav': 'curso/teste-' + lv.id }, [h('span', { class: 'sb-l-ico', 'aria-hidden': 'true' }, '🎓'), h('span', { class: 'sb-l-t' }, 'Teste de nível ' + lv.id),
+          rec ? h('span', { class: 'sb-score ' + (rec.passed ? 'ok' : 'low') }, Math.round(rec.best * 100) + '%') : null]);
+        ta.addEventListener('click', function () { SB.closeDrawer(); closeFlyout(); });
+        lvBox.appendChild(h('ul', { class: 'sb-sublist sb-lessons' }, h('li', null, ta)));
+      }
+      wrap.appendChild(lvBox);
+    });
+    return wrap;
+  }
+
+  function openFlyout(anchor, key) {
     closeFlyout();
-    flyout = h('div', { class: 'sb-flyout', role: 'menu', 'aria-label': 'Gerais' }, [h('a', { class: 'sb-subitem', href: '#/gerais', onclick: closeFlyout }, '🗂 Todas as páginas de Gerais'), generalSub(true)]);
+    flyout = key === 'curso'
+      ? h('div', { class: 'sb-flyout', role: 'menu', 'aria-label': 'Curso' }, [h('a', { class: 'sb-subitem', href: '#/curso', onclick: closeFlyout }, '📘 Mapa do curso'), courseSub(true)])
+      : h('div', { class: 'sb-flyout', role: 'menu', 'aria-label': 'Gerais' }, [h('a', { class: 'sb-subitem', href: '#/gerais', onclick: closeFlyout }, '🗂 Todas as páginas de Gerais'), generalSub(true)]);
     document.body.appendChild(flyout);
     var r = anchor.getBoundingClientRect();
     flyout.style.top = Math.max(8, Math.min(r.top, window.innerHeight - flyout.offsetHeight - 8)) + 'px';
@@ -189,10 +257,17 @@
     setTimeout(function () { document.addEventListener('click', off); document.addEventListener('keydown', esc); }, 10);
   }
 
+  var courseFocus = null;
   SB.setActive = function (id) {
     active = id;
     if (!el) return;
     var top = id ? String(id).split('/')[0] : null;
+    // numa lição ou teste: abre a árvore do Curso (a menos que o usuário a tenha fechado) e a refaz em volta da página atual
+    if (top === 'curso' && id !== 'curso') {
+      var cs = navState(), box = el.querySelector('#sb-curso');
+      if (!box && cs.curso !== false) { cs.curso = true; courseFocus = id; SB.render(); return; }
+      if (box && courseFocus !== id) { courseFocus = id; box.replaceWith(courseSub()); }
+    }
     el.querySelectorAll('[data-nav]').forEach(function (a) {
       var n = a.getAttribute('data-nav');
       var on = n === id || (n === top && !el.querySelector('[data-nav="' + id + '"]')) || (n === top && a.classList.contains('sb-item'));

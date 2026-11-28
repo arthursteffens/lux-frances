@@ -772,3 +772,22 @@ em.fr-in .w:hover, em.fr-in .w:focus { background: var(--primary-soft); }
 .translation-box { margin-top: 8px; padding: 10px 12px; background: var(--surface-2); border-radius: 10px; border-left: 3px solid var(--primary); }
 .line-pt { margin-top: 2px; font-style: italic; }
 .transcript .tr-btn { margin-bottom: 8px; }
+
+/* barra lateral: árvore do Curso (níveis → unidades → lições) */
+.sb-course .sb-course-lv { text-transform: none; letter-spacing: 0; font-size: .82rem; color: var(--text); padding: 7px 6px; gap: 6px; }
+.sb-course .sb-course-lv.soon { color: var(--muted); cursor: default; }
+.sb-count { color: var(--muted); font-weight: 600; font-size: .72rem; white-space: nowrap; flex: none; }
+.sb-course-units { margin: 0 0 4px 6px; padding-left: 8px; border-left: 1px solid var(--border); }
+.sb-unit { display: flex; align-items: center; justify-content: space-between; gap: 6px; width: 100%; background: none; border: 0; padding: 6px; font: 600 .78rem var(--font); color: var(--text); cursor: pointer; border-radius: 6px; text-align: left; }
+.sb-unit:hover { background: var(--surface-2); }
+.sb-unit.soon { color: var(--muted); cursor: default; font-weight: 500; }
+.sb-unit-t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.sb-lessons { margin: 0 0 4px 6px; }
+.sb-lesson { gap: 6px; font-size: .84rem; min-height: 32px; padding: 5px 6px; }
+.sb-lesson.locked { color: var(--muted); cursor: not-allowed; opacity: .75; }
+.sb-l-ico { flex: none; font-size: .8rem; }
+.sb-l-t { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-fr); }
+.sb-score { flex: none; font-size: .7rem; font-weight: 700; border-radius: 999px; padding: 1px 6px; background: var(--ok-soft); color: var(--ok); }
+.sb-score.low { background: var(--warn-soft); color: var(--warn); }
+.sb-course .sb-course-lv { align-items: center; text-align: left; }
+.sb-course .sb-course-lv > span:first-child { flex: 1; min-width: 0; }

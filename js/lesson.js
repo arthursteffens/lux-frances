@@ -97,7 +97,7 @@
     var l = LUX.data.lessons[params.id];
     var p = LUX.profiles.current();
     return L.view(l, p, params, {
-      route: '#/licao/' + params.id, nav: 'curso',
+      route: '#/licao/' + params.id, nav: 'curso/' + params.id,
       crumbs: l ? [['Curso', '#/curso'], [l.level + ' · Unidade ' + l.unit, '#/curso?u=' + l.level + '-' + l.unit], [l.title, null]] : [['Curso', '#/curso']],
       locked: l && !L.isUnlocked(p, l.id) ? 'Conclua a lição anterior com pelo menos 70% para desbloquear esta. Você também pode desbloquear tudo em **Perfil e configurações**.' : null
     });

@@ -46,7 +46,7 @@
     var t = LUX.data.levelTests[level];
     var p = LUX.profiles.current();
     return {
-      title: 'Teste de nível ' + level, nav: 'curso',
+      title: 'Teste de nível ' + level, nav: 'curso/teste-' + level,
       crumbs: [['Curso', '#/curso'], ['Teste de nível ' + level, null]],
       render: function (main) {
         if (!t || !T.available(level)) { main.appendChild(UI.empty('🎓', 'Teste ainda não disponível', 'O teste do nível ' + level + ' chega quando todas as unidades do nível estiverem prontas.', h('a', { class: 'btn primary', href: '#/curso' }, 'Voltar ao curso'))); return; }
